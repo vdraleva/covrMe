@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+	
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+	
+  <ItemGroup>
+    <ProjectReference Include="..\CovrMe.WebAPI.Data\CovrMe.WebAPI.Data.csproj" />
+    <ProjectReference Include="..\CovrMe.WebAPI.Shared\CovrMe.WebAPI.Shared.csproj" />
+  </ItemGroup>
+</Project>
