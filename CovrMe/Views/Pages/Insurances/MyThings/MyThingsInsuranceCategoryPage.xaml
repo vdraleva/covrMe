@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:CovrMe.Views.ContentViews"
+             xmlns:behaviors="clr-namespace:CovrMe.Bahaviors"
+             xmlns:model="clr-namespace:CovrMe.ViewModels.Pages.Insurances.MyThings"
+             x:DataType="model:MyThingsInsuranceCategoryPageViewModel"
+             x:Class="CovrMe.Views.Pages.Insurances.MyThings.MyThingsInsuranceCategoryPage"
+             Title="MyThingsInsuranceCategoryPage" BackgroundColor="White">
+    <NavigationPage.TitleView>
+        <Image Source="covrmelogo.png" Margin="0,0,0,0" HeightRequest="50" WidthRequest="250" HorizontalOptions="StartAndExpand" BackgroundColor="White"/>
+    </NavigationPage.TitleView>
+    <Grid RowDefinitions="{OnPlatform Android='9*,*', iOS='670,*'}">
+        <ScrollView Grid.Row="0" Padding="0" MinimumHeightRequest="{OnPlatform Android='400', iOS='750'}"
+   BackgroundColor="White"
+   VerticalOptions="StartAndExpand">
+            <StackLayout>
+                <Label Text="Моите вещи" FontSize="24" FontAttributes="Bold" FontFamily="Montserrat" HorizontalOptions="FillAndExpand" BackgroundColor="#E8E8E8" TextColor="{StaticResource Black}" Padding="20,5"/>
+                <Label Grid.Column="0" Text="Видове" FontSize="22" FontAttributes="Bold" HorizontalOptions="FillAndExpand" TextColor="{StaticResource Primary}" Padding="20,15,0,10" />
+       
+                <Grid RowDefinitions="*,*,*,*" ColumnDefinitions="*,9*" RowSpacing="10" Padding="15,5,0,0" VerticalOptions="End" HorizontalOptions="StartAndExpand" Margin="0,5,0,0">
+                    <RadioButton Grid.Row="0" Grid.Column="0" x:Name="BycicleRadio" Content="" IsChecked="True" CheckedChanged="BycicleRadio_CheckedChanged" Value="1"/>
+                    <Label       Grid.Row="0" Grid.Column="1" x:Name="BycicleText"  Text="Велосипед" FontSize="Small" FontAttributes="Bold" BackgroundColor="White" TextColor="{StaticResource Black}" Padding="0,0,0,0" VerticalOptions="CenterAndExpand">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer  Tapped="BycicleText_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <RadioButton Grid.Row="1" Grid.Column="0" x:Name="TricycleRadio" Content="" IsChecked="False" CheckedChanged="TricycleRadio_CheckedChanged" Value="2"/>
+                    <Label       Grid.Row="1" Grid.Column="1" x:Name="TricycleText"  Text="Триколка" FontSize="Small" FontAttributes="Bold" BackgroundColor="White" TextColor="{StaticResource Black}" Padding="0,0,0,0" VerticalOptions="CenterAndExpand">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer  Tapped="TricycleText_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <RadioButton Grid.Row="2" Grid.Column="0" x:Name="ScooterRadio" Content="" IsChecked="False" CheckedChanged="ScooterRadio_CheckedChanged" Value="3"/>
+                    <Label       Grid.Row="2" Grid.Column="1" x:Name="ScooterText"  Text="Тротинетка" FontSize="Small" FontAttributes="Bold" BackgroundColor="White" TextColor="{StaticResource Black}" Padding="0,0,0,0" VerticalOptions="CenterAndExpand">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer  Tapped="ScooterText_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <RadioButton Grid.Row="3" Grid.Column="0" x:Name="GlassesRadio" Content="" IsChecked="False" CheckedChanged="GlassesRadio_CheckedChanged" Value="4"/>
+                    <Label       Grid.Row="3" Grid.Column="1" x:Name="GlassesText"  Text="Очила" FontSize="Small" FontAttributes="Bold" BackgroundColor="White" TextColor="{StaticResource Black}" Padding="0,0,0,0" VerticalOptions="CenterAndExpand">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer  Tapped="GlassesText_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Grid>
+                <!--Continue Button -->
+                <Button x:Name="continueBtn"
+                 Text="Продължи" Grid.Column="1"
+                 Margin="0,50,0,50"
+                 Padding="70,5"
+                 FontSize="24"
+                 BackgroundColor="{StaticResource Tertiary}"
+                 TextColor="White"
+                 HorizontalOptions="CenterAndExpand"
+                 Command="{Binding ContinueCommand}"/>
+            </StackLayout>
+        </ScrollView>
+        <views:NavBar Grid.Row="1" 
+           Margin="0"
+           Padding="0"
+           VerticalOptions="EndAndExpand"
+           BackgroundColor="Transparent"/>
+    </Grid>
+</ContentPage>

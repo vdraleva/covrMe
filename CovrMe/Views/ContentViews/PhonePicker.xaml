@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:CovrMe.Handlers"
+             x:Class="CovrMe.Views.ContentViews.PhonePicker"
+             xmlns:viewmodels="clr-namespace:CovrMe.ViewModels.Pages" BackgroundColor="White">
+
+    <Grid RowDefinitions="*,3*" Padding="0" BackgroundColor="White">
+        <Frame Grid.Row="0" HorizontalOptions="FillAndExpand" BorderColor="{StaticResource Black}" CornerRadius="8" Padding="0" Margin="0" HeightRequest="{OnPlatform Android='38'}">
+            <HorizontalStackLayout Padding="10,-3,0,0">
+                <Label Grid.Row="0" x:Name="PickerImage" IsVisible="True" FontSize="20" VerticalOptions="CenterAndExpand">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnPickerEntryTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+                <ImageButton Source="arrowmore.png" Margin="10,0,0,0" MaximumWidthRequest="20" VerticalOptions="CenterAndExpand" Clicked="OnPickerEntryTapped" Scale="{OnPlatform iOS='0.4'}"/>
+
+                <Entry x:Name="PickerEntry" IsReadOnly="true" Margin="10,0,0,0" FontSize="16" HorizontalOptions="StartAndExpand" TextColor="{StaticResource Black}" Text="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:RegisterPageViewModel}},Path=PhoneNumberCode,Mode=OneWay}">
+                    <Entry.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnPickerEntryTapped" />
+                    </Entry.GestureRecognizers>
+                </Entry>
+                <Entry Placeholder="788 477 521" IsReadOnly="False" Text="{Binding Phone}" BackgroundColor="White"
+                Keyboard="Telephone" Margin="0" FontSize="16" PlaceholderColor="#C1B5B5" 
+                HorizontalOptions="FillAndExpand" TextColor="Black" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" WidthRequest="300"/>
+            </HorizontalStackLayout>
+        </Frame>
+        <CollectionView x:Name="SuggestionsCollectionView" Grid.Row="1" BackgroundColor="White"
+                        IsVisible="false"
+                        SelectionMode="Single"
+                        MaximumHeightRequest="200"
+                        SelectionChanged="OnSuggestionsSelectionChanged">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid ColumnDefinitions="Auto,30,*" Margin="5" ColumnSpacing="5">
+                        <Label Grid.Column="0" TextColor="Black" Text="{Binding CountryFlag}" FontSize="Large"/>
+                        <Label Grid.Column="2" TextColor="Black" Text="{Binding CountryName}" FontSize="Small"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentView>

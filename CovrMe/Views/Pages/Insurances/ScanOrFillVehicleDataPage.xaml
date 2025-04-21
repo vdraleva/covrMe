@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:CovrMe.Views.ContentViews"
+             xmlns:viewmodels="clr-namespace:CovrMe.ViewModels.Pages.Insurances"
+             x:DataType="viewmodels:ScanOrFillVehicleDataPageViewModel"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:model="clr-namespace:CovrMe.ViewModels.Pages"
+             xmlns:insurancesModel="clr-namespace:CovrMe.Models.Insurances;assembly=CovrMe.Models"
+             x:Class="CovrMe.Views.Pages.Insurances.ScanOrFillVehicleDataPage"
+             BackgroundColor="White"
+             Title="ScanOrFillVehicleDataPage">
+    <NavigationPage.TitleView>
+        <Image Source="covrmelogo.png"  HeightRequest="55"
+             WidthRequest="300" Margin="0,0,55,0"/>
+    </NavigationPage.TitleView>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:InvertedBoolConverter x:Key="invertBoolConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <StackLayout Padding="0">
+        <Label Text="{Binding InsuranceType}" FontSize="24" FontAttributes="Bold" FontFamily="Montserrat" HorizontalOptions="FillAndExpand" BackgroundColor="#E8E8E8" TextColor="{StaticResource Black}" Padding="25,5"/>
+
+        <Label Text="Сканирайте голям или&#x0a; двустранно малък талон" 
+               FontSize="24" 
+               FontAttributes="Bold" 
+               HorizontalOptions="Center" 
+               VerticalOptions="Start" 
+               HorizontalTextAlignment="Center"
+               WidthRequest="300" 
+        Margin="0,10,0,0"
+               TextColor="{StaticResource Primary}"/>
+
+        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" Spacing="50" Margin="0,20,0,20">
+            <StackLayout>
+                <Label 
+            Text="голям талон" 
+            FontSize="15" 
+            FontAttributes="Bold" 
+            HorizontalOptions="Center" 
+            VerticalOptions="Start" 
+            HorizontalTextAlignment="Center"
+            Margin="0,0,0,10"
+            TextColor="{StaticResource Tertiary}" />
+                <Button 
+            ImageSource="scan.png"
+            HorizontalOptions="Center" 
+            VerticalOptions="CenterAndExpand"
+            BackgroundColor="Transparent"
+            Padding="0" 
+            Margin="0,0,0,10"
+            Command="{Binding GoToBigCameraPageCommand}" />
+            </StackLayout>
+
+            <StackLayout>
+                <Label 
+            Text="малък талон" 
+            FontSize="15" 
+            FontAttributes="Bold" 
+            HorizontalOptions="Center" 
+            VerticalOptions="Start" 
+            HorizontalTextAlignment="Center"
+            Margin="0,0,0,0"
+            TextColor="{StaticResource Tertiary}" />
+                <Button 
+            ImageSource="scan.png"
+            HorizontalOptions="Center" 
+            VerticalOptions="CenterAndExpand"
+            BackgroundColor="Transparent"
+            Padding="0" 
+            Margin="0,0,0,0"
+            Command="{Binding GoToSmallCameraPageCommand}" />
+            </StackLayout>
+        </HorizontalStackLayout>
+
+        <Label Text="Въведете данните за&#x0a;МПС и собственик ръчно"
+              FontSize="24" 
+              FontAttributes="Bold" 
+              HorizontalOptions="Center" 
+              VerticalOptions="Start" 
+              HorizontalTextAlignment="Center"
+              WidthRequest="300" 
+              Margin="0,0,0,10"
+              TextColor="{StaticResource Primary}"/>
+
+
+        <Button Text="Попълни" 
+               FontSize="24"
+               HorizontalOptions="Center" 
+               VerticalOptions="End" 
+               HeightRequest="50" 
+               WidthRequest="230"
+               Margin="0,0,0,10"
+               BackgroundColor="{StaticResource Tertiary}"
+               TextColor="White"
+               Command="{Binding GoToHandFillPageCommand}"/>
+
+        <Label Text="Изберете от своите автомобили"
+              FontSize="24" 
+              FontAttributes="Bold" 
+              HorizontalOptions="Center" 
+              VerticalOptions="Start" 
+              HorizontalTextAlignment="Center"
+              WidthRequest="300" 
+              Margin="0,10,0,10"
+              TextColor="{StaticResource Primary}"/>
+
+        <Button Text="Избери" 
+               FontSize="24"
+               HorizontalOptions="Center" 
+               VerticalOptions="End" 
+               HeightRequest="50" 
+               WidthRequest="230"
+               Margin="0,0,0,0"
+               BackgroundColor="{StaticResource Tertiary}"
+               TextColor="White"
+               Command="{Binding GoToHandFillPageCommand}"/>
+
+        <views:NavBar
+                Margin="0"
+                Padding="0"
+                VerticalOptions="EndAndExpand"
+                BackgroundColor="Transparent"/>
+    </StackLayout>
+
+</ContentPage>

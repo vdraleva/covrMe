@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:CovrMe.Views.ContentViews"
+             xmlns:viewmodels="clr-namespace:CovrMe.ViewModels.Pages.Insurances.HealthInsurance"
+             xmlns:offers="clr-namespace:CovrMe.Models.Insurances.Result.HealthInsurance;assembly=CovrMe.Models"
+             x:DataType="viewmodels:HealthInsuranceOffersPageViewModel"
+             x:Class="CovrMe.Views.Pages.Insurances.HealthInsurance.HealthInsuranceOffersPage"
+             Title="HealthInsuranceOffersPage" BackgroundColor="White">
+    <NavigationPage.TitleView>
+        <Image Source="covrmelogo.png" Margin="0,0,0,0" HeightRequest="50" WidthRequest="250" HorizontalOptions="StartAndExpand" BackgroundColor="White"/>
+    </NavigationPage.TitleView>
+
+    <Grid RowDefinitions="{OnPlatform Android='9*,*', iOS='670,*'}">
+        <ScrollView Grid.Row="0" Padding="0" MinimumHeightRequest="{OnPlatform iOS='750'}"
+             BackgroundColor="White"
+             VerticalOptions="StartAndExpand">
+            <StackLayout Padding="0" HorizontalOptions="FillAndExpand">
+                <Label Text="Здраве и спокойствие"  FontSize="24" FontAttributes="Bold" FontFamily="Montserrat" HorizontalOptions="FillAndExpand" BackgroundColor="#E8E8E8" TextColor="{StaticResource Black}" Padding="25,5"/>
+                <Label Text="Застрахователна компания" FontSize="22" FontAttributes="Bold" HorizontalOptions="FillAndExpand" TextColor="{StaticResource Primary}" Padding="20,15,0,0" />
+                
+                <Label x:Name="noOffersLabel" Text="Няма оферти!" FontSize="14" FontAttributes="Bold" HorizontalOptions="FillAndExpand" TextColor="{StaticResource Black}" Padding="20,15,0,0" />
+
+                <CollectionView ItemsSource="{Binding OffersCollection}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="offers:HealthInsuranceSearchModel">
+                            <StackLayout Padding="10">
+                                <Border BackgroundColor="White" StrokeThickness="0" Padding="{OnPlatform iOS='10', Android='15,10,10,10'}" Margin="0,40,0,0" StrokeShape="RoundRectangle 0,8,8,0" WidthRequest="{OnPlatform iOS='370', Android='330'}" HorizontalOptions="Center">
+                                    <Border.Shadow>
+                                        <Shadow Brush="{StaticResource Black}" Opacity="{OnPlatform Android='0.7', iOS='0.4'}" Radius="{OnPlatform iOS='10', Android='20'}"/>
+                                    </Border.Shadow>
+                                    <StackLayout BackgroundColor="White">
+                                        <Grid ColumnDefinitions="5*,3*" VerticalOptions="StartAndExpand" Margin="0" Padding="20,25">
+                                            <Image Grid.Column="0" Source="{Binding LogoSrc}" MaximumWidthRequest="100" MaximumHeightRequest="40" HorizontalOptions="StartAndExpand"/>
+                                            <Label Text="{Binding PremiumFormatted}" Grid.Column="1" FontSize="17" FontAttributes="Bold" TextColor="{StaticResource Black}" Padding="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+                                        </Grid>
+
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HealthInsuranceOffersPageViewModel}},Path=ContinueCommand}" CommandParameter="{Binding .}"/>
+                                        </StackLayout.GestureRecognizers>
+                                    </StackLayout>
+                                </Border>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <StackLayout Margin="20,0,20,0">
+                    <Label Text="Покрити рискове" FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" TextColor="{StaticResource Black}" Padding="0,10"/>
+                    <Grid ColumnDefinitions="*,9*">
+                        <Image Grid.Column="0" Source="tickthree.png" MaximumHeightRequest="10" Margin="0,5,0,0" VerticalOptions="StartAndExpand"/>
+                        <Label Grid.Column="1" Text="Болничен престой при злополука"  FontSize="14" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="Black" Padding="0,5,0,0" />
+                    </Grid>
+                    <Grid ColumnDefinitions="*,9*" Margin="0,5,0,0">
+                        <Image Grid.Column="0" Source="tickthree.png" MaximumHeightRequest="10" Margin="0,5,0,0" VerticalOptions="StartAndExpand"/>
+                        <Label Grid.Column="1" Text="Болничен престой при заболяване"  FontSize="14" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="Black" Padding="0,5,0,0" />
+                    </Grid>
+                    <Grid ColumnDefinitions="*,9*" Margin="0,5,0,0">
+                        <Image Grid.Column="0" Source="tickthree.png" MaximumHeightRequest="15" Margin="0,5,0,0"/>
+                        <Label Grid.Column="1" Text="Болничен престой при раждане"  FontSize="14" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="Black" Padding="0,5,0,0" />
+                    </Grid>
+                    <Grid ColumnDefinitions="*,9*" Margin="0,5,0,0">
+                        <Image Grid.Column="0" Source="tickthree.png" MaximumHeightRequest="10" Margin="0,5,0,0" VerticalOptions="StartAndExpand"/>
+                        <Label Grid.Column="1" Text="При леки фрактури на кости"  FontSize="14" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="Black" Padding="0,5,0,0" />
+                    </Grid>
+                    <Grid ColumnDefinitions="*,9*" Margin="0,5,0,0">
+                        <Image Grid.Column="0" Source="tickthree.png" MaximumHeightRequest="15" Margin="0,5,0,0"/>
+                        <Label Grid.Column="1" Text="При средно тежки фрактури "  FontSize="14" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="Black" Padding="0,5,0,0" />
+                    </Grid>
+                </StackLayout>
+                
+                <!--Continue Button -->
+                <Button x:Name="continueBtn"
+                        Text="Продължи" Grid.Column="1"
+                        Margin="0,50,0,50"
+                        Padding="70,5"
+                        FontSize="24"
+                        BackgroundColor="{StaticResource Tertiary}"
+                        TextColor="White"
+                        HorizontalOptions="CenterAndExpand"
+                        Command="{Binding ContinueCommand}"/>
+                
+            </StackLayout>
+        </ScrollView>
+        <views:NavBar Grid.Row="1" 
+         Margin="0"
+         Padding="0"
+         VerticalOptions="EndAndExpand"
+         BackgroundColor="Transparent"/>
+    </Grid>
+</ContentPage>

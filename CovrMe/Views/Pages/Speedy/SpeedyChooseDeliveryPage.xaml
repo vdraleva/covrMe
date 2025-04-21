@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:CovrMe.Views.ContentViews"
+             xmlns:viewmodel="clr-namespace:CovrMe.ViewModels.Pages.Speedy"
+             x:DataType="viewmodel:SpeedyChooseDeliveryViewModel"
+             x:Class="CovrMe.Views.Pages.Speedy.SpeedyChooseDeliveryPage"
+             BackgroundColor="White">
+    <NavigationPage.TitleView>
+        <Image Source="covrmelogo.png" Margin="0,0,0,0" HeightRequest="50" WidthRequest="250" HorizontalOptions="StartAndExpand" BackgroundColor="White"/>
+    </NavigationPage.TitleView>
+    <Grid RowDefinitions="{OnPlatform Android='9*,*', iOS='670,*'}">
+        <ScrollView Grid.Row="0" Padding="0" MinimumHeightRequest="{OnPlatform Android='400', iOS='750'}"
+           BackgroundColor="White"
+           VerticalOptions="StartAndExpand">
+            <StackLayout>
+                <Label Text="Гражданска отговорност" FontSize="24" FontAttributes="Bold" FontFamily="Montserrat" HorizontalOptions="FillAndExpand" BackgroundColor="#E8E8E8" TextColor="{StaticResource Black}" Padding="25,5"/>
+                <StackLayout Padding="20,10,10,0">
+                    <Grid ColumnDefinitions="2*,*">
+                        <Label Grid.Column="0" Text="Начин на доставка" FontSize="22" FontAttributes="Bold" BackgroundColor="White" TextColor="{StaticResource Primary}" Padding="0,5" />
+                        <Image Grid.Column="1" Source="speedyimg.png" MaximumHeightRequest="70" VerticalOptions="StartAndExpand" Margin="0,-5,0,0"/>
+                    </Grid>
+                        <Label Text="* Доставката е за сметка на клиента и се заплаща при получаване на полицата." FontSize="13" FontAttributes="Bold" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="{StaticResource Black}" Padding="0,5,0,0" />
+                    <!-- Radio Buttons-->
+                    <Grid RowDefinitions="*,*" ColumnDefinitions="*,9*" Padding="0,20,0,0" VerticalOptions="End" HorizontalOptions="StartAndExpand" Margin="0,5,0,30">
+                        <RadioButton Grid.Row="0" Grid.Column="0" x:Name="OfficeRadio" Content="" IsChecked="False" BackgroundColor="Transparent" CheckedChanged="OfficeRadio_CheckedChanged"/>
+                        <Label       Grid.Row="0" Grid.Column="1" x:Name="OfficeText"  Text="Доставка до офис/АПС на СПИДИ" FontSize="18" FontAttributes="Bold" BackgroundColor="White" TextColor="{StaticResource Black}" Padding="0,0,0,0" VerticalOptions="CenterAndExpand">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer  Tapped="OfficeLabel_Tapped" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <RadioButton Grid.Row="1" Grid.Column="0" x:Name="CurierRadio" Content="" IsChecked="True" BackgroundColor="Transparent" CheckedChanged="CurierRadio_CheckedChanged"/>
+                        <Label       Grid.Row="1" Grid.Column="1" x:Name="CurierText"  Text="Доставка до адрес" FontSize="18" FontAttributes="Bold" BackgroundColor="White" TextColor="{StaticResource Primary}" Padding="0,0,0,0" VerticalOptions="CenterAndExpand">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer  Tapped="AddressLabel_Tapped" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Grid>
+                </StackLayout>
+                <!--Continue Button -->
+                <Button
+                 Text="Продължи" Grid.Column="1"
+                 Margin="0,50,0,50"
+                 Padding="50,5"
+                 FontSize="24"
+                 BackgroundColor="{StaticResource Tertiary}"
+                 TextColor="White"
+                 HorizontalOptions="CenterAndExpand"
+                 Command="{Binding ContinueCommand}"/>
+            </StackLayout>
+        </ScrollView>
+        <views:NavBar Grid.Row="1" 
+       Margin="0"
+       Padding="0"
+       VerticalOptions="EndAndExpand"
+       BackgroundColor="Transparent"/>
+    </Grid>
+</ContentPage>

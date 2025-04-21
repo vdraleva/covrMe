@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:CovrMe.ViewModels.Pages"
+             x:DataType="model:OTPPageViewModel"
+             x:Class="CovrMe.Views.Pages.OTPPage" BackgroundColor="White">
+    <NavigationPage.TitleView>
+        <Image Source="covrmelogo.png" Margin="0,0,0,0" HeightRequest="50" WidthRequest="250" HorizontalOptions="StartAndExpand" BackgroundColor="White"/>
+    </NavigationPage.TitleView>
+    <Grid>
+        <!-- Sign-In Form -->
+        <Grid Grid.Row="0" Margin="0">
+            <Grid RowDefinitions="*,auto">
+                <Grid RowDefinitions="*,2*,3*" >
+                    <!-- Centered Header -->
+                    <Label Grid.Row="0" Text="Код за потвърждение" VerticalOptions="CenterAndExpand"
+            HorizontalOptions="CenterAndExpand"
+            FontSize="26"
+            FontAttributes="Bold"
+            TextColor="{StaticResource Black}"
+            Margin="0,0,0,0"/>
+
+                    <Grid Grid.Row="1" Margin="0,0,0,0" Padding="30,0" VerticalOptions="CenterAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="50" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0"
+                    Text="Въведи кода"
+                    HorizontalOptions="CenterAndExpand"
+                    FontSize="Medium"
+                    TextColor="{StaticResource Black}"
+                    Margin="20,10"/>
+                        <StackLayout Orientation="Horizontal" Grid.Row="1" HorizontalOptions="Center">
+                            <Frame BorderColor="{StaticResource Black}" CornerRadius="4" Padding="0" BackgroundColor="Transparent" Margin="5">
+                                <VerticalStackLayout>
+                                    <Entry Text="{Binding Digit1}" x:Name="Digit1" Placeholder="1" PlaceholderColor="LightGray" TextColor="Black" MaxLength="1" Keyboard="Numeric" MaximumWidthRequest="35" FontSize="Body" HorizontalTextAlignment="Center"/>
+                                </VerticalStackLayout>
+                            </Frame>
+                            <Frame BorderColor="{StaticResource Black}" CornerRadius="4" Padding="0" BackgroundColor="Transparent" Margin="5">
+                                <VerticalStackLayout>
+                                    <Entry Text="{Binding Digit2}" x:Name="Digit2" Placeholder="2" PlaceholderColor="LightGray" TextColor="Black" MaxLength="1" Keyboard="Numeric" MaximumWidthRequest="35" FontSize="Body" HorizontalTextAlignment="Center"/>
+                                </VerticalStackLayout>
+                            </Frame>
+                            <Frame BorderColor="{StaticResource Black}" CornerRadius="4" Padding="0" BackgroundColor="Transparent" Margin="5">
+                                <VerticalStackLayout>
+                                    <Entry Text="{Binding Digit3}" x:Name="Digit3" Placeholder="3" PlaceholderColor="LightGray" TextColor="Black" MaxLength="1" Keyboard="Numeric" MaximumWidthRequest="35" FontSize="Body" HorizontalTextAlignment="Center"/>
+                                </VerticalStackLayout>
+                            </Frame>
+                            <Frame BorderColor="{StaticResource Black}" CornerRadius="4" Padding="0" BackgroundColor="Transparent" Margin="5">
+                                <VerticalStackLayout>
+                                    <Entry Text="{Binding Digit4}" x:Name="Digit4" Placeholder="4" PlaceholderColor="LightGray" TextColor="Black" MaxLength="1" Keyboard="Numeric" MaximumWidthRequest="35" FontSize="Body" HorizontalTextAlignment="Center"/>
+                                </VerticalStackLayout>
+                            </Frame>
+                        </StackLayout>
+                    </Grid>
+
+                    <Button Grid.Row="2" Text="Изпрати"
+                         Command="{Binding VerifyCodeCommand}"
+                         Margin="20"
+                         Padding="70,0"
+                         FontSize="Large"
+                         FontAttributes="Bold"
+                         BackgroundColor="{StaticResource Primary}"
+                         TextColor="White"
+                         VerticalOptions="StartAndExpand"
+                         HorizontalOptions="CenterAndExpand"/>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</ContentPage>

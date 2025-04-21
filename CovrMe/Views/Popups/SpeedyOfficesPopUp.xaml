@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mct:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+             xmlns:viewmodels="clr-namespace:CovrMe.ViewModels.Popups"
+             xmlns:offices="clr-namespace:CovrMe.Models.Deliveries.Result;assembly=CovrMe.Models"
+             x:DataType="viewmodels:SpeedyOfficesPopUpViewModel"
+             x:Class="CovrMe.Views.Popups.SpeedyOfficesPopUp"
+             CanBeDismissedByTappingOutsideOfPopup="True"
+             Color="White">
+    
+    <Border Stroke="White" StrokeShape="RoundRectangle 16,16,16,16">
+        <Grid RowDefinitions="0.5*,5*, *" WidthRequest="{Binding DisplayWidth}" HeightRequest="500" Background="White">
+            <StackLayout Grid.Row="0" Background="White">
+                <Grid  ColumnDefinitions="9*,*">
+                    <Image Grid.Column="0" Source="speedyimg.png" MaximumHeightRequest="40" HorizontalOptions="Center" Margin="20, 0, 0, 0"/>
+                    <ImageButton Grid.Column="1" Source="close.png" MaximumHeightRequest="20" HorizontalOptions="End" Clicked="ImageButton_Clicked"/>
+                </Grid>
+            </StackLayout>
+
+            <CollectionView ItemsSource="{Binding OfficeCollection}" Grid.Row="1" Background="White">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="offices:SpeedyOfficeModel">
+                        <StackLayout BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray200}}">
+                            <Grid ColumnDefinitions="*,9*" Padding="10,0,10,0" VerticalOptions="End" HorizontalOptions="StartAndExpand" Margin="0,5,0,5">
+                                <RadioButton VerticalOptions="CenterAndExpand" Grid.Row="0" Grid.Column="0" GroupName="Offices"  Value="{Binding Id}" Content="" IsChecked="{Binding Path=IsChecked,Mode=TwoWay}" CheckedChanged="RadioButton_CheckedChanged"/>
+                                <Label Grid.Row="0" Grid.Column="1" VerticalOptions="CenterAndExpand" Text="{Binding Name}" FontSize="12" FontAttributes="Bold" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray200}}" TextColor="{StaticResource Black}"/>
+                            </Grid>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Button Grid.Row="2" Text="Избери"
+                    Clicked="ImageButton_Clicked"
+                    Margin="20"
+                    Padding="70,0"
+                    FontSize="Large"
+                    FontAttributes="Bold"
+                    BackgroundColor="{StaticResource Tertiary}"
+                    TextColor="White"
+                    VerticalOptions="StartAndExpand"
+                    HorizontalOptions="CenterAndExpand"/>
+        </Grid>
+    </Border>
+    
+</mct:Popup>

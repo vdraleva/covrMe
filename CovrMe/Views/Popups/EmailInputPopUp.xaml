@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mct:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+           xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+             xmlns:viewmodels="clr-namespace:CovrMe.ViewModels.Popups"
+             x:DataType="viewmodels:EmailInputPopUpViewModel"
+             x:Class="CovrMe.Views.Popups.EmailInputPopUp"
+             Color="White" CanBeDismissedByTappingOutsideOfPopup="False">
+
+    <Border Stroke="White" StrokeShape="RoundRectangle 16,16,16,16">
+        <Grid VerticalOptions="FillAndExpand" 
+          HorizontalOptions="Fill" 
+          BackgroundColor="White" 
+          HeightRequest="500" 
+          WidthRequest="{Binding DisplayWidth}">
+
+            <!-- Centered Content -->
+            <VerticalStackLayout Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Center" Spacing="10">
+                <!-- Label -->
+                <Label Text="Имейл" 
+                   FontAttributes="Bold" 
+                   TextColor="{StaticResource Black}" 
+                   FontSize="Medium" 
+                   HorizontalOptions="Start" />
+
+                <!-- Entry -->
+                <Frame BorderColor="{StaticResource Black}" 
+                   CornerRadius="8" 
+                   Padding="0" 
+                   BackgroundColor="Transparent" 
+                   WidthRequest="300" 
+                   HeightRequest="50">
+                    <!-- Adjusted Height -->
+                    <Entry x:Name="EmailEntry" 
+                       Text="{Binding Email}" 
+                       Placeholder="alex.ivanov@gmail.com" 
+                       Margin="10,0,0,0" 
+                       TextColor="Black" 
+                       FontSize="Medium" 
+                       PlaceholderColor="#C1B5B5" 
+                       VerticalTextAlignment="Center" 
+                       HorizontalOptions="FillAndExpand" />
+                    <Frame.Triggers>
+                        <DataTrigger TargetType="Frame" 
+                                 Binding="{Binding EmailError, Mode=TwoWay}" 
+                                 Value="True">
+                            <Setter Property="BorderColor" Value="Red" />
+                        </DataTrigger>
+                    </Frame.Triggers>
+                </Frame>
+            </VerticalStackLayout>
+
+            <!-- Button at the Bottom -->
+            <Button Grid.Row="1"
+                Text="Избери"
+                Clicked="Button_Clicked"
+                Margin="20"
+                Padding="70,0"
+                FontSize="Large"
+                FontAttributes="Bold"
+                BackgroundColor="{StaticResource Tertiary}"
+                TextColor="White"
+                HorizontalOptions="Center"
+                VerticalOptions="End" />
+        </Grid>
+    </Border>
+
+
+</mct:Popup>

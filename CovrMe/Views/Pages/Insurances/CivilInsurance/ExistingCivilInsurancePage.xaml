@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:CovrMe.Views.ContentViews"
+             xmlns:model="clr-namespace:CovrMe.ViewModels.Pages.Insurances.CivilInsurance"
+             x:DataType="model:ExistingCivilInsurancePageViewModel"
+             x:Class="CovrMe.Views.Pages.Insurances.CivilInsurance.ExistingCivilInsurancePage"
+             Title="ExistingCivilInsurancePage" BackgroundColor="White">
+    <NavigationPage.TitleView>
+        <Image Source="covrmelogo.png" Margin="0,0,0,0" HeightRequest="50" WidthRequest="250" HorizontalOptions="StartAndExpand" BackgroundColor="White"/>
+    </NavigationPage.TitleView>
+    <Grid RowDefinitions="{OnPlatform Android='9*,*', iOS='670,*'}">
+        <ScrollView Grid.Row="0" Padding="0" MinimumHeightRequest="{OnPlatform Android='400', iOS='750'}"
+                    BackgroundColor="White"
+                    VerticalOptions="StartAndExpand">
+
+            <StackLayout Padding="25,0">
+                <Label Text="{Binding CurrentInsuranceEndDate, StringFormat='Автомобилът има активна застраховка Гражданска отговорност до {0} г.'}" 
+           TextColor="{StaticResource Black}" FontSize="18" 
+           HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" 
+           HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Margin="0,60,0,0" Padding="20,0,20,0"/>
+
+                <Label Text="Подновяването на текущата застраховка може да се направи най-рано 30 дни преди изтичането й."
+           TextColor="{StaticResource Black}" FontSize="16" Margin="0,0,0,20" Padding="20,0,20,0"
+                       HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" 
+                        HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+
+                <!--Continue Button -->
+                <Button Text="Начало" Grid.Column="1"
+            Margin="0,0,0,0"
+            Padding="50,5"
+            FontSize="24"
+            BackgroundColor="{StaticResource Primary}"
+            TextColor="White"
+            HorizontalOptions="CenterAndExpand"
+            Command="{Binding ContinueCommand}"/>
+            </StackLayout>
+        </ScrollView>
+
+        <views:NavBar Grid.Row="1" Margin="0" Padding="0" VerticalOptions="EndAndExpand" BackgroundColor="Transparent"/>
+    </Grid>
+</ContentPage>

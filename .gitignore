@@ -4,3 +4,10 @@
 
 /CovrMe/obj
 /.vs
+/CovrMe.Models/obj
+/CovrMe.Models/bin/Debug/net8.0
+/CovrMe.Services/bin/Debug/net8.0
+/CovrMe.Services/obj
+/CovrMe.Shared/bin/Debug/net8.0
+/CovrMe.Shared/obj
+/CovrMe/bin/Debug/net9.0-android

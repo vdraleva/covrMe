@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:CovrMe.Views.ContentViews"
+             xmlns:model="clr-namespace:CovrMe.ViewModels.Pages.Insurances.MyThings"
+             x:DataType="model:MyThingsCharacteristicsPageViewModel"
+             x:Class="CovrMe.Views.Pages.Insurances.MyThings.MyThingsCharacteristicsPage"
+             Title="MyThingsCharacteristicsPage" BackgroundColor="White">
+    <NavigationPage.TitleView>
+        <Image Source="covrmelogo.png" Margin="0,0,0,0" HeightRequest="50" WidthRequest="250" HorizontalOptions="StartAndExpand" BackgroundColor="White"/>
+    </NavigationPage.TitleView>
+    <Grid RowDefinitions="{OnPlatform Android='9*,*', iOS='670,*'}">
+        <ScrollView Grid.Row="0" Padding="0"
+      BackgroundColor="White"
+      VerticalOptions="StartAndExpand">
+            <StackLayout Padding="0" HorizontalOptions="FillAndExpand">
+                <Label Text="Моите вещи" FontSize="24" FontAttributes="Bold" FontFamily="Montserrat" HorizontalOptions="FillAndExpand" BackgroundColor="#E8E8E8" TextColor="{StaticResource Black}" Padding="25,5"/>
+                <Label Text="Характеристики"   FontSize="22" FontAttributes="Bold" FontFamily="Montserrat" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="{StaticResource Primary}" Padding="25,15,0,0" />
+                <StackLayout Padding="25,0" VerticalOptions="StartAndExpand">
+
+                    <!--DatePicker-->
+                    <Grid Margin="0,0,0,5"  HorizontalOptions="FillAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start" Text="Дата на закупуване в ново състояние" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0,5"/>
+                        <Frame Grid.Row="1" BorderColor="{StaticResource Black}" CornerRadius="8" Padding="0" MaximumHeightRequest="{OnPlatform Android='38'}" BackgroundColor="Transparent" Margin="0">
+                            <VerticalStackLayout>
+                                <DatePicker Date="{Binding PurchaseDate, Mode=TwoWay}" MinimumDate="{Binding MinPickerDate, Mode=TwoWay}" MaximumDate="{Binding MaxPickerDate, Mode=TwoWay}" Format="dd/MM/yyyy" Margin="10,0,0,0" FontSize="Medium"  IsEnabled="True">
+                                </DatePicker>
+                            </VerticalStackLayout>
+                        </Frame>
+                        <ImageButton Grid.Row="1" Source="arrowmore.png" Margin="10,0" MaximumWidthRequest="10" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand" Scale="{OnPlatform iOS='0.4'}"/>
+                    </Grid>
+
+                    <Grid Margin="0,0,0,5"  HorizontalOptions="FillAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start"  Text="Марка" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0,5"/>
+                        <Frame Grid.Row="1" BorderColor="{StaticResource Black}" CornerRadius="8" Padding="0" MaximumHeightRequest="{OnPlatform Android='38'}" BackgroundColor="Transparent" Margin="0">
+                            <VerticalStackLayout>
+                                <Entry Placeholder="Ягода" Text="{Binding Brand, Mode=TwoWay}" Margin="10,0,0,0" TextColor="Black" FontSize="Medium" PlaceholderColor="#C1B5B5" HorizontalOptions="FillAndExpand"/>
+                            </VerticalStackLayout>
+                            <Frame.Triggers>
+                                <DataTrigger TargetType="Frame" Binding="{Binding BrandError}" Value="True">
+                                    <Setter Property="BorderColor" Value="Red" />
+                                </DataTrigger>
+                            </Frame.Triggers>
+                        </Frame>
+                    </Grid>
+                    
+                    <Grid Margin="0,0,0,5"  HorizontalOptions="FillAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start"  Text="Модел" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0,5"/>
+                        <Frame Grid.Row="1" BorderColor="{StaticResource Black}" CornerRadius="8" Padding="0" MaximumHeightRequest="{OnPlatform Android='38'}" BackgroundColor="Transparent" Margin="0">
+                            <VerticalStackLayout>
+                                <Entry Placeholder="Череша" Text="{Binding Model, Mode=TwoWay}" Margin="10,0,0,0" TextColor="Black" FontSize="Medium" PlaceholderColor="#C1B5B5" HorizontalOptions="FillAndExpand"/>
+                            </VerticalStackLayout>
+                            <Frame.Triggers>
+                                <DataTrigger TargetType="Frame" Binding="{Binding ModelError}" Value="True">
+                                    <Setter Property="BorderColor" Value="Red" />
+                                </DataTrigger>
+                            </Frame.Triggers>
+                        </Frame>
+                    </Grid>
+
+                    <Grid Margin="0,0,0,5"  HorizontalOptions="FillAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start"  Text="Цвят" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0,5"/>
+                        <Frame Grid.Row="1" BorderColor="{StaticResource Black}" CornerRadius="8" Padding="0" MaximumHeightRequest="{OnPlatform Android='38'}" BackgroundColor="Transparent" Margin="0">
+                            <VerticalStackLayout>
+                                <Entry Placeholder="Червен" Text="{Binding Color, Mode=TwoWay}" Margin="10,0,0,0" TextColor="Black" FontSize="Medium" PlaceholderColor="#C1B5B5" HorizontalOptions="FillAndExpand"/>
+                            </VerticalStackLayout>
+                            <Frame.Triggers>
+                                <DataTrigger TargetType="Frame" Binding="{Binding ColorError}" Value="True">
+                                    <Setter Property="BorderColor" Value="Red" />
+                                </DataTrigger>
+                            </Frame.Triggers>
+                        </Frame>
+                    </Grid>
+
+                    <Grid Margin="0,0,0,5"  HorizontalOptions="FillAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start"  Text="{Binding MaxInsuranceSum, StringFormat='Стойност (по-малка от {0} лв.)'}" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0,5"/>
+                        <Frame Grid.Row="1" BorderColor="{StaticResource Black}" CornerRadius="8" Padding="0" MaximumHeightRequest="{OnPlatform Android='38'}" BackgroundColor="Transparent" Margin="0">
+                            <VerticalStackLayout>
+                                <Entry Keyboard="Numeric" Placeholder="1800" Text="{Binding Sum, Mode=TwoWay}" Margin="10,0,0,0" TextColor="Black" FontSize="Medium" PlaceholderColor="#C1B5B5" HorizontalOptions="FillAndExpand"/>
+                            </VerticalStackLayout>
+                            <Frame.Triggers>
+                                <DataTrigger TargetType="Frame" Binding="{Binding SumError}" Value="True">
+                                    <Setter Property="BorderColor" Value="Red" />
+                                </DataTrigger>
+                            </Frame.Triggers>
+                        </Frame>
+                    </Grid>
+
+                    <Grid Margin="0,0,0,5"  HorizontalOptions="FillAndExpand" IsVisible="{Binding IsGlasses}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start"  Text="Размер" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0,5"/>
+                        <Frame Grid.Row="1" BorderColor="{StaticResource Black}" CornerRadius="8" Padding="0" MaximumHeightRequest="{OnPlatform Android='38'}" BackgroundColor="Transparent" Margin="0">
+                            <VerticalStackLayout>
+                                <Entry Placeholder="345" Keyboard="Numeric" Text="{Binding Size, Mode=TwoWay}" Margin="10,0,0,0" TextColor="Black" FontSize="Medium" PlaceholderColor="#C1B5B5" HorizontalOptions="FillAndExpand"/>
+                            </VerticalStackLayout>
+                            <Frame.Triggers>
+                                <DataTrigger TargetType="Frame" Binding="{Binding SizeError}" Value="True">
+                                    <Setter Property="BorderColor" Value="Red" />
+                                </DataTrigger>
+                            </Frame.Triggers>
+                        </Frame>
+                    </Grid>
+
+                    <Grid Margin="0,0,0,5"  HorizontalOptions="FillAndExpand" IsVisible="{Binding IsBycicle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start"  Text="Има ли допълнително оборудване?" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0,5"/>
+                        <Frame Grid.Row="1" BorderColor="{StaticResource Black}" CornerRadius="8" Padding="0" MaximumHeightRequest="{OnPlatform Android='38'}" BackgroundColor="Transparent" Margin="0">
+                            <VerticalStackLayout>
+                                <Entry  Placeholder="Вело багажник " Text="{Binding AdditionalEquipment, Mode=TwoWay}" Margin="10,0,0,0" TextColor="Black" FontSize="Medium" PlaceholderColor="#C1B5B5" HorizontalOptions="FillAndExpand"/>
+                            </VerticalStackLayout>
+
+                        </Frame>
+                    </Grid>
+
+                    <Grid Margin="0,0,0,5"  HorizontalOptions="FillAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start"  Text="Допълнителни пояснения" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0,5"/>
+                        <Frame Grid.Row="1" BorderColor="{StaticResource Black}" CornerRadius="8" Padding="0" MaximumHeightRequest="{OnPlatform Android='38'}" BackgroundColor="Transparent" Margin="0">
+                            <VerticalStackLayout>
+                                <Entry Placeholder="Дизайнерски рамки" Text="{Binding AdditionalClarification, Mode=TwoWay}" Margin="10,0,0,0" TextColor="Black" FontSize="Medium" PlaceholderColor="#C1B5B5" HorizontalOptions="FillAndExpand"/>
+                            </VerticalStackLayout>
+
+                        </Frame>
+                    </Grid>
+
+                    <Grid Margin="0,0,0,5"  HorizontalOptions="FillAndExpand" IsVisible="{Binding IsBycicle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start"  Text="Електрически ли е?" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0,5"/>
+
+                        <Grid Grid.Row="1" ColumnDefinitions="auto,auto" Padding="20,0,20,0" Margin="0,10,0,10">
+                            <Grid ColumnDefinitions="auto, auto" Grid.Column="0" Margin="0,0,40,0">
+                                <RadioButton Grid.Column="0" x:Name="RadioElectricYes" Content="" IsChecked="False" CheckedChanged="RadioElectricYes_CheckedChanged" />
+                                <Label x:Name="LabelElectricYes" Grid.Column="1" FontSize="17" Text="Да" FontAttributes="Bold"  VerticalOptions="CenterAndExpand" Padding="5,0,0,0">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="LabelElectricYes_Tapped"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </Grid>
+                            <Grid ColumnDefinitions="auto, auto" Grid.Column="1">
+                                <RadioButton Grid.Column="0" x:Name="RadioBtnElectricNo" Content="" IsChecked="True" CheckedChanged="RadioBtnElectricNo_CheckedChanged"/>
+                                <Label x:Name="LabelElectricNo" Grid.Column="1" FontSize="17"  Text="Не" FontAttributes="Bold" VerticalOptions="CenterAndExpand" Padding="5,0,0,0">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="LabelElectricNo_Tapped"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+
+                    <Grid Margin="0,0,0,5"  HorizontalOptions="FillAndExpand" IsVisible="{Binding IsBycicle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start"  Text="Има ли щети през последните 3 години?" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0,5"/>
+
+                        <Grid Grid.Row="1" ColumnDefinitions="auto,auto" Padding="20,0,20,0" Margin="0,10,0,10">
+                            <Grid ColumnDefinitions="auto, auto" Grid.Column="0" Margin="0,0,40,0">
+                                <RadioButton Grid.Column="0" x:Name="RadioHasDamageYes" Content="" IsChecked="False" CheckedChanged="RadioHasDamageYes_CheckedChanged" />
+                                <Label x:Name="LabelHasDamageYes" Grid.Column="1" FontSize="17" Text="Да" FontAttributes="Bold" VerticalOptions="CenterAndExpand" Padding="5,0,0,0">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="LabelHasDamageYes_Tapped"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </Grid>
+                            <Grid ColumnDefinitions="auto, auto" Grid.Column="1">
+                                <RadioButton Grid.Column="0" x:Name="RadioBtnHasDamageNo" Content="" IsChecked="True" CheckedChanged="RadioBtnHasDamageNo_CheckedChanged"/>
+                                <Label x:Name="LabelHasDamageNo" Grid.Column="1" FontSize="17"  Text="Не" FontAttributes="Bold" VerticalOptions="CenterAndExpand" Padding="5,0,0,0">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="LabelHasDamageNo_Tapped"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+
+                    <Grid  Margin="0,0,0,5"  HorizontalOptions="FillAndExpand" IsVisible="{Binding IsBycicle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start"  Text="Има ли неотстранени вреди?" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0,5"/>
+
+                        <Grid Grid.Row="1" ColumnDefinitions="auto,auto" Padding="20,0,20,0" Margin="0,10,0,10">
+                            <Grid ColumnDefinitions="auto, auto" Grid.Column="0" Margin="0,0,40,0">
+                                <RadioButton Grid.Column="0" x:Name="RadioUnrepairedYes" Content="" IsChecked="False" CheckedChanged="RadioUnrepairedYes_CheckedChanged"/>
+                                <Label x:Name="LabelUnrepairedYes" Grid.Column="1" FontSize="17" Text="Да" FontAttributes="Bold" VerticalOptions="CenterAndExpand" Padding="5,0,0,0">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="LabelUnrepairedYes_Tapped"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </Grid>
+                            <Grid ColumnDefinitions="auto, auto" Grid.Column="1">
+                                <RadioButton Grid.Column="0" x:Name="RadioBtnUnrepairedNo" Content="" IsChecked="True" CheckedChanged="RadioBtnUnrepairedNo_CheckedChanged"/>
+                                <Label x:Name="LabelUnrepairedNo" Grid.Column="1" FontSize="17"  Text="Не" FontAttributes="Bold" VerticalOptions="CenterAndExpand" Padding="5,0,0,0">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="LabelUnrepairedNo_Tapped"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+
+                    <Grid Margin="0,0,0,5"  HorizontalOptions="FillAndExpand" IsVisible="{Binding HasUnrepairedDamage}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start"  Text="Какви са неотстранените вреди ?" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0,5"/>
+                        <Frame Grid.Row="1" BorderColor="{StaticResource Black}" CornerRadius="8" Padding="0" MaximumHeightRequest="{OnPlatform Android='38'}" BackgroundColor="Transparent" Margin="0">
+                            <VerticalStackLayout>
+                                <Entry Placeholder="Счупена рамка" Text="{Binding UnrepairedInfo, Mode=TwoWay}" Margin="10,0,0,0" TextColor="Black" FontSize="Medium" PlaceholderColor="#C1B5B5" HorizontalOptions="FillAndExpand"/>
+                            </VerticalStackLayout>
+                            <Frame.Triggers>
+                                <DataTrigger TargetType="Frame" Binding="{Binding UnrepairedInfoError}" Value="True">
+                                    <Setter Property="BorderColor" Value="Red" />
+                                </DataTrigger>
+                            </Frame.Triggers>
+                        </Frame>
+                    </Grid>
+
+
+
+                    <!--Continue Button -->
+                    <Button x:Name="RegBtn"
+          Text="Продължи" Grid.Column="1"
+          Margin="0,20,0,50"
+          Padding="50,5"
+          FontSize="24"
+          BackgroundColor="{StaticResource Tertiary}"
+          TextColor="White"
+          HorizontalOptions="CenterAndExpand"
+          Command="{Binding ContinueCommand}"/>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+        <views:NavBar Grid.Row="1" 
+  Margin="0"
+  Padding="0"
+  VerticalOptions="EndAndExpand"
+  BackgroundColor="Transparent"/>
+    </Grid>
+</ContentPage>

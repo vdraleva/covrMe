@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:CovrMe.Views.ContentViews"
+             xmlns:behaviors="clr-namespace:CovrMe.Bahaviors"
+             xmlns:viewmodels="clr-namespace:CovrMe.ViewModels.Pages.Insurances.TravelInsurance"
+             x:DataType="viewmodels:TravelInsuranceInsuredUsersViewModel"
+             x:Class="CovrMe.Views.Pages.Insurances.TravelInsurance.TravelInsuranceInsuredUsersPage"
+             BackgroundColor="White">
+    <NavigationPage.TitleView>
+        <Image Source="covrmelogo.png" Margin="0,0,0,0" HeightRequest="50" WidthRequest="250" HorizontalOptions="StartAndExpand" BackgroundColor="White"/>
+    </NavigationPage.TitleView>
+    <Grid RowDefinitions="{OnPlatform Android='9*,*', iOS='670,*'}">
+        <ScrollView Grid.Row="0" Padding="0" MinimumHeightRequest="{OnPlatform Android='400', iOS='750'}" BackgroundColor="White" VerticalOptions="StartAndExpand">
+            <StackLayout>
+                <Label Text="Помощ при пътуване" FontSize="24" FontAttributes="Bold" FontFamily="Montserrat" HorizontalOptions="FillAndExpand" BackgroundColor="#E8E8E8" TextColor="{StaticResource Black}" Padding="20,5"/>
+                <Label Text="Застраховани лица" FontSize="22" FontAttributes="Bold" HorizontalOptions="FillAndExpand" TextColor="{StaticResource Primary}" Padding="20,15,0,10" />
+
+                <views:InsuredUsersContentView AgesList="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:TravelInsuranceInsuredUsersViewModel}},Path=InsuredUsersAgesList}"  HorizontalOptions="FillAndExpand"/>
+
+                <!--Continue Button -->
+                <Button x:Name="continueBtn"
+                  Text="Продължи" Grid.Column="1"
+                  Margin="0,50,0,150"
+                  Padding="70,5"
+                  FontSize="24"
+                  BackgroundColor="{StaticResource Tertiary}"
+                  TextColor="White"
+                  HorizontalOptions="CenterAndExpand"
+                  Command="{Binding ContinueCommand}"/>
+            </StackLayout>
+        </ScrollView>
+        <views:NavBar Grid.Row="1" 
+            Margin="0"
+            Padding="0"
+            VerticalOptions="EndAndExpand"
+            BackgroundColor="Transparent"/>
+    </Grid>
+</ContentPage>

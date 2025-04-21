@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:CovrMe.ViewModels.ContentViews"
+             x:DataType="viewmodels:NavBarViewModel"
+             x:Class="CovrMe.Views.ContentViews.NavBar" BackgroundColor="Transparent">
+    <StackLayout BackgroundColor="Transparent">
+        <Grid BackgroundColor="{StaticResource Black}" MinimumHeightRequest="{OnPlatform Android='60',iOS='80'}" VerticalOptions="FillAndExpand" ColumnDefinitions="*,*,*,*" Padding="10" Margin="{OnPlatform iOS='0,0,0,-35'}">
+            <ImageButton Grid.Column="0" Source="navcircle.png"  MaximumHeightRequest="50" Padding="0,0,0,0" VerticalOptions="CenterAndExpand" WidthRequest="30" Scale="{OnPlatform Android='0.8', iOS='0.6'}" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:NavBarViewModel}},Path=CreateNewInsuranceCommand}"/>
+            <ImageButton Grid.Column="1" Source="navhome.png"    MaximumHeightRequest="50" Padding="0,0,0,0" VerticalOptions="CenterAndExpand" WidthRequest="30" Scale="{OnPlatform Android='0.8', iOS='0.6'}" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:NavBarViewModel}},Path=GoToHomePageCommand}"/>
+            <ImageButton Grid.Column="2" Source="navpolicy.png"  MaximumHeightRequest="50" Padding="0,0,0,0" VerticalOptions="CenterAndExpand" WidthRequest="30" Scale="{OnPlatform Android='0.8', iOS='0.6'}" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:NavBarViewModel}},Path=GoToMyInsurancesPageCommand}"/>
+            <ImageButton Grid.Column="3" Source="navprofile.png" MaximumHeightRequest="50" Padding="0,0,0,0" VerticalOptions="CenterAndExpand" WidthRequest="30" Scale="{OnPlatform Android='0.8', iOS='0.6'}" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:NavBarViewModel}},Path=GoToProfilePageCommand}"/>
+        </Grid>
+    </StackLayout>
+</ContentView>

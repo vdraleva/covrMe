@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mct:Popup   xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:viewmodels="clr-namespace:CovrMe.ViewModels.Popups"
+             x:DataType="viewmodels:MountainXtreemInfoPopUpViewModel"
+             x:Class="CovrMe.Views.Popups.MountainXtreemInfoPopUp"      
+             Color="White"
+            CanBeDismissedByTappingOutsideOfPopup="True">
+
+    <Border  Stroke="White" StrokeShape="RoundRectangle 16,16,16,16" >
+        <VerticalStackLayout>
+            <Grid RowDefinitions="0.5*,5*" WidthRequest="{Binding DisplayWidth}" HeightRequest="220" MaximumHeightRequest="220" Background="White">
+                <StackLayout Grid.Row="0" Background="White">
+                    <Grid  ColumnDefinitions="9*,*">
+                        <Label Grid.Column="0"  Text="Информация" FontSize="Medium" FontAttributes="Bold" MaximumHeightRequest="40" HorizontalOptions="Center"/>
+                        <ImageButton Clicked="ImageButton_Clicked" Grid.Column="1" Source="close.png" MaximumHeightRequest="30" HorizontalOptions="End" >
+                        </ImageButton>
+                    </Grid>
+                </StackLayout>
+
+                <StackLayout Grid.Row="1" Margin="0,20,0,20">
+                    <Label  HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand" Padding="10,0,10,0" TextColor="{StaticResource Black}" Text="Клауза “Екстремен спорт” включва" />
+                    <Label  HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand" Padding="10,0,0,0"  TextColor="{StaticResource Black}" Text="всички стандартни покрития плюс " />
+                    <Label  HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand" Padding="10,0,0,0"  TextColor="{StaticResource Black}" Text="упражняване на екстремни спортове" />
+                    <Label  HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand" Padding="10,0,0,0"  TextColor="{StaticResource Black}" Text="или хоби (лвв, планинско колоездене," />
+                    <Label  HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand" Padding="10,0,0,0"  TextColor="{StaticResource Black}" Text="парапланеризъм, скално катерене," />
+                    <Label  HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand" Padding="10,0,0,0"  TextColor="{StaticResource Black}" Text="алпинизъм с използване на " />
+                    <Label  HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand" Padding="10,0,0,0"  TextColor="{StaticResource Black}" Text="обезопасителни мерки, ски спускане" />
+                    <Label  HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand" Padding="10,0,0,0"  TextColor="{StaticResource Black}" Text="и сноуборд извън обработени писти)." />
+                </StackLayout >
+            </Grid>
+        </VerticalStackLayout>
+    </Border>
+</mct:Popup>

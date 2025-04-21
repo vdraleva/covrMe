@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:CovrMe.Views.ContentViews"
+             xmlns:model="clr-namespace:CovrMe.ViewModels.Pages.Insurances.CivilInsurance"
+             x:DataType="model:CivilInsuranceOwnerViewModel"
+             x:Class="CovrMe.Views.Pages.Insurances.CivilInsurance.CivilInsuranceOwnerPage" BackgroundColor="White">
+    <NavigationPage.TitleView>
+        <Image Source="covrmelogo.png" Margin="0,0,0,0" HeightRequest="50" WidthRequest="250" HorizontalOptions="StartAndExpand" BackgroundColor="White"/>
+    </NavigationPage.TitleView>
+    <Grid RowDefinitions="{OnPlatform Android='9*,*', iOS='670,*'}">
+        <ScrollView Grid.Row="0" Padding="0"
+                   BackgroundColor="White"
+                   VerticalOptions="StartAndExpand">
+            <StackLayout Padding="0" HorizontalOptions="FillAndExpand">
+                <Label Text="Гражданска отговорност" FontSize="24" FontAttributes="Bold" FontFamily="Montserrat" HorizontalOptions="FillAndExpand" BackgroundColor="#E8E8E8" TextColor="{StaticResource Black}" Padding="25,5"/>
+                <Label Text="Данни на собственика"   FontSize="22" FontAttributes="Bold" FontFamily="Montserrat" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="{StaticResource Primary}" Padding="25,15,0,0" />
+                <StackLayout Padding="{OnPlatform Android='25,0', iOS='25,0,25,50'}" VerticalOptions="StartAndExpand">
+                    <Grid Margin="0,10,0,5"  HorizontalOptions="FillAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start" Text="Собственик" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0,5"/>
+                        <Frame Grid.Row="1" BorderColor="{StaticResource Black}" CornerRadius="8" Padding="0" MaximumHeightRequest="{OnPlatform Android='38'}" BackgroundColor="Transparent" Margin="0">
+                            <VerticalStackLayout>
+                                <Picker x:Name="UserPicker" ItemsSource="{Binding UserCollection}" SelectedItem="{Binding SelectedUser, Mode=TwoWay}" SelectedIndexChanged="UserPicker_SelectedIndexChanged" Title="Собственик" TitleColor="Silver" Margin="10,0,0,0" FontSize="Medium" HorizontalTextAlignment="Start" IsEnabled="True">
+                                    <Picker.ItemDisplayBinding>
+                                        <Binding Path="Names" />
+                                    </Picker.ItemDisplayBinding>
+                                </Picker>
+                            </VerticalStackLayout>
+                        </Frame>
+                        <ImageButton Grid.Row="1" Source="arrowmore.png" Margin="10,0" MaximumWidthRequest="10" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand" Scale="{OnPlatform iOS='0.4'}"/>
+                    </Grid>
+
+                    <!-- First Name Entry -->
+                    <Grid Margin="0,0,0,5"  HorizontalOptions="FillAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start"  Text="Име (кирилица)" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0,5"/>
+                        <Frame Grid.Row="1" BorderColor="{StaticResource Black}" CornerRadius="8" Padding="0" MaximumHeightRequest="{OnPlatform Android='38'}" BackgroundColor="Transparent" Margin="0">
+                            <VerticalStackLayout>
+                                <Entry Placeholder="Алекс" Text="{Binding FirstName, Mode=TwoWay}" Margin="10,0,0,0" TextColor="Black" FontSize="Medium" PlaceholderColor="#C1B5B5" HorizontalOptions="FillAndExpand"/>
+                            </VerticalStackLayout>
+                            <Frame.Triggers>
+                                <DataTrigger TargetType="Frame" Binding="{Binding FirstNameError}" Value="True">
+                                    <Setter Property="BorderColor" Value="Red" />
+                                </DataTrigger>
+                            </Frame.Triggers>
+                        </Frame>
+                    </Grid>
+
+                    <!-- Second Name Entry -->
+                    <Grid Margin="0,0,0,5" HorizontalOptions="FillAndExpand" Padding="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start"  Text="Презиме (кирилица)" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0,5"/>
+                        <Frame Grid.Row="1" BorderColor="{StaticResource Black}" CornerRadius="8" Padding="0" MaximumHeightRequest="{OnPlatform Android='38'}" BackgroundColor="Transparent" Margin="0">
+                            <VerticalStackLayout>
+                                <Entry Placeholder="Иванов" Text="{Binding SurName, Mode=TwoWay}" Margin="10,0,0,0" TextColor="Black" FontSize="Medium" PlaceholderColor="#C1B5B5" HorizontalOptions="FillAndExpand"/>
+                            </VerticalStackLayout>
+                            <Frame.Triggers>
+                                <DataTrigger TargetType="Frame" Binding="{Binding SurNameError}" Value="True">
+                                    <Setter Property="BorderColor" Value="Red" />
+                                </DataTrigger>
+                            </Frame.Triggers>
+                        </Frame>
+                    </Grid>
+
+                    <!-- Last Name Entry -->
+                    <Grid Margin="0,0,0,5" HorizontalOptions="FillAndExpand" Padding="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start"  Text="Фамилия (кирилица)" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0,5"/>
+                        <Frame Grid.Row="1" BorderColor="{StaticResource Black}" CornerRadius="8" Padding="0" MaximumHeightRequest="{OnPlatform Android='38'}" BackgroundColor="Transparent" Margin="0">
+                            <VerticalStackLayout>
+                                <Entry Placeholder="Иванов" Text="{Binding LastName, Mode=TwoWay}" Margin="10,0,0,0" TextColor="Black" FontSize="Medium" PlaceholderColor="#C1B5B5" HorizontalOptions="FillAndExpand"/>
+                            </VerticalStackLayout>
+                            <Frame.Triggers>
+                                <DataTrigger TargetType="Frame" Binding="{Binding LastNameError}" Value="True">
+                                    <Setter Property="BorderColor" Value="Red" />
+                                </DataTrigger>
+                            </Frame.Triggers>
+                        </Frame>
+                    </Grid>
+
+                    <!-- Nationality Picker-->
+                    <Grid Margin="0,0,0,5"  HorizontalOptions="FillAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start" Text="Националност" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0,5"/>
+                        <Frame Grid.Row="1" BorderColor="{StaticResource Black}" CornerRadius="8" Padding="0" MaximumHeightRequest="{OnPlatform Android='38'}" BackgroundColor="Transparent" Margin="0">
+                            <VerticalStackLayout>
+                                <Picker x:Name="NationalityPicker" ItemsSource="{Binding CountryCollection}" SelectedItem="{Binding SelectedNationality, Mode=TwoWay}" SelectedIndexChanged="NationalityPicker_SelectedIndexChanged" Title="Националност" TitleColor="Silver" Margin="10,0,0,0" FontSize="Medium" HorizontalTextAlignment="Start" IsEnabled="True">
+                                    <Picker.ItemDisplayBinding>
+                                        <Binding Path="Name" />
+                                    </Picker.ItemDisplayBinding>
+                                </Picker>
+                            </VerticalStackLayout>
+                        </Frame>
+                        <ImageButton Grid.Row="1" Source="arrowmore.png" Margin="10,0" MaximumWidthRequest="10" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand" Scale="{OnPlatform iOS='0.4'}"/>
+                    </Grid>
+
+                    <!-- UIN Entry -->
+                    <Grid Margin="0,0,0,5" HorizontalOptions="FillAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start"  Text="ЕГН/ЛНЧ" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0,5"/>
+                        <Frame Grid.Row="1" BorderColor="{StaticResource Black}" CornerRadius="8" Padding="0" MaximumHeightRequest="{OnPlatform Android='38'}" BackgroundColor="Transparent" Margin="0">
+                            <VerticalStackLayout>
+                                <Entry Unfocused="Entry_Unfocused" Placeholder="8705151212" Text="{Binding Uin, Mode=TwoWay}" Margin="10,0,0,0" TextColor="Black" FontSize="Medium" PlaceholderColor="#C1B5B5" HorizontalOptions="FillAndExpand"/>
+                            </VerticalStackLayout>
+                            <Frame.Triggers>
+                                <DataTrigger TargetType="Frame" Binding="{Binding UiNumberError}" Value="True">
+                                    <Setter Property="BorderColor" Value="Red" />
+                                </DataTrigger>
+                            </Frame.Triggers>
+                        </Frame>
+                    </Grid>
+
+                    <!-- VAT numbere Entry -->
+                    <Grid Margin="0,0,0,5" HorizontalOptions="FillAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start"  Text="ЕИК" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0,5"/>
+                        <Frame Grid.Row="1" BorderColor="{StaticResource Black}" CornerRadius="8" Padding="0" MaximumHeightRequest="{OnPlatform Android='38'}" BackgroundColor="Transparent" Margin="0">
+                            <VerticalStackLayout>
+                                <Entry Placeholder="123456789" Text="{Binding VatNumber, Mode=TwoWay}" Margin="10,0,0,0" TextColor="Black" FontSize="Medium" PlaceholderColor="#C1B5B5" HorizontalOptions="FillAndExpand"/>
+                            </VerticalStackLayout>
+                            <Frame.Triggers>
+                                <DataTrigger TargetType="Frame" Binding="{Binding VatNumberError}" Value="True">
+                                    <Setter Property="BorderColor" Value="Red" />
+                                </DataTrigger>
+                            </Frame.Triggers>
+                        </Frame>
+                    </Grid>
+
+                    <!-- Company Name Entry -->
+                    <Grid Margin="0,0,0,5" HorizontalOptions="FillAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start"  Text="Име на фирма (кирилица)" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0,5"/>
+                        <Frame Grid.Row="1" BorderColor="{StaticResource Black}" CornerRadius="8" Padding="0" MaximumHeightRequest="{OnPlatform Android='38'}" BackgroundColor="Transparent" Margin="0">
+                            <VerticalStackLayout>
+                                <Entry Placeholder="Мираж" Text="{Binding CompanyName, Mode=TwoWay}" Margin="10,0,0,0" TextColor="Black" FontSize="Medium" PlaceholderColor="#C1B5B5" HorizontalOptions="FillAndExpand"/>
+                            </VerticalStackLayout>
+                            <Frame.Triggers>
+                                <DataTrigger TargetType="Frame" Binding="{Binding CompanyNameError}" Value="True">
+                                    <Setter Property="BorderColor" Value="Red" />
+                                </DataTrigger>
+                            </Frame.Triggers>
+                        </Frame>
+                    </Grid>
+
+                    <!-- Region Picker -->
+                    <Grid Margin="0,0,0,5"  HorizontalOptions="FillAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start" Text="Област" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0,5"/>
+                        <Frame Grid.Row="1" BorderColor="{StaticResource Black}" CornerRadius="8" Padding="0" MaximumHeightRequest="{OnPlatform Android='38'}" BackgroundColor="Transparent" Margin="0">
+                            <VerticalStackLayout>
+                                <Picker x:Name="RegionPicker" ItemsSource="{Binding RegionCollection}" SelectedItem="{Binding SelectedRegion, Mode=TwoWay}" SelectedIndexChanged="RegionPicker_SelectedIndexChanged" Title="Област" TitleColor="Silver" Margin="10,0,0,0" FontSize="Medium" HorizontalTextAlignment="Start" IsEnabled="True">
+                                    <Picker.ItemDisplayBinding>
+                                        <Binding Path="Name" />
+                                    </Picker.ItemDisplayBinding>
+                                </Picker>
+                            </VerticalStackLayout>
+                        </Frame>
+                        <ImageButton Grid.Row="1" Source="arrowmore.png" Margin="10,0" MaximumWidthRequest="10" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand" Scale="{OnPlatform iOS='0.4'}"/>
+                    </Grid>
+
+                    <!-- Municipality Picker -->
+                    <Grid Margin="0,0,0,5"  HorizontalOptions="FillAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start" Text="Община" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0,5"/>
+                        <Frame Grid.Row="1" BorderColor="{StaticResource Black}" CornerRadius="8" Padding="0" MaximumHeightRequest="{OnPlatform Android='38'}" BackgroundColor="Transparent" Margin="0">
+                            <VerticalStackLayout>
+                                <Picker x:Name="MunicipalityPicker" ItemsSource="{Binding MunicipalityCollection}" SelectedItem="{Binding SelectedMunicipality, Mode=TwoWay}" ItemDisplayBinding="{Binding Path=Name,Mode=TwoWay}" SelectedIndexChanged="MunicipalityPicker_SelectedIndexChanged" Title="Община" TitleColor="Silver" Margin="10,0,0,0" FontSize="Medium" HorizontalTextAlignment="Start" IsEnabled="True">
+                                </Picker>
+                            </VerticalStackLayout>
+                        </Frame>
+                        <ImageButton Grid.Row="1" Source="arrowmore.png" Margin="10,0" MaximumWidthRequest="10" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand" Scale="{OnPlatform iOS='0.4'}"/>
+                    </Grid>
+
+                    <!-- City Picker -->
+                    <Grid Margin="0,0,0,5"  HorizontalOptions="FillAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start" Text="Населено място" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0,5"/>
+                        <Frame Grid.Row="1" BorderColor="{StaticResource Black}" CornerRadius="8" Padding="0" MaximumHeightRequest="{OnPlatform Android='38'}" BackgroundColor="Transparent" Margin="0">
+                            <VerticalStackLayout>
+                                <Picker x:Name="CityPicker" ItemsSource="{Binding CityCollection}" SelectedItem="{Binding SelectedCityModel, Mode=TwoWay}" SelectedIndexChanged="CityPicker_SelectedIndexChanged" Title="Населено място" TitleColor="Silver" Margin="10,0,0,0" FontSize="Medium" HorizontalTextAlignment="Start" IsEnabled="True">
+                                    <Picker.ItemDisplayBinding>
+                                        <Binding Path="Name" />
+                                    </Picker.ItemDisplayBinding>
+                                </Picker>
+                            </VerticalStackLayout>
+                        </Frame>
+                        <ImageButton Grid.Row="1" Source="arrowmore.png" Margin="10,0" MaximumWidthRequest="10" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand" Scale="{OnPlatform iOS='0.4'}"/>
+                    </Grid>
+
+                    <!-- Address Entry -->
+                    <Grid Margin="0,0,0,5"  HorizontalOptions="FillAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start"  Text="Адрес (кирилица)" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0,5"/>
+                        <Frame Grid.Row="1" BorderColor="{StaticResource Black}" CornerRadius="8" Padding="0" MaximumHeightRequest="{OnPlatform Android='38'}" BackgroundColor="Transparent" Margin="0">
+                            <VerticalStackLayout>
+                                <Entry Placeholder="ул. Череша 8" Text="{Binding Address, Mode=TwoWay}" Margin="10,0,0,0" TextColor="Black" FontSize="Medium" PlaceholderColor="#C1B5B5" HorizontalOptions="FillAndExpand"/>
+                            </VerticalStackLayout>
+                            <Frame.Triggers>
+                                <DataTrigger TargetType="Frame" Binding="{Binding AddressError}" Value="True">
+                                    <Setter Property="BorderColor" Value="Red" />
+                                </DataTrigger>
+                            </Frame.Triggers>
+                        </Frame>
+                    </Grid>
+
+                    <!-- Driving Experience Picker-->
+                    <Grid Margin="0,0,0,5" HorizontalOptions="FillAndExpand" Padding="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start" Text="Шофьорски стаж" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0,5"/>
+                        <Frame Grid.Row="1" BorderColor="{StaticResource Black}" CornerRadius="8" Padding="0" MaximumHeightRequest="{OnPlatform Android='38'}" BackgroundColor="Transparent" Margin="0">
+                            <VerticalStackLayout>
+                                <Picker x:Name="ExpPicker" ItemsSource="{Binding DrivingExperienceCollection}" SelectedItem="{Binding SelectedDrivingExperience, Mode=TwoWay}" SelectedIndexChanged="ExpPicker_SelectedIndexChanged" Title="Шофьорски стаж" TitleColor="Silver" Margin="10,0,0,0" FontSize="Medium" HorizontalTextAlignment="Start" IsEnabled="True">
+                                    <Picker.ItemDisplayBinding>
+                                        <Binding Path="Text" />
+                                    </Picker.ItemDisplayBinding>
+                                </Picker>
+                            </VerticalStackLayout>
+                        </Frame>
+                        <ImageButton Grid.Row="1" Source="arrowmore.png" Margin="10,0" MaximumWidthRequest="10" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand" Scale="{OnPlatform iOS='0.4'}"/>
+                    </Grid>
+
+                    <Grid Margin="0,0,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start"  Text="Провинения на водача" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0,5"/>
+                        <Frame Grid.Row="1" BorderColor="{StaticResource Black}" CornerRadius="8" Padding="0" MaximumHeightRequest="{OnPlatform Android='38'}" BackgroundColor="Transparent" Margin="0">
+                            <VerticalStackLayout>
+                                <Picker ItemsSource="{Binding UserGuiltCollection}" SelectedItem="{Binding SelectedGuiltType, Mode=TwoWay}" Title="Провинение" TitleColor="Silver" Margin="10,0,0,0" FontSize="Medium" HorizontalTextAlignment="Start" IsEnabled="True">
+                                    <Picker.ItemDisplayBinding>
+                                        <Binding Path="Name" />
+                                    </Picker.ItemDisplayBinding>
+                                </Picker>
+                            </VerticalStackLayout>
+                        </Frame>
+                        <ImageButton Grid.Row="1" Source="arrowmore.png" Margin="10,0" MaximumWidthRequest="10" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand" Scale="{OnPlatform iOS='0.4'}"/>
+                    </Grid>
+
+                    <!-- BirthDate DatePicker-->
+                    <Grid Margin="0,0,0,25"  HorizontalOptions="FillAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start" Text="Дата на раждане" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0,5"/>
+                        <Frame Grid.Row="1" BorderColor="{StaticResource Black}" CornerRadius="8" Padding="0" MaximumHeightRequest="{OnPlatform Android='38'}" BackgroundColor="Transparent" Margin="0">
+                            <VerticalStackLayout>
+                                <DatePicker Date="{Binding BirthDate, Mode=TwoWay}" MinimumDate="{Binding MinPickerDate, Mode=TwoWay}" MaximumDate="{Binding MaxPickerDate, Mode=TwoWay}" Format="dd/MM/yyyy" Margin="10,0,0,0" FontSize="Medium"  IsEnabled="True">
+                                </DatePicker>
+                            </VerticalStackLayout>
+                            <Frame.Triggers>
+                                <DataTrigger TargetType="Frame" Binding="{Binding BirthDateError}" Value="True">
+                                    <Setter Property="BorderColor" Value="Red" />
+                                </DataTrigger>
+                            </Frame.Triggers>
+                        </Frame>
+                        <ImageButton Grid.Row="1" Source="arrowmore.png" Margin="10,0" MaximumWidthRequest="10" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand" Scale="{OnPlatform iOS='0.4'}"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="*,9*">
+                        <CheckBox Grid.Column="0" x:Name="CheckBoxSave" CheckedChanged="CheckBoxSave_CheckedChanged" ScaleX="{OnPlatform Android='1.1'}" ScaleY="{OnPlatform Android='1.1'}" />
+                        <Label Grid.Column="1" FontSize="14" Text="Запази в моя профил" FontAttributes="Bold" VerticalOptions="CenterAndExpand" Padding="0,0,0,0"/>
+
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer  Tapped="TapGestureRecognizer_Tapped" />
+                        </Grid.GestureRecognizers>
+                    </Grid>
+
+                    <!--Continue Button -->
+                    <Button x:Name="RegBtn"
+                       Text="Продължи" Grid.Column="1"
+                       Margin="0,20,0,50"
+                       Padding="50,5"
+                       FontSize="24"
+                       BackgroundColor="{StaticResource Tertiary}"
+                       TextColor="White"
+                       HorizontalOptions="CenterAndExpand"
+                       Command="{Binding ContinueCommand}"/>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+        <views:NavBar Grid.Row="1" 
+               Margin="0"
+               Padding="0"
+               VerticalOptions="EndAndExpand"
+               BackgroundColor="Transparent"/>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:CovrMe.Views.ContentViews"
+             xmlns:model="clr-namespace:CovrMe.ViewModels.Pages"
+             x:DataType="model:RegisterPageViewModel"
+             x:Class="CovrMe.Views.Pages.RegisterPage">
+    <NavigationPage.TitleView>
+        <Image Source="covrmelogo.png" Margin="0,0,0,0" HeightRequest="50" WidthRequest="250" HorizontalOptions="StartAndExpand" BackgroundColor="White"/>
+    </NavigationPage.TitleView>
+    <ScrollView Padding="0"
+           BackgroundColor="White"
+           VerticalOptions="CenterAndExpand">
+        <StackLayout Padding="25,0" VerticalOptions="StartAndExpand">
+            <Label Text="Регистрация" FontSize="26" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" TextColor="{StaticResource Black}"/>
+
+            <!-- Email Entry -->
+            <Grid Margin="0,0,0,5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start" Margin="0,5">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Имейл" TextColor="{StaticResource Black}" FontSize="Medium"/>
+                            <!--<Span Text=" *" TextColor="#CE2A27" FontAttributes="Bold"></Span>-->
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Frame Grid.Row="1" BorderColor="{StaticResource Black}" CornerRadius="8" Padding="0" MaximumHeightRequest="{OnPlatform Android='38'}" BackgroundColor="Transparent" Margin="0">
+                    <VerticalStackLayout>
+                        <Entry x:Name="EmailEntry" Text="{Binding Email}" Placeholder="alex.ivanov@gmail.com" Margin="10,0,0,0" TextColor="Black" FontSize="Medium" PlaceholderColor="#C1B5B5" HorizontalOptions="FillAndExpand"/>
+                    </VerticalStackLayout>
+                    <Frame.Triggers>
+                        <DataTrigger TargetType="Frame" Binding="{Binding EmailError}" Value="True">
+                            <Setter Property="BorderColor" Value="Red" />
+                        </DataTrigger>
+                    </Frame.Triggers>
+                </Frame>
+            </Grid>
+
+            <!-- Password Entry -->
+            <Grid Margin="0,0,0,5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start" Margin="0,5">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Парола" TextColor="{StaticResource Black}" FontSize="Medium"/>
+                            <!--<Span Text=" *" TextColor="#CE2A27" FontAttributes="Bold"></Span>-->
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Frame Grid.Row="1" BorderColor="{StaticResource Black}" CornerRadius="8" Padding="0" MaximumHeightRequest="{OnPlatform Android='38'}" BackgroundColor="Transparent" Margin="0">
+                    <Grid>
+                        <VerticalStackLayout>
+                            <Entry x:Name="PasswordEntry" Margin="10,0,0,0" TextColor="Black" Placeholder="*********" IsPassword="True" FontSize="Medium" PlaceholderColor="#C1B5B5" HorizontalOptions="FillAndExpand" Text="{Binding Password}"/>
+                        </VerticalStackLayout>
+                        <ImageButton Source="hide.png" Clicked="TogglePasswordVisibility" MaximumWidthRequest="20" MaximumHeightRequest="20" Scale="{OnPlatform iOS='0.6'}" VerticalOptions="Center" HorizontalOptions="End" Margin="{OnPlatform Android='10'}"/>
+                    </Grid>
+                    <Frame.Triggers>
+                        <DataTrigger TargetType="Frame" Binding="{Binding PasswordError}" Value="True">
+                            <Setter Property="BorderColor" Value="Red" />
+                        </DataTrigger>
+                    </Frame.Triggers>
+                </Frame>
+            </Grid>
+
+            <!-- Confirm Password Entry -->
+            <Grid Margin="0,0,0,5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start" Margin="0,5">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Повтори парола" TextColor="{StaticResource Black}" FontSize="Medium"/>
+                            <!--<Span Text=" *" TextColor="#CE2A27" FontAttributes="Bold"></Span>-->
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Frame Grid.Row="1" BorderColor="{StaticResource Black}" CornerRadius="8" Padding="0" MaximumHeightRequest="{OnPlatform Android='38'}" BackgroundColor="Transparent" Margin="0">
+                    <Grid>
+                        <VerticalStackLayout>
+                            <Entry x:Name="ConfirmPassword" Margin="10,0,0,0" TextColor="Black" Placeholder="*********" FontSize="Medium" IsPassword="True" PlaceholderColor="#C1B5B5" HorizontalOptions="FillAndExpand" Text="{Binding ConfirmPassword}"/>
+                        </VerticalStackLayout>
+                        <ImageButton Source="hide.png" Clicked="ToggleConfirmPasswordVisibility" MaximumWidthRequest="20" MaximumHeightRequest="20" Scale="{OnPlatform iOS='0.6'}" VerticalOptions="Center" HorizontalOptions="End" Margin="{OnPlatform Android='10'}"/>
+                    </Grid>
+                    <Frame.Triggers>
+                        <DataTrigger TargetType="Frame" Binding="{Binding ConfirmPasswordError}" Value="True">
+                            <Setter Property="BorderColor" Value="Red" />
+                        </DataTrigger>
+                    </Frame.Triggers>
+                </Frame>
+            </Grid>
+
+            <Grid ColumnDefinitions="*,9*" Margin="10,20,0,0">
+                <CheckBox Grid.Column="0" x:Name="CheckBoxTermsEntry" CheckedChanged="CheckBoxTermsEntry_CheckedChanged" Color="{StaticResource Primary}" ScaleX="{OnPlatform Android='1.1'}" ScaleY="{OnPlatform Android='1.1'}"/>
+                <Label Grid.Column="1" Text="Съгласявам се с Общите условия" VerticalOptions="CenterAndExpand" TextDecorations="Underline" FontAttributes="Bold" TextColor="{StaticResource Black}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoToInsuranceBgTermsCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+
+            <Grid ColumnDefinitions="*,9*" Margin="10,20,0,20">
+                <CheckBox Grid.Column="0" x:Name="CheckBoxPersonalEntry" CheckedChanged="CheckBoxPersonalEntry_CheckedChanged" Color="{StaticResource Primary}" ScaleX="{OnPlatform Android='1.1'}" ScaleY="{OnPlatform Android='1.1'}"/>
+                <Label Grid.Column="1" Text="Съгласявам се с Политиката за лични данни" VerticalOptions="CenterAndExpand" TextDecorations="Underline" FontAttributes="Bold" TextColor="{StaticResource Black}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoToPrivacyPolicyCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+            
+            <!-- Sign-Up Button -->
+            <Button x:Name="RegBtn"
+                    Text="Регистрирай се" Grid.Column="1"
+                    Margin="0,20,0,50"
+                    Padding="20,5"
+                    FontSize="24"
+                    BackgroundColor="{StaticResource Tertiary}"
+                    TextColor="White"
+                    HorizontalOptions="CenterAndExpand"
+                    Command="{Binding RegisterCommand}"/>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

@@ -2,15 +2,6 @@
 
 	<PropertyGroup>
 		<TargetFrameworks>net9.0-android;</TargetFrameworks>
-		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
-		<!-- <TargetFrameworks>$(TargetFrameworks);net9.0-tizen</TargetFrameworks> -->
-
-		<!-- Note for MacCatalyst:
-		The default runtime is maccatalyst-x64, except in Release config, in which case the default is maccatalyst-x64;maccatalyst-arm64.
-		When specifying both architectures, use the plural <RuntimeIdentifiers> instead of the singular <RuntimeIdentifier>.
-		The Mac App Store will NOT accept apps with ONLY maccatalyst-arm64 indicated;
-		either BOTH runtimes must be indicated or ONLY macatalyst-x64. -->
-		<!-- For example: <RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers> -->
 
 		<OutputType>Exe</OutputType>
 		<RootNamespace>CovrMe</RootNamespace>
@@ -29,23 +20,19 @@
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
 		<ApplicationVersion>1</ApplicationVersion>
 
-		<!-- To develop, package, and publish an app to the Microsoft Store, see: https://aka.ms/MauiTemplateUnpackaged -->
-		<WindowsPackageType>None</WindowsPackageType>
-
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">15.0</SupportedOSPlatformVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">15.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">13.1</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 	</PropertyGroup>
-
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" Color="#fff" BackgroundColor="#fff" BaseSize="64,64" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#fff" BaseSize="256,256" Resize="true" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -59,8 +46,606 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
+		<None Remove="Resources\Images\att.png" />
+		<None Remove="Resources\Images\beuroins.png" />
+		<None Remove="Resources\Images\close.png" />
+		<None Remove="Resources\Images\contactusmail.png" />
+		<None Remove="Resources\Images\delete_forever.png" />
+		<None Remove="Resources\Images\facebook.png" />
+		<None Remove="Resources\Images\google.png" />
+		<None Remove="Resources\Images\hr.png" />
+		<None Remove="Resources\Images\newhome.png" />
+		<None Remove="Resources\Images\scan.png" />
+		<None Remove="Resources\Images\scanner.png" />
+		<None Remove="Resources\Raw\location\cities\BGS01.json" />
+		<None Remove="Resources\Raw\location\cities\BGS04.json" />
+		<None Remove="Resources\Raw\location\cities\BGS06.json" />
+		<None Remove="Resources\Raw\location\cities\BGS08.json" />
+		<None Remove="Resources\Raw\location\cities\BGS09.json" />
+		<None Remove="Resources\Raw\location\cities\BGS12.json" />
+		<None Remove="Resources\Raw\location\cities\BGS13.json" />
+		<None Remove="Resources\Raw\location\cities\BGS15.json" />
+		<None Remove="Resources\Raw\location\cities\BGS17.json" />
+		<None Remove="Resources\Raw\location\cities\BGS18.json" />
+		<None Remove="Resources\Raw\location\cities\BGS21.json" />
+		<None Remove="Resources\Raw\location\cities\BGS23.json" />
+		<None Remove="Resources\Raw\location\cities\BGS27.json" />
+		<None Remove="Resources\Raw\location\cities\BLG01.json" />
+		<None Remove="Resources\Raw\location\cities\BLG02.json" />
+		<None Remove="Resources\Raw\location\cities\BLG03.json" />
+		<None Remove="Resources\Raw\location\cities\BLG11.json" />
+		<None Remove="Resources\Raw\location\cities\BLG13.json" />
+		<None Remove="Resources\Raw\location\cities\BLG28.json" />
+		<None Remove="Resources\Raw\location\cities\BLG33.json" />
+		<None Remove="Resources\Raw\location\cities\BLG37.json" />
+		<None Remove="Resources\Raw\location\cities\BLG40.json" />
+		<None Remove="Resources\Raw\location\cities\BLG42.json" />
+		<None Remove="Resources\Raw\location\cities\BLG44.json" />
+		<None Remove="Resources\Raw\location\cities\BLG49.json" />
+		<None Remove="Resources\Raw\location\cities\BLG52.json" />
+		<None Remove="Resources\Raw\location\cities\BLG53.json" />
+		<None Remove="Resources\Raw\location\cities\DOB03.json" />
+		<None Remove="Resources\Raw\location\cities\DOB12.json" />
+		<None Remove="Resources\Raw\location\cities\DOB15.json" />
+		<None Remove="Resources\Raw\location\cities\DOB17.json" />
+		<None Remove="Resources\Raw\location\cities\DOB20.json" />
+		<None Remove="Resources\Raw\location\cities\DOB27.json" />
+		<None Remove="Resources\Raw\location\cities\DOB28.json" />
+		<None Remove="Resources\Raw\location\cities\DOB29.json" />
+		<None Remove="Resources\Raw\location\cities\GAB05.json" />
+		<None Remove="Resources\Raw\location\cities\GAB12.json" />
+		<None Remove="Resources\Raw\location\cities\GAB29.json" />
+		<None Remove="Resources\Raw\location\cities\GAB35.json" />
+		<None Remove="Resources\Raw\location\cities\HKV09.json" />
+		<None Remove="Resources\Raw\location\cities\HKV11.json" />
+		<None Remove="Resources\Raw\location\cities\HKV17.json" />
+		<None Remove="Resources\Raw\location\cities\HKV18.json" />
+		<None Remove="Resources\Raw\location\cities\HKV19.json" />
+		<None Remove="Resources\Raw\location\cities\HKV28.json" />
+		<None Remove="Resources\Raw\location\cities\HKV29.json" />
+		<None Remove="Resources\Raw\location\cities\HKV30.json" />
+		<None Remove="Resources\Raw\location\cities\HKV32.json" />
+		<None Remove="Resources\Raw\location\cities\HKV33.json" />
+		<None Remove="Resources\Raw\location\cities\HKV34.json" />
+		<None Remove="Resources\Raw\location\cities\JAM03.json" />
+		<None Remove="Resources\Raw\location\cities\JAM07.json" />
+		<None Remove="Resources\Raw\location\cities\JAM22.json" />
+		<None Remove="Resources\Raw\location\cities\JAM25.json" />
+		<None Remove="Resources\Raw\location\cities\JAM26.json" />
+		<None Remove="Resources\Raw\location\cities\KNL04.json" />
+		<None Remove="Resources\Raw\location\cities\KNL05.json" />
+		<None Remove="Resources\Raw\location\cities\KNL27.json" />
+		<None Remove="Resources\Raw\location\cities\KNL29.json" />
+		<None Remove="Resources\Raw\location\cities\KNL31.json" />
+		<None Remove="Resources\Raw\location\cities\KNL38.json" />
+		<None Remove="Resources\Raw\location\cities\KNL41.json" />
+		<None Remove="Resources\Raw\location\cities\KNL48.json" />
+		<None Remove="Resources\Raw\location\cities\KNL50.json" />
+		<None Remove="Resources\Raw\location\cities\KRZ02.json" />
+		<None Remove="Resources\Raw\location\cities\KRZ08.json" />
+		<None Remove="Resources\Raw\location\cities\KRZ14.json" />
+		<None Remove="Resources\Raw\location\cities\KRZ15.json" />
+		<None Remove="Resources\Raw\location\cities\KRZ16.json" />
+		<None Remove="Resources\Raw\location\cities\KRZ21.json" />
+		<None Remove="Resources\Raw\location\cities\KRZ35.json" />
+		<None Remove="Resources\Raw\location\cities\LOV02.json" />
+		<None Remove="Resources\Raw\location\cities\LOV17.json" />
+		<None Remove="Resources\Raw\location\cities\LOV18.json" />
+		<None Remove="Resources\Raw\location\cities\LOV19.json" />
+		<None Remove="Resources\Raw\location\cities\LOV33.json" />
+		<None Remove="Resources\Raw\location\cities\LOV34.json" />
+		<None Remove="Resources\Raw\location\cities\LOV36.json" />
+		<None Remove="Resources\Raw\location\cities\LOV38.json" />
+		<None Remove="Resources\Raw\location\cities\MON02.json" />
+		<None Remove="Resources\Raw\location\cities\MON04.json" />
+		<None Remove="Resources\Raw\location\cities\MON07.json" />
+		<None Remove="Resources\Raw\location\cities\MON11.json" />
+		<None Remove="Resources\Raw\location\cities\MON12.json" />
+		<None Remove="Resources\Raw\location\cities\MON14.json" />
+		<None Remove="Resources\Raw\location\cities\MON24.json" />
+		<None Remove="Resources\Raw\location\cities\MON26.json" />
+		<None Remove="Resources\Raw\location\cities\MON29.json" />
+		<None Remove="Resources\Raw\location\cities\MON36.json" />
+		<None Remove="Resources\Raw\location\cities\MON38.json" />
+		<None Remove="Resources\Raw\location\cities\PAZ03.json" />
+		<None Remove="Resources\Raw\location\cities\PAZ04.json" />
+		<None Remove="Resources\Raw\location\cities\PAZ06.json" />
+		<None Remove="Resources\Raw\location\cities\PAZ08.json" />
+		<None Remove="Resources\Raw\location\cities\PAZ14.json" />
+		<None Remove="Resources\Raw\location\cities\PAZ19.json" />
+		<None Remove="Resources\Raw\location\cities\PAZ20.json" />
+		<None Remove="Resources\Raw\location\cities\PAZ21.json" />
+		<None Remove="Resources\Raw\location\cities\PAZ24.json" />
+		<None Remove="Resources\Raw\location\cities\PAZ29.json" />
+		<None Remove="Resources\Raw\location\cities\PAZ32.json" />
+		<None Remove="Resources\Raw\location\cities\PDV01.json" />
+		<None Remove="Resources\Raw\location\cities\PDV07.json" />
+		<None Remove="Resources\Raw\location\cities\PDV12.json" />
+		<None Remove="Resources\Raw\location\cities\PDV13.json" />
+		<None Remove="Resources\Raw\location\cities\PDV15.json" />
+		<None Remove="Resources\Raw\location\cities\PDV17.json" />
+		<None Remove="Resources\Raw\location\cities\PDV22.json" />
+		<None Remove="Resources\Raw\location\cities\PDV23.json" />
+		<None Remove="Resources\Raw\location\cities\PDV25.json" />
+		<None Remove="Resources\Raw\location\cities\PDV26.json" />
+		<None Remove="Resources\Raw\location\cities\PDV28.json" />
+		<None Remove="Resources\Raw\location\cities\PDV33.json" />
+		<None Remove="Resources\Raw\location\cities\PDV37.json" />
+		<None Remove="Resources\Raw\location\cities\PDV39.json" />
+		<None Remove="Resources\Raw\location\cities\PDV40.json" />
+		<None Remove="Resources\Raw\location\cities\PDV41.json" />
+		<None Remove="Resources\Raw\location\cities\PDV42.json" />
+		<None Remove="Resources\Raw\location\cities\PDV43.json" />
+		<None Remove="Resources\Raw\location\cities\PER08.json" />
+		<None Remove="Resources\Raw\location\cities\PER19.json" />
+		<None Remove="Resources\Raw\location\cities\PER22.json" />
+		<None Remove="Resources\Raw\location\cities\PER32.json" />
+		<None Remove="Resources\Raw\location\cities\PER36.json" />
+		<None Remove="Resources\Raw\location\cities\PER51.json" />
+		<None Remove="Resources\Raw\location\cities\PVN03.json" />
+		<None Remove="Resources\Raw\location\cities\PVN08.json" />
+		<None Remove="Resources\Raw\location\cities\PVN10.json" />
+		<None Remove="Resources\Raw\location\cities\PVN11.json" />
+		<None Remove="Resources\Raw\location\cities\PVN16.json" />
+		<None Remove="Resources\Raw\location\cities\PVN21.json" />
+		<None Remove="Resources\Raw\location\cities\PVN23.json" />
+		<None Remove="Resources\Raw\location\cities\PVN24.json" />
+		<None Remove="Resources\Raw\location\cities\PVN27.json" />
+		<None Remove="Resources\Raw\location\cities\PVN37.json" />
+		<None Remove="Resources\Raw\location\cities\PVN39.json" />
+		<None Remove="Resources\Raw\location\cities\RAZ11.json" />
+		<None Remove="Resources\Raw\location\cities\RAZ14.json" />
+		<None Remove="Resources\Raw\location\cities\RAZ16.json" />
+		<None Remove="Resources\Raw\location\cities\RAZ17.json" />
+		<None Remove="Resources\Raw\location\cities\RAZ26.json" />
+		<None Remove="Resources\Raw\location\cities\RAZ29.json" />
+		<None Remove="Resources\Raw\location\cities\RAZ36.json" />
+		<None Remove="Resources\Raw\location\cities\RSE03.json" />
+		<None Remove="Resources\Raw\location\cities\RSE04.json" />
+		<None Remove="Resources\Raw\location\cities\RSE05.json" />
+		<None Remove="Resources\Raw\location\cities\RSE08.json" />
+		<None Remove="Resources\Raw\location\cities\RSE13.json" />
+		<None Remove="Resources\Raw\location\cities\RSE27.json" />
+		<None Remove="Resources\Raw\location\cities\RSE33.json" />
+		<None Remove="Resources\Raw\location\cities\RSE37.json" />
+		<None Remove="Resources\Raw\location\cities\SFO06.json" />
+		<None Remove="Resources\Raw\location\cities\SFO07.json" />
+		<None Remove="Resources\Raw\location\cities\SFO09.json" />
+		<None Remove="Resources\Raw\location\cities\SFO10.json" />
+		<None Remove="Resources\Raw\location\cities\SFO16.json" />
+		<None Remove="Resources\Raw\location\cities\SFO17.json" />
+		<None Remove="Resources\Raw\location\cities\SFO18.json" />
+		<None Remove="Resources\Raw\location\cities\SFO20.json" />
+		<None Remove="Resources\Raw\location\cities\SFO24.json" />
+		<None Remove="Resources\Raw\location\cities\SFO25.json" />
+		<None Remove="Resources\Raw\location\cities\SFO26.json" />
+		<None Remove="Resources\Raw\location\cities\SFO34.json" />
+		<None Remove="Resources\Raw\location\cities\SFO39.json" />
+		<None Remove="Resources\Raw\location\cities\SFO43.json" />
+		<None Remove="Resources\Raw\location\cities\SFO45.json" />
+		<None Remove="Resources\Raw\location\cities\SFO47.json" />
+		<None Remove="Resources\Raw\location\cities\SFO54.json" />
+		<None Remove="Resources\Raw\location\cities\SFO55.json" />
+		<None Remove="Resources\Raw\location\cities\SFO56.json" />
+		<None Remove="Resources\Raw\location\cities\SFO57.json" />
+		<None Remove="Resources\Raw\location\cities\SFO58.json" />
+		<None Remove="Resources\Raw\location\cities\SFO59.json" />
+		<None Remove="Resources\Raw\location\cities\SHU07.json" />
+		<None Remove="Resources\Raw\location\cities\SHU10.json" />
+		<None Remove="Resources\Raw\location\cities\SHU11.json" />
+		<None Remove="Resources\Raw\location\cities\SHU18.json" />
+		<None Remove="Resources\Raw\location\cities\SHU19.json" />
+		<None Remove="Resources\Raw\location\cities\SHU21.json" />
+		<None Remove="Resources\Raw\location\cities\SHU22.json" />
+		<None Remove="Resources\Raw\location\cities\SHU23.json" />
+		<None Remove="Resources\Raw\location\cities\SHU25.json" />
+		<None Remove="Resources\Raw\location\cities\SHU30.json" />
+		<None Remove="Resources\Raw\location\cities\SLS01.json" />
+		<None Remove="Resources\Raw\location\cities\SLS07.json" />
+		<None Remove="Resources\Raw\location\cities\SLS10.json" />
+		<None Remove="Resources\Raw\location\cities\SLS15.json" />
+		<None Remove="Resources\Raw\location\cities\SLS31.json" />
+		<None Remove="Resources\Raw\location\cities\SLS32.json" />
+		<None Remove="Resources\Raw\location\cities\SLS34.json" />
+		<None Remove="Resources\Raw\location\cities\SLV11.json" />
+		<None Remove="Resources\Raw\location\cities\SLV16.json" />
+		<None Remove="Resources\Raw\location\cities\SLV20.json" />
+		<None Remove="Resources\Raw\location\cities\SLV24.json" />
+		<None Remove="Resources\Raw\location\cities\SML02.json" />
+		<None Remove="Resources\Raw\location\cities\SML05.json" />
+		<None Remove="Resources\Raw\location\cities\SML09.json" />
+		<None Remove="Resources\Raw\location\cities\SML10.json" />
+		<None Remove="Resources\Raw\location\cities\SML11.json" />
+		<None Remove="Resources\Raw\location\cities\SML16.json" />
+		<None Remove="Resources\Raw\location\cities\SML18.json" />
+		<None Remove="Resources\Raw\location\cities\SML27.json" />
+		<None Remove="Resources\Raw\location\cities\SML31.json" />
+		<None Remove="Resources\Raw\location\cities\SML38.json" />
+		<None Remove="Resources\Raw\location\cities\SOF46.json" />
+		<None Remove="Resources\Raw\location\cities\SZR04.json" />
+		<None Remove="Resources\Raw\location\cities\SZR07.json" />
+		<None Remove="Resources\Raw\location\cities\SZR12.json" />
+		<None Remove="Resources\Raw\location\cities\SZR22.json" />
+		<None Remove="Resources\Raw\location\cities\SZR23.json" />
+		<None Remove="Resources\Raw\location\cities\SZR24.json" />
+		<None Remove="Resources\Raw\location\cities\SZR27.json" />
+		<None Remove="Resources\Raw\location\cities\SZR31.json" />
+		<None Remove="Resources\Raw\location\cities\SZR36.json" />
+		<None Remove="Resources\Raw\location\cities\SZR37.json" />
+		<None Remove="Resources\Raw\location\cities\SZR38.json" />
+		<None Remove="Resources\Raw\location\cities\TGV02.json" />
+		<None Remove="Resources\Raw\location\cities\TGV22.json" />
+		<None Remove="Resources\Raw\location\cities\TGV23.json" />
+		<None Remove="Resources\Raw\location\cities\TGV24.json" />
+		<None Remove="Resources\Raw\location\cities\TGV35.json" />
+		<None Remove="Resources\Raw\location\cities\VAR01.json" />
+		<None Remove="Resources\Raw\location\cities\VAR02.json" />
+		<None Remove="Resources\Raw\location\cities\VAR04.json" />
+		<None Remove="Resources\Raw\location\cities\VAR05.json" />
+		<None Remove="Resources\Raw\location\cities\VAR06.json" />
+		<None Remove="Resources\Raw\location\cities\VAR08.json" />
+		<None Remove="Resources\Raw\location\cities\VAR09.json" />
+		<None Remove="Resources\Raw\location\cities\VAR13.json" />
+		<None Remove="Resources\Raw\location\cities\VAR14.json" />
+		<None Remove="Resources\Raw\location\cities\VAR16.json" />
+		<None Remove="Resources\Raw\location\cities\VAR24.json" />
+		<None Remove="Resources\Raw\location\cities\VAR26.json" />
+		<None Remove="Resources\Raw\location\cities\VRC05.json" />
+		<None Remove="Resources\Raw\location\cities\VRC08.json" />
+		<None Remove="Resources\Raw\location\cities\VRC10.json" />
+		<None Remove="Resources\Raw\location\cities\VRC20.json" />
+		<None Remove="Resources\Raw\location\cities\VRC21.json" />
+		<None Remove="Resources\Raw\location\cities\VRC27.json" />
+		<None Remove="Resources\Raw\location\cities\VRC28.json" />
+		<None Remove="Resources\Raw\location\cities\VRC31.json" />
+		<None Remove="Resources\Raw\location\cities\VRC32.json" />
+		<None Remove="Resources\Raw\location\cities\VRC35.json" />
+		<None Remove="Resources\Raw\location\cities\VTR04.json" />
+		<None Remove="Resources\Raw\location\cities\VTR06.json" />
+		<None Remove="Resources\Raw\location\cities\VTR13.json" />
+		<None Remove="Resources\Raw\location\cities\VTR14.json" />
+		<None Remove="Resources\Raw\location\cities\VTR20.json" />
+		<None Remove="Resources\Raw\location\cities\VTR22.json" />
+		<None Remove="Resources\Raw\location\cities\VTR26.json" />
+		<None Remove="Resources\Raw\location\cities\VTR28.json" />
+		<None Remove="Resources\Raw\location\cities\VTR31.json" />
+		<None Remove="Resources\Raw\location\cities\VTR32.json" />
+		<None Remove="Resources\Raw\location\countries.json" />
+		<None Remove="Resources\Raw\location\municipalities\BGS.json" />
+		<None Remove="Resources\Raw\location\municipalities\BLG.json" />
+		<None Remove="Resources\Raw\location\municipalities\countries.json" />
+		<None Remove="Resources\Raw\location\municipalities\DOB.json" />
+		<None Remove="Resources\Raw\location\municipalities\GAB.json" />
+		<None Remove="Resources\Raw\location\municipalities\HKV.json" />
+		<None Remove="Resources\Raw\location\municipalities\JAM.json" />
+		<None Remove="Resources\Raw\location\municipalities\KNL.json" />
+		<None Remove="Resources\Raw\location\municipalities\KRZ.json" />
+		<None Remove="Resources\Raw\location\municipalities\LOV.json" />
+		<None Remove="Resources\Raw\location\municipalities\MON.json" />
+		<None Remove="Resources\Raw\location\municipalities\PAZ.json" />
+		<None Remove="Resources\Raw\location\municipalities\PDV.json" />
+		<None Remove="Resources\Raw\location\municipalities\PER.json" />
+		<None Remove="Resources\Raw\location\municipalities\PVN.json" />
+		<None Remove="Resources\Raw\location\municipalities\RAZ.json" />
+		<None Remove="Resources\Raw\location\municipalities\regions.json" />
+		<None Remove="Resources\Raw\location\municipalities\RSE.json" />
+		<None Remove="Resources\Raw\location\municipalities\SFO.json" />
+		<None Remove="Resources\Raw\location\municipalities\SHU.json" />
+		<None Remove="Resources\Raw\location\municipalities\SLS.json" />
+		<None Remove="Resources\Raw\location\municipalities\SLV.json" />
+		<None Remove="Resources\Raw\location\municipalities\SML.json" />
+		<None Remove="Resources\Raw\location\municipalities\SOF.json" />
+		<None Remove="Resources\Raw\location\municipalities\SZR.json" />
+		<None Remove="Resources\Raw\location\municipalities\TGV.json" />
+		<None Remove="Resources\Raw\location\municipalities\VAR.json" />
+		<None Remove="Resources\Raw\location\municipalities\VID.json" />
+		<None Remove="Resources\Raw\location\municipalities\VRC.json" />
+		<None Remove="Resources\Raw\location\municipalities\VTR.json" />
+		<None Remove="Resources\Raw\location\regions.json" />
+		<None Remove="Resources\Raw\user\guiltTypes.json" />
+		<None Remove="Resources\Raw\vehicles\bodyType.json" />
+		<None Remove="Resources\Raw\vehicles\colors.json" />
+		<None Remove="Resources\Raw\vehicles\engineTypes.json" />
+		<None Remove="Resources\Raw\vehicles\vehicleMarks.json" />
+		<None Remove="Resources\Raw\vehicles\vehicleTypes.json" />
+		<None Remove="Resources\Raw\vehicles\vehicleUsages.json" />
+		<None Remove="Settings\appsettings.json" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<EmbeddedResource Include="Settings\appsettings.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Acr.UserDialogs" Version="8.0.1" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="9.1.1" />
+		<PackageReference Include="CommunityToolkit.Maui.Core" Version="9.1.1" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+		<PackageReference Include="Controls.UserDialogs.Maui" Version="1.5.0" />
+		<PackageReference Include="CountryData.Standard" Version="1.3.0" />
+		<PackageReference Include="Dynamsoft.CaptureVisionBundle.Maui" Version="2.4.2000" />
+		<PackageReference Include="Goldie.MauiPlugins.PageResolver" Version="1.1.1" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.21" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.21" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Maui.Essentials" Version="9.0.21" />
+		<PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
+		<PackageReference Include="StrawberryShake.CodeGeneration.CSharp" Version="12.22.2" />
+		<PackageReference Include="StrawberryShake.Transport.Http" Version="13.8.1" />
+		<PackageReference Include="Xamarin.Essentials" Version="1.8.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<MauiXaml Update="Views\Pages\Insurances\CameraPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Insurances\Casco\CascoInsuranceOwnerPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\ContentViews\CalendarDataRangeView.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\ContentViews\CalendarPeriodPickerView.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\ContentViews\InsuredUsersAgeEntry.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\ContentViews\InsuredUsersContentView.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\ContentViews\OneTimePaymentBox - Copy.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\ContentViews\OneTimePaymentBox.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\ContentViews\TwelveTimePaymentBox.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\ErrorPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Insurances\Casco\CascoInsuranceThankYouPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Insurances\Casco\CascoInsuranceVehiclePage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Insurances\CivilInsurance\CivilInsuranceLongOffersPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Insurances\CivilInsurance\CivilInsuranceVehicleAdditionalInfoPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Insurances\CivilInsurance\ExistingCivilInsurancePage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Insurances\HealthInsurance\HealthDeclarationPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Insurances\HealthInsurance\HealthInsuranceDocumentsPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Insurances\HealthInsurance\HealthInsuranceInsuredUsersPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Insurances\HealthInsurance\HealthInsuranceOffersPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Insurances\HealthInsurance\HealthInsurancePacketsPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Insurances\HealthInsurance\HealthInsurancePeriodPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Insurances\HealthInsurance\HealthInsuranceSummaryPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Insurances\InsuranceOwnerPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Insurances\InsuredUsersPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Insurances\Mountain\MountainInsuranceCalendarPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Insurances\Mountain\MountainInsuranceDocumentsPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Insurances\Mountain\MountainInsuranceInfoPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Insurances\Mountain\MountainInsuranceInsuredUsersPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Insurances\Mountain\MountainInsuranceOffersPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Insurances\Mountain\MountainInsuranceSummaryPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Insurances\MyInsurancesPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Insurances\MyThings\MyThingsCharacteristicsPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Insurances\MyThings\MyThingsInsuranceCalendarPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Insurances\MyThings\MyThingsInsuranceCategoryPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Insurances\MyThings\MyThingsInsuranceDocumentsPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Insurances\MyThings\MyThingsInsuranceInfoPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Insurances\MyThings\MyThingsInsuranceOffersPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Insurances\NewInsurancePage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Insurances\TravelInsurance\TravelInsuranceCalendarPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Insurances\TravelInsurance\TravelInsuranceDocumentsPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Insurances\TravelInsurance\TravelInsuranceInfoPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Insurances\TravelInsurance\TravelInsuranceSummaryPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Insurances\TravelInsurance\TravelInsuranceUserInfoPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Insurances\TravelInsurance\TravelInsuranceLocationPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Insurances\TravelInsurance\TravelInsuranceOffersPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Insurances\TravelInsurance\TravelInsuranceOwnerPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Insurances\TravelInsurance\TravelInsuredUsersPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Payment\PrePaymentPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Profile\CarDataPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Profile\FamilyFriendsDataPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Profile\PersonalDataPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Payment\PaymentPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Profile\ProfilePage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Speedy\SpeedyChooseDeliveryPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Speedy\SpeedyDeliveryUserAddressPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\ContentViews\CalendarView.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\ContentViews\FourTimePaymentBox.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\ContentViews\NavBar.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\ContentViews\PhonePicker.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\ContentViews\TwoTimePaymentBox.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\ForgotPasswordPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\HomePage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Insurances\CivilInsurance\CivilInsuranceCalendarPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Insurances\CivilInsurance\CivilInsuranceDocumentsPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Insurances\CivilInsurance\CivilInsuranceOffersPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Insurances\CivilInsurance\CivilInsuranceOwnerPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Insurances\CivilInsurance\CivilInsuranceSummaryPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Insurances\CivilInsurance\CivilInsuranceUsualDriverPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\Insurances\CivilInsurance\CivilInsuranceVehiclePage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\OTPPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\RegisterPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\ResetPasswordPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\SuccessfulRegistrationPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Pages\ThankYouPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Popups\HealthInsuranceContactUsPopUp.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Popups\MountainXtreemInfoPopUp.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Popups\EmailInputPopUp.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Popups\SpeedyOfficesPopUp.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\CovrMe.Models\CovrMe.Models.csproj">
+			<ReferenceSourceTarget></ReferenceSourceTarget>
+		</ProjectReference>
+		<ProjectReference Include="..\CovrMe.Services\CovrMe.Services.csproj">
+			<ReferenceSourceTarget></ReferenceSourceTarget>
+		</ProjectReference>
+		<ProjectReference Include="..\CovrMe.Shared\CovrMe.Shared.csproj">
+			<ReferenceSourceTarget></ReferenceSourceTarget>
+		</ProjectReference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="Views\ContentViews\CalendarDataRangeView.xaml.cs">
+			<DependentUpon>CalendarDataRangeView.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\Pages\TestPage.xaml.cs">
+			<DependentUpon>TestPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\Pages\Insurances\Casco\CascoInsuranceThankYouPage.xaml.cs">
+			<DependentUpon>CascoInsuranceThankYouPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\Pages\Insurances\TravelInsurance\TravelInsuranceUserInfoPage.xaml.cs">
+			<DependentUpon>TravelInsuranceUserInfoPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\Popups\EmailInputPopUp.xaml.cs">
+			<DependentUpon>EmailInputPopUp.xaml</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
+	<ProjectExtensions>
+		<VisualStudio>
+			<UserProperties XamarinHotReloadDebuggerTimeoutExceptionInsuranceBgMobileAppHideInfoBar="True" />
+		</VisualStudio>
+	</ProjectExtensions>
 </Project>

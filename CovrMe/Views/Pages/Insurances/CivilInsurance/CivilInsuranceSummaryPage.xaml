@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:CovrMe.Views.ContentViews"
+             xmlns:viewmodels="clr-namespace:CovrMe.ViewModels.Pages.Insurances.CivilInsurance"
+             xmlns:model="clr-namespace:CovrMe.ViewModels.Pages.Insurances.CivilInsurance"
+             xmlns:installments="clr-namespace:CovrMe.Models.Insurances;assembly=CovrMe.Models"
+             x:DataType="model:CivilInsuranceSummaryViewModel"
+             x:Class="CovrMe.Views.Pages.Insurances.CivilInsurance.CivilInsuranceSummaryPage"
+             Title="CivilInsuranceSummaryPage" BackgroundColor="White">
+    <NavigationPage.TitleView>
+        <Image Source="covrmelogo.png" Margin="0,0,0,0" HeightRequest="50" WidthRequest="250" HorizontalOptions="StartAndExpand" BackgroundColor="White"/>
+    </NavigationPage.TitleView>
+    <Grid RowDefinitions="{OnPlatform Android='9*,*', iOS='670,*'}">
+        <ScrollView Grid.Row="0" Padding="0"
+                BackgroundColor="White"
+                VerticalOptions="StartAndExpand">
+            <StackLayout Padding="0" HorizontalOptions="FillAndExpand">
+                <Label Text="Гражданска отговорност" FontSize="24" FontAttributes="Bold" FontFamily="Montserrat" HorizontalOptions="FillAndExpand" BackgroundColor="#E8E8E8" TextColor="{StaticResource Black}" Padding="25,5"/>
+                <Border Grid.Row="1" BackgroundColor="White" StrokeThickness="0" Padding="10" Margin="0,10,0,0" StrokeShape="RoundRectangle 8,8,8,8" WidthRequest="{OnPlatform iOS='370', Android='330'}" HorizontalOptions="Center">
+                    <Border.Shadow>
+                        <Shadow Brush="{StaticResource Black}" Opacity="{OnPlatform Android='0.7', iOS='0.4'}" Radius="{OnPlatform iOS='10', Android='20'}"/>
+                    </Border.Shadow>
+                    <StackLayout>
+                        <Grid ColumnDefinitions="5*,2*">
+                            <Label Grid.Column="0" Text="Избра застраховка от" FontSize="20" FontAttributes="Bold" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="{StaticResource Primary}" Padding="0,5,0,0" />
+                            <Image Grid.Column="1" Source="{Binding LogoSrc, Mode=TwoWay}" MaximumHeightRequest="40"/>
+                        </Grid>
+                        <Grid ColumnDefinitions="*,9*" RowSpacing="10" HorizontalOptions="StartAndExpand" ColumnSpacing="3" Padding="0,10,0,0">
+                            <Image Grid.Column="0" Source="calendaricon.png" HeightRequest="13" WidthRequest="10" Margin="0,5,0,0"/>
+                            <Label Grid.Column="1" Text="{Binding StartDate, StringFormat='Начална дата: от 00:00 ч. на {0} г.'}" FontSize="12" FontAttributes="Bold" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="{StaticResource Black}"   Padding="0,5,0,0" />
+                        </Grid>
+
+                        <CollectionView ItemsSource="{Binding Installments}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="installments:InstallmentModel">
+                                    <VerticalStackLayout>
+                                        <Grid RowDefinitions="*,*" ColumnDefinitions="*,*" Padding="0,10,0,0">
+                                            <Grid Grid.Row="0" Grid.ColumnSpan="2" ColumnDefinitions="*,*" RowDefinitions="*" HorizontalOptions="StartAndExpand">
+                                                <Label Grid.Row="0" Grid.Column="0" Text="{Binding Text}" FontSize="13" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="{StaticResource Black}" Padding="0,5,0,0" />
+                                                <Label Grid.Row="0" Grid.Column="1" Text="{Binding DateFormatted, StringFormat='{0} г.'}" FontAttributes="Bold" FontSize="13" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="{StaticResource Black}" Padding="2,5,0,0" />
+                                            </Grid>
+                                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding PriceFormatted, Mode=TwoWay}" FontSize="16" FontAttributes="Bold" FontFamily="Montserrat" HorizontalOptions="StartAndExpand" BackgroundColor="White" TextColor="{StaticResource Primary}" Padding="10,5,0,0" />
+                                        </Grid>
+                                    </VerticalStackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+
+                        <!--<VerticalStackLayout IsVisible="{Binding IsOneInstallment}">
+                            <Grid RowDefinitions="*,*" ColumnDefinitions="*,*" Padding="0,10,0,0">
+                                <Grid Grid.Row="0" Grid.ColumnSpan="2" ColumnDefinitions="*,*" RowDefinitions="*" HorizontalOptions="StartAndExpand">
+                                    <Label Grid.Row="0" Grid.Column="0" Text="Първа вноска: " FontSize="13" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="{StaticResource Black}" Padding="0,5,0,0" />
+                                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding StartDate, StringFormat='{0} г.'}" FontAttributes="Bold" FontSize="13" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="{StaticResource Black}" Padding="2,5,0,0" />
+                                </Grid>
+                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding FirstInstallmentFormatted, Mode=TwoWay}" FontSize="16" FontAttributes="Bold" FontFamily="Montserrat" HorizontalOptions="StartAndExpand" BackgroundColor="White" TextColor="{StaticResource Primary}" Padding="10,5,0,0" />
+                            </Grid>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout IsVisible="{Binding IsTwoInstallment}">
+                            <Grid RowDefinitions="*,*" ColumnDefinitions="*,*" Padding="0,10,0,0">
+                                <Grid Grid.Row="0" Grid.ColumnSpan="2" ColumnDefinitions="*,*" RowDefinitions="*" HorizontalOptions="StartAndExpand">
+                                    <Label Grid.Row="0" Grid.Column="0" Text="Първа вноска: " FontSize="13" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="{StaticResource Black}" Padding="0,5,0,0" />
+                                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding StartDate, StringFormat='{0} г.'}" FontAttributes="Bold" FontSize="13" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="{StaticResource Black}" Padding="2,5,0,0" />
+                                </Grid>
+                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding FirstInstallmentFormatted, Mode=TwoWay}" FontSize="16" FontAttributes="Bold" FontFamily="Montserrat" HorizontalOptions="StartAndExpand" BackgroundColor="White" TextColor="{StaticResource Primary}" Padding="10,5,0,0" />
+                            </Grid>
+                            <Grid RowDefinitions="*,*" ColumnDefinitions="*,*" Padding="0,10">
+                                <Grid Grid.Row="0" Grid.ColumnSpan="2" ColumnDefinitions="*,*" RowDefinitions="*" HorizontalOptions="StartAndExpand">
+                                    <Label Grid.Row="0" Grid.Column="0" Text="Втора вноска: " FontSize="13" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="{StaticResource Black}" Padding="0,5,0,0" />
+                                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding SecondInstallmentDate, StringFormat='{0} г.'}" FontAttributes="Bold" FontSize="13" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="{StaticResource Black}" Padding="2,5,0,0" />
+                                </Grid>
+                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding SecondInstallmentFormatted, Mode=TwoWay}" FontSize="16" FontAttributes="Bold" FontFamily="Montserrat" HorizontalOptions="StartAndExpand" BackgroundColor="White" TextColor="{StaticResource Primary}" Padding="10,5,0,0" />
+                            </Grid>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout IsVisible="{Binding IsFourInstallment}">
+                            <Grid RowDefinitions="*,*" ColumnDefinitions="*,*" Padding="0,10,0,0">
+                                <Grid Grid.Row="0" Grid.ColumnSpan="2" ColumnDefinitions="*,*" RowDefinitions="*" HorizontalOptions="StartAndExpand">
+                                    <Label Grid.Row="0" Grid.Column="0" Text="Първа вноска: " FontSize="13" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="{StaticResource Black}" Padding="0,5,0,0" />
+                                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding StartDate, StringFormat='{0} г.'}" FontAttributes="Bold" FontSize="13" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="{StaticResource Black}" Padding="2,5,0,0" />
+                                </Grid>
+                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding FirstInstallmentFormatted, Mode=TwoWay}" FontSize="16" FontAttributes="Bold" FontFamily="Montserrat" HorizontalOptions="StartAndExpand" BackgroundColor="White" TextColor="{StaticResource Primary}" Padding="10,5,0,0" />
+                            </Grid>
+                            <Grid RowDefinitions="*,*" ColumnDefinitions="*,*" Padding="0,10">
+                                <Grid Grid.Row="0" Grid.ColumnSpan="2" ColumnDefinitions="*,*" RowDefinitions="*" HorizontalOptions="StartAndExpand">
+                                    <Label Grid.Row="0" Grid.Column="0" Text="Втора вноска: " FontSize="13" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="{StaticResource Black}" Padding="0,5,0,0" />
+                                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding SecondInstallmentDate, StringFormat='{0} г.'}" FontAttributes="Bold" FontSize="13" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="{StaticResource Black}" Padding="2,5,0,0" />
+                                </Grid>
+                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding SecondInstallmentFormatted, Mode=TwoWay}" FontSize="16" FontAttributes="Bold" FontFamily="Montserrat" HorizontalOptions="StartAndExpand" BackgroundColor="White" TextColor="{StaticResource Primary}" Padding="10,5,0,0" />
+                            </Grid>
+                            <Grid RowDefinitions="*,*" ColumnDefinitions="*,*" Padding="0,10,0,0">
+                                <Grid Grid.Row="0" Grid.ColumnSpan="2" ColumnDefinitions="*,*" RowDefinitions="*" HorizontalOptions="StartAndExpand">
+                                    <Label Grid.Row="0" Grid.Column="0" Text="Трета вноска: " FontSize="13" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="{StaticResource Black}" Padding="0,5,0,0" />
+                                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding ThirdInstallmentDate, StringFormat='{0} г.'}" FontAttributes="Bold" FontSize="13" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="{StaticResource Black}" Padding="2,5,0,0" />
+                                </Grid>
+                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding ThirdInstallmentFormatted, Mode=TwoWay}" FontSize="16" FontAttributes="Bold" FontFamily="Montserrat" HorizontalOptions="StartAndExpand" BackgroundColor="White" TextColor="{StaticResource Primary}" Padding="10,5,0,0" />
+                            </Grid>
+                            <Grid RowDefinitions="*,*" ColumnDefinitions="*,*" Padding="0,10">
+                                <Grid Grid.Row="0" Grid.ColumnSpan="2" ColumnDefinitions="*,*" RowDefinitions="*" HorizontalOptions="StartAndExpand">
+                                    <Label Grid.Row="0" Grid.Column="0" Text="Четвърта вноска: " FontSize="13" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="{StaticResource Black}" Padding="0,5,0,0" />
+                                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding FourthInstallmentDate, StringFormat='{0} г.'}" FontAttributes="Bold" FontSize="13" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="{StaticResource Black}" Padding="2,5,0,0" />
+                                </Grid>
+                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding FourthInstallmentFormatted, Mode=TwoWay}" FontSize="16" FontAttributes="Bold" FontFamily="Montserrat" HorizontalOptions="StartAndExpand" BackgroundColor="White" TextColor="{StaticResource Primary}" Padding="10,5,0,0" />
+                            </Grid>
+                        </VerticalStackLayout>-->
+
+                        <Grid ColumnDefinitions="*,9*" Padding="0" RowSpacing="10" HorizontalOptions="StartAndExpand" ColumnSpacing="3">
+                            <Image Grid.Column="0" Source="calendaricon.png" HeightRequest="13" WidthRequest="10" Margin="0,5,0,0"/>
+                            <Label Grid.Column="1" Text="{Binding EndDate, StringFormat='Крайна дата: до 23:59 ч. на {0} г.'}"  FontSize="12" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="{StaticResource Black}"   Padding="0,5,0,0" />
+                        </Grid>
+                    </StackLayout>
+                </Border>
+
+                <!--Dropdown-->
+                <StackLayout Padding="20,20,10,0">
+                    <Grid ColumnDefinitions="*,9*">
+                        <Image Grid.Column="0" Source="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:CivilInsuranceSummaryViewModel}},Path=FirstCardArrow}" HeightRequest="15" WidthRequest="10" HorizontalOptions="StartAndExpand" Margin="10,0,0,0"/>
+                        <Label Grid.Column="1" Text="Покритие" TextColor="{StaticResource Black}" FontSize="18" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+                    </Grid>
+                    <StackLayout IsVisible="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:CivilInsuranceSummaryViewModel}},Path=FirstCardOpened}" Padding="35,10,20,0">
+                        <Label FontSize="14" LineHeight="1.2" Text="Гражданската отговорност на физически и юридически лица покрива причинените от тях на трети лица имуществени и неимуществени вреди, свързани с притежаването и/или използването на моторни превозни средства, за които застрахованите отговарят съгласно българското законодателство или законодателството на държавата, в която е настъпила вредата."/>
+                    </StackLayout>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding CardToggleCommand}" CommandParameter="first" />
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+                <!--Dropdown-->
+                <StackLayout Padding="20,10,0,0">
+                    <Grid ColumnDefinitions="*,9*">
+                        <Image Grid.Column="0" Source="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:CivilInsuranceSummaryViewModel}},Path=SecondCardArrow}" HeightRequest="15" WidthRequest="10" HorizontalOptions="StartAndExpand" Margin="10,0,0,0"/>
+                        <Label Grid.Column="1" Text="Лимит на отговорност" TextColor="{StaticResource Black}" FontSize="18" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+                    </Grid>
+                    <StackLayout IsVisible="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:CivilInsuranceSummaryViewModel}},Path=SecondCardOpened}" Padding="35,10,20,0">
+                        <Grid ColumnDefinitions="0.5*,9*" RowDefinitions="*, 2*">
+                            <Image Source="tick.png" Grid.Column="0" Grid.Row="0" HeightRequest="15" WidthRequest="10"/>
+                            <Label Grid.Column="1"     Grid.Row="0" FontSize="14" LineHeight="1.2" Text="Неимуществени и имуществени вреди"/>
+                            <Label Grid.ColumnSpan="2" Grid.Row="1" Text="вследствие на телесно увреждане или смърт – 10 420 000 лв. за всяко събитие, независимо от броя на пострадалите лица;"/>
+                        </Grid>
+                        <Grid ColumnDefinitions="0.5*,9*" RowDefinitions="*, 2*" Padding="0,20,0,0">
+                            <Image Source="tick.png" Grid.Column="0" Grid.Row="0" HeightRequest="15" WidthRequest="10"/>
+                            <Label Grid.Column="1"     Grid.Row="0" Text=" Вреди на имущество - 2 100 000 лв."/>
+                            <Label Grid.ColumnSpan="2" Grid.Row="1" Text=" за всяко събитие, независимо от броя на увредените лица."/>
+                        </Grid>
+                    </StackLayout>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding CardToggleCommand}" CommandParameter="second" />
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+                <!--Dropdown-->
+                <StackLayout Padding="20,10,0,0">
+                    <Grid ColumnDefinitions="*,9*">
+                        <Image Grid.Column="0" Source="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:CivilInsuranceSummaryViewModel}},Path=ThirdCardArrow}" HeightRequest="15" WidthRequest="10" HorizontalOptions="StartAndExpand" Margin="10,0,0,0"/>
+                        <Label Grid.Column="1" Text="Териториална валидност" TextColor="{StaticResource Black}" FontSize="18" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+                    </Grid>
+                    <StackLayout IsVisible="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:CivilInsuranceSummaryViewModel}},Path=ThirdCardOpened}" Padding="35,10,20,0">
+                        <Grid ColumnDefinitions="0.5*,9*" RowDefinitions="*,*,*,*,*,*" RowSpacing="3">
+                            <Label Grid.Row="0" Grid.ColumnSpan="2" Text="Покритието по застраховка Гражданска отговорност е валидно за:"/>
+                            <Image Source="tick.png" Grid.Column="0" Grid.Row="1" HeightRequest="15" WidthRequest="10" VerticalOptions="StartAndExpand" Margin="0,3,0,0"/>
+                            <Label Grid.Column="1"  Grid.Row="1" Text="Република България съгласно българския закон."/>
+
+                            <Image Source="tick.png" Grid.Column="0" Grid.Row="2" HeightRequest="15" WidthRequest="10" VerticalOptions="StartAndExpand" Margin="0,3,0,0"/>
+                            <Label Grid.Column="1"   Grid.Row="2" Text="Държава-членка съгласно нейния закон."/>
+
+                            <Image Source="tick.png" Grid.Column="0" Grid.Row="3" HeightRequest="15" WidthRequest="10" VerticalOptions="StartAndExpand" Margin="0,3,0,0"/>
+                            <Label Grid.Column="1"   Grid.Row="3" Text="Трета държава, когато вредите са били причинени на лица от държава членка при пътуване между териториите на две държави членки и при условие че не е налице национално застрахователно бюро, което да носи отговорност за тази територия; в този случай отговорността се покрива съгласно закона на държавата членка, на чиято територия обичайно се намира моторното превозно средство на виновния водач, по повод на което е сключена застраховката."/>
+
+                            <Image Source="tick.png" Grid.Column="0" Grid.Row="4" HeightRequest="15" WidthRequest="10" VerticalOptions="StartAndExpand" Margin="0,3,0,0"/>
+                            <Label Grid.Column="1"   Grid.Row="4" Text="Трета държава, чието национално бюро на застрахователите е страна по многостранното споразумение, съгласно нейния закон."/>
+
+                            <Image Source="tick.png" Grid.Column="0" Grid.Row="5" HeightRequest="15" WidthRequest="10" VerticalOptions="StartAndExpand" Margin="0,3,0,0"/>
+                            <Label Grid.Column="1"   Grid.Row="5" Text="Трета държава, чието национално бюро на застрахователите е член на системата „Зелена карта„ "/>
+                        </Grid>
+                    </StackLayout>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding CardToggleCommand}" CommandParameter="third" />
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+                <!--Dropdown-->
+                <StackLayout Padding="20,10,0,0">
+                    <Grid ColumnDefinitions="*,9*">
+                        <Image Grid.Column="0" Source="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:CivilInsuranceSummaryViewModel}},Path=ForthCardArrow}" HeightRequest="15" WidthRequest="10" HorizontalOptions="StartAndExpand" Margin="10,0,0,0"/>
+                        <Label Grid.Column="1" Text="Начин на плащане" TextColor="{StaticResource Black}" FontSize="18" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+                    </Grid>
+                    <StackLayout IsVisible="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:CivilInsuranceSummaryViewModel}},Path=ForthCardOpened}" Padding="35,10,30,0">
+                        <Label FontSize="14" Text="Можеш да платиш застраховката еднократно при сключване й или разсрочено. Застрахователната полица може да бъде платена тук с банкова карта. В случай, че плащането на поредна вноска закъснее с повече от 15 дни от падежа, полицата ще бъде прекратена и МПС-то няма да има покритие."/>
+                    </StackLayout>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding CardToggleCommand}" CommandParameter="forth" />
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+
+                <!--CheckBox-->
+                <Grid ColumnDefinitions="*,9*" Padding="20,40,0,0">
+                    <CheckBox Grid.Column="0" x:Name="CheckBoxTermsEntry" CheckedChanged="CheckBoxTermsEntry_CheckedChanged" ScaleX="{OnPlatform Android='1.1'}" ScaleY="{OnPlatform Android='1.1'}" />
+                    <Label Grid.Column="1" FontSize="14" Text="Прочетох и съм съгласен" FontAttributes="Bold" VerticalOptions="CenterAndExpand" Padding="0,0,0,0"/>
+
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer  Tapped="TapGestureRecognizer_Tapped" />
+                    </Grid.GestureRecognizers>
+                </Grid>
+
+
+                <!--Continue Button -->
+                <Button x:Name="continueBtn"
+                    Text="Продължи" Grid.Column="1"
+                    Margin="0,20,0,50"
+                    Padding="50,5"
+                    FontSize="24"
+                    BackgroundColor="{StaticResource Tertiary}"
+                    TextColor="White"
+                    HorizontalOptions="CenterAndExpand"
+                    Command="{Binding ContinueCommand}"/>
+            </StackLayout>
+        </ScrollView>
+        <views:NavBar Grid.Row="1" 
+            Margin="0"
+            Padding="0"
+            VerticalOptions="EndAndExpand"
+            BackgroundColor="Transparent"/>
+    </Grid>
+</ContentPage>

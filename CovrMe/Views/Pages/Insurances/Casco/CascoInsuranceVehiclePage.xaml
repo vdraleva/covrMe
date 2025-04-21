@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:CovrMe.Views.ContentViews"
+             xmlns:model="clr-namespace:CovrMe.ViewModels.Pages.Insurances.Casco"
+             x:DataType="model:CascoInsuranceVehicleViewModel"
+             x:Class="CovrMe.Views.Pages.Insurances.Casco.CascoInsuranceVehiclePage"
+             Title="CascoInsuranceVehiclePage">
+    <NavigationPage.TitleView>
+        <Image Source="covrmelogo.png" Margin="0,0,0,0" HeightRequest="50" WidthRequest="250" HorizontalOptions="StartAndExpand" BackgroundColor="White"/>
+    </NavigationPage.TitleView>
+    <Grid RowDefinitions="{OnPlatform Android='9*,*', iOS='670,*'}">
+        <ScrollView Grid.Row="0" Padding="0"
+                  BackgroundColor="White"
+                  VerticalOptions="StartAndExpand">
+            <StackLayout Padding="0" HorizontalOptions="FillAndExpand">
+                <Label Text="Автокаско" FontSize="24" FontAttributes="Bold" FontFamily="Montserrat" HorizontalOptions="FillAndExpand" BackgroundColor="#E8E8E8" TextColor="{StaticResource Black}" Padding="25,5"/>
+                <Label Text="Данни на МПС"           FontSize="22" FontAttributes="Bold" FontFamily="Montserrat" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="{StaticResource Primary}" Padding="25,15,0,0" />
+                <StackLayout Padding="{OnPlatform Android='25,0', iOS='25,0,25,50'}" VerticalOptions="StartAndExpand">
+
+                    <Grid Margin="0,10,0,5"  HorizontalOptions="FillAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start" Text="Твоите коли" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0,5"/>
+                        <Frame Grid.Row="1" BorderColor="{StaticResource Black}" CornerRadius="8" Padding="0" MaximumHeightRequest="{OnPlatform Android='38'}" BackgroundColor="Transparent" Margin="0">
+                            <VerticalStackLayout>
+                                <Picker x:Name="UserVehiclesPicker" SelectedIndexChanged="UserVehiclesPicker_SelectedIndexChanged" ItemsSource="{Binding UserVehiclesCollection}" SelectedItem="{Binding SelectedUserVehicle, Mode=TwoWay}" Title="Избери кола" TitleColor="Silver" Margin="10,0,0,0" FontSize="Medium" HorizontalTextAlignment="Start" IsEnabled="True">
+                                    <Picker.ItemDisplayBinding>
+                                        <Binding Path="VehicleBrandAndModel" />
+                                    </Picker.ItemDisplayBinding>
+                                </Picker>
+                            </VerticalStackLayout>
+                        </Frame>
+                        <ImageButton Grid.Row="1" Source="arrowmore.png" Margin="10,0" MaximumWidthRequest="10" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand" Scale="{OnPlatform iOS='0.4'}"/>
+                    </Grid>
+
+                    <Grid Margin="0,0,0,5"  HorizontalOptions="FillAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start" Text="Регистрационен номер" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0,5"/>
+                        <Frame Grid.Row="1" BorderColor="{StaticResource Black}" CornerRadius="8" Padding="0" MaximumHeightRequest="{OnPlatform Android='38'}" BackgroundColor="Transparent" Margin="0">
+                            <VerticalStackLayout>
+                                <Entry Placeholder="СВ1234BC" Text="{Binding VehiclePlateNumber, Mode=TwoWay}" Margin="10,0,0,0" TextColor="Black" FontSize="Medium" PlaceholderColor="#C1B5B5" HorizontalOptions="FillAndExpand"/>
+                            </VerticalStackLayout>
+                            <Frame.Triggers>
+                                <DataTrigger TargetType="Frame" Binding="{Binding VehiclePlateNumberError}" Value="True">
+                                    <Setter Property="BorderColor" Value="Red" />
+                                </DataTrigger>
+                            </Frame.Triggers>
+                        </Frame>
+                    </Grid>
+
+                    <Grid Margin="0,10,0,5"  HorizontalOptions="FillAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start" Text="Дата на първа регистрация" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0,5"/>
+                        <Frame Grid.Row="1" BorderColor="{StaticResource Black}" CornerRadius="8" Padding="0" MaximumHeightRequest="{OnPlatform Android='38'}" BackgroundColor="Transparent" Margin="0">
+                            <VerticalStackLayout>
+                                <DatePicker Date="{Binding FirstRegistrationDate, Mode=TwoWay}" MinimumDate="{Binding MinPickerDate, Mode=TwoWay}" MaximumDate="{Binding MaxPickerDate, Mode=TwoWay}" Format="dd/MM/yyyy" Margin="10,0,0,0" FontSize="Medium"  IsEnabled="True">
+                                </DatePicker>
+                            </VerticalStackLayout>
+                        </Frame>
+                        <ImageButton Grid.Row="1" Source="arrowmore.png" Margin="10,0" MaximumWidthRequest="10" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand" Scale="{OnPlatform iOS='0.4'}"/>
+                    </Grid>
+
+                    <Grid Margin="0" HorizontalOptions="FillAndExpand" Padding="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start" Text="Номер на талон" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0,5"/>
+                        <Frame Grid.Row="1" BorderColor="{StaticResource Black}" CornerRadius="8" Padding="0" MaximumHeightRequest="{OnPlatform Android='38'}" BackgroundColor="Transparent" Margin="0">
+                            <VerticalStackLayout>
+                                <Entry Placeholder="00123444" Text="{Binding RegistrationCertificateNumber,Mode=TwoWay}" Margin="10,0,0,0" TextColor="Black" FontSize="Medium" PlaceholderColor="#C1B5B5" HorizontalOptions="FillAndExpand"/>
+                            </VerticalStackLayout>
+                            <Frame.Triggers>
+                                <DataTrigger TargetType="Frame" Binding="{Binding RegistrationCertificateNumberError}" Value="True">
+                                    <Setter Property="BorderColor" Value="Red" />
+                                </DataTrigger>
+                            </Frame.Triggers>
+                        </Frame>
+                    </Grid>
+
+                    <Grid Margin="0" HorizontalOptions="FillAndExpand" Padding="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start" Text="Тип МПС" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0,5"/>
+                        <Frame Grid.Row="1" BorderColor="{StaticResource Black}" CornerRadius="8" Padding="0" MaximumHeightRequest="{OnPlatform Android='38'}" BackgroundColor="Transparent" Margin="0">
+                            <VerticalStackLayout>
+                                <Picker ItemsSource="{Binding VehiclesTypesCollection}" SelectedItem="{Binding SelectedVehicleType, Mode=TwoWay}" Title="Тип МПС" TitleColor="Silver" Margin="10,0,0,0" FontSize="Medium" HorizontalTextAlignment="Start" IsEnabled="True">
+                                    <Picker.ItemDisplayBinding>
+                                        <Binding Path="Name" />
+                                    </Picker.ItemDisplayBinding>
+                                </Picker>
+                            </VerticalStackLayout>
+                        </Frame>
+                        <ImageButton Grid.Row="1" Source="arrowmore.png" Margin="10,0" MaximumWidthRequest="10" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand" Scale="{OnPlatform iOS='0.4'}"/>
+                    </Grid>
+
+                    <Grid Margin="0,0,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start" Text="Тип на двигателя" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0,5"/>
+                        <Frame Grid.Row="1" BorderColor="{StaticResource Black}" CornerRadius="8" Padding="0" MaximumHeightRequest="{OnPlatform Android='38'}" BackgroundColor="Transparent" Margin="0">
+                            <VerticalStackLayout>
+                                <Picker x:Name="engineTypesPicker" ItemsSource="{Binding EngineTypesCollection}" SelectedIndexChanged="engineTypesPicker_SelectedIndexChanged" SelectedItem="{Binding SelectedEngineType, Mode=TwoWay}" Title="Тип" TitleColor="Silver" Margin="10,0,0,0" FontSize="Medium" HorizontalTextAlignment="Start" IsEnabled="True">
+                                    <Picker.ItemDisplayBinding>
+                                        <Binding Path="Name" />
+                                    </Picker.ItemDisplayBinding>
+                                </Picker>
+                            </VerticalStackLayout>
+                        </Frame>
+                        <ImageButton Grid.Row="1" Source="arrowmore.png" Margin="10,0" MaximumWidthRequest="10" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand" Scale="{OnPlatform iOS='0.4'}"/>
+                    </Grid>
+
+                    <Grid Margin="0"  HorizontalOptions="FillAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start" Text="Марка" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0,5"/>
+                        <Frame Grid.Row="1" BorderColor="{StaticResource Black}" CornerRadius="8" Padding="0" MaximumHeightRequest="{OnPlatform Android='38'}" BackgroundColor="Transparent" Margin="0">
+                            <VerticalStackLayout>
+                                <Picker x:Name="VehiclesBrandsPicker" SelectedIndexChanged="VehiclesBrandsPicker_SelectedIndexChanged"  ItemsSource="{Binding VehicleBrandsCollection}" SelectedItem="{Binding SelectedVehicleBrand, Mode=TwoWay}" Title="Избери марка" TitleColor="Silver" Margin="10,0,0,0" FontSize="Medium" HorizontalTextAlignment="Start" IsEnabled="True">
+                                    <Picker.ItemDisplayBinding>
+                                        <Binding Path="Name" />
+                                    </Picker.ItemDisplayBinding>
+                                </Picker>
+                            </VerticalStackLayout>
+                        </Frame>
+                        <ImageButton Grid.Row="1" Source="arrowmore.png" Margin="10,0" MaximumWidthRequest="10" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand" Scale="{OnPlatform iOS='0.4'}"/>
+                    </Grid>
+
+                    <Grid Margin="0"  HorizontalOptions="FillAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start" Text="Модел" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0,5"/>
+                        <Frame Grid.Row="1" BorderColor="{StaticResource Black}" CornerRadius="8" Padding="0" MaximumHeightRequest="{OnPlatform Android='38'}" BackgroundColor="Transparent" Margin="0">
+                            <VerticalStackLayout>
+                                <Picker x:Name="VehiclesModelsPicker" ItemsSource="{Binding VehiclesModelsCollection}" SelectedItem="{Binding SelectedVehicleModel, Mode=TwoWay}" Title="Избери модел" TitleColor="Silver" Margin="10,0,0,0" FontSize="Medium" HorizontalTextAlignment="Start" IsEnabled="True">
+                                    <Picker.ItemDisplayBinding>
+                                        <Binding Path="Name" />
+                                    </Picker.ItemDisplayBinding>
+                                </Picker>
+                            </VerticalStackLayout>
+                        </Frame>
+                        <ImageButton Grid.Row="1" Source="arrowmore.png" Margin="10,0" MaximumWidthRequest="10" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand" Scale="{OnPlatform iOS='0.4'}"/>
+                    </Grid>
+
+                    <!-- Vehicle Kilowatts Entry -->
+                    <Grid Margin="0" HorizontalOptions="FillAndExpand" Padding="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start" Text="Мощност - kW" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0,5"/>
+                        <Frame Grid.Row="1" BorderColor="{StaticResource Black}" CornerRadius="8" Padding="0" MaximumHeightRequest="{OnPlatform Android='38'}" BackgroundColor="Transparent" Margin="0">
+                            <VerticalStackLayout>
+                                <Entry Placeholder="50" Text="{Binding VehicleKilowatts, Mode=TwoWay}" Keyboard="Numeric" Margin="10,0,0,0" TextColor="Black" FontSize="Medium" PlaceholderColor="#C1B5B5" HorizontalOptions="FillAndExpand"/>
+                            </VerticalStackLayout>
+                            <Frame.Triggers>
+                                <DataTrigger TargetType="Frame" Binding="{Binding VehicleKilowattsError}" Value="True">
+                                    <Setter Property="BorderColor" Value="Red" />
+                                </DataTrigger>
+                            </Frame.Triggers>
+                        </Frame>
+                    </Grid>
+
+                    <!-- Engine Volume Entry -->
+                    <Grid Margin="0" HorizontalOptions="FillAndExpand" Padding="0" IsVisible="{Binding IsEngineVolumeEnabled}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start" Text="Обем на двигателя - куб.см" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0,5"/>
+                        <Frame Grid.Row="1" BorderColor="{StaticResource Black}" CornerRadius="8" Padding="0" MaximumHeightRequest="{OnPlatform Android='38'}" BackgroundColor="Transparent" Margin="0">
+                            <VerticalStackLayout>
+                                <Entry Placeholder="2000" Text="{Binding EngineVolume, Mode=TwoWay}" Keyboard="Numeric" Margin="10,0,0,0" TextColor="Black" FontSize="Medium" PlaceholderColor="#C1B5B5" HorizontalOptions="FillAndExpand" IsEnabled="{Binding IsEngineVolumeEnabled}"/>
+                            </VerticalStackLayout>
+                            <Frame.Triggers>
+                                <DataTrigger TargetType="Frame" Binding="{Binding EngineVolumeError}" Value="True">
+                                    <Setter Property="BorderColor" Value="Red" />
+                                </DataTrigger>
+                            </Frame.Triggers>
+                        </Frame>
+                    </Grid>
+
+                    <!-- Battery Capacity Entry -->
+                    <Grid Margin="0" HorizontalOptions="FillAndExpand" Padding="0" IsVisible="{Binding IsBatteryCapacityEnabled}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start" Text="Капацитет на батерията [kWh]" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0,5"/>
+                        <Frame Grid.Row="1" BorderColor="{StaticResource Black}" CornerRadius="8" Padding="0" MaximumHeightRequest="{OnPlatform Android='38'}" BackgroundColor="Transparent" Margin="0">
+                            <VerticalStackLayout>
+                                <Entry Placeholder="100" Text="{Binding BatteryCapacity, Mode=TwoWay}" Keyboard="Numeric" Margin="10,0,0,0" TextColor="Black" FontSize="Medium" PlaceholderColor="#C1B5B5" HorizontalOptions="FillAndExpand" IsEnabled="{Binding IsBatteryCapacityEnabled}"/>
+                            </VerticalStackLayout>
+                            <Frame.Triggers>
+                                <DataTrigger TargetType="Frame" Binding="{Binding BatteryCapacityError}" Value="True">
+                                    <Setter Property="BorderColor" Value="Red" />
+                                </DataTrigger>
+                            </Frame.Triggers>
+                        </Frame>
+                    </Grid>
+
+                    <Grid Margin="0,0,0,25">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start"  Text="Автомобилът се използва за" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0,5"/>
+                        <Frame Grid.Row="1" BorderColor="{StaticResource Black}" CornerRadius="8" Padding="0" MaximumHeightRequest="{OnPlatform Android='38'}" BackgroundColor="Transparent" Margin="0">
+                            <VerticalStackLayout>
+                                <Picker ItemsSource="{Binding VehicleUsagesCollection}" SelectedItem="{Binding SelectedVehicleUsage, Mode=TwoWay}" Title="Цел" TitleColor="Silver" Margin="10,0,0,0" FontSize="Medium" HorizontalTextAlignment="Start" IsEnabled="True">
+                                    <Picker.ItemDisplayBinding>
+                                        <Binding Path="Name" />
+                                    </Picker.ItemDisplayBinding>
+                                </Picker>
+                            </VerticalStackLayout>
+                        </Frame>
+                        <ImageButton Grid.Row="1" Source="arrowmore.png" Margin="10,0" MaximumWidthRequest="10" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand" Scale="{OnPlatform iOS='0.4'}"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="*,9*">
+                        <CheckBox Grid.Column="0" x:Name="CheckBoxSave" CheckedChanged="CheckBoxSave_CheckedChanged" ScaleX="{OnPlatform Android='1.1'}" Color="{StaticResource Primary}" ScaleY="{OnPlatform Android='1.1'}" />
+                        <Label Grid.Column="1" FontSize="14" Text="Запази в моите автомобили" FontAttributes="Bold" VerticalOptions="CenterAndExpand" Padding="0,0,0,0"/>
+
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer  Tapped="TapGestureRecognizer_Tapped" />
+                        </Grid.GestureRecognizers>
+                    </Grid>
+
+                    <!--Continue Button -->
+                    <Button x:Name="RegBtn"
+                      Text="Продължи" Grid.Column="1"
+                      Margin="0,20,0,50"
+                      Padding="50,5"
+                      FontSize="24"
+                      BackgroundColor="{StaticResource Tertiary}"
+                      TextColor="White"
+                      HorizontalOptions="CenterAndExpand"
+                      Command="{Binding ContinueCommand}"/>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+        <views:NavBar Grid.Row="1" 
+              Margin="0"
+              Padding="0"
+              VerticalOptions="EndAndExpand"
+              BackgroundColor="Transparent"/>
+    </Grid>
+</ContentPage>

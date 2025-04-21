@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:CovrMe.Views.ContentViews"
+             xmlns:behaviors="clr-namespace:CovrMe.Bahaviors"
+             xmlns:viewmodels="clr-namespace:CovrMe.ViewModels.Pages.Insurances.HealthInsurance"
+             xmlns:converters="clr-namespace:CovrMe.Handlers"
+             x:DataType="viewmodels:HealthInsuranceInsuredUsersViewModel"
+             x:Class="CovrMe.Views.Pages.Insurances.HealthInsurance.HealthInsuranceInsuredUsersPage"
+             Title="HealthInsuranceInsuredUsersPage" BackgroundColor="White">
+    <NavigationPage.TitleView>
+        <Image Source="covrmelogo.png" Margin="0,0,0,0" HeightRequest="50" WidthRequest="250" HorizontalOptions="StartAndExpand" BackgroundColor="White"/>
+    </NavigationPage.TitleView>
+    <ContentPage.Resources>
+        <converters:MoreThanOneUserToCheckedConverter x:Key="MoreThanOneUserToCheckedConverter"/>
+    </ContentPage.Resources>
+    <Grid RowDefinitions="{OnPlatform Android='9*,*', iOS='670,*'}">
+        <ScrollView Grid.Row="0" Padding="0" MinimumHeightRequest="{OnPlatform Android='400', iOS='750'}" BackgroundColor="White" VerticalOptions="StartAndExpand">
+            <StackLayout>
+                <Label Text="Здраве и спокойствие" FontSize="24" FontAttributes="Bold" FontFamily="Montserrat" HorizontalOptions="FillAndExpand" BackgroundColor="#E8E8E8" TextColor="{StaticResource Black}" Padding="20,5"/>
+                <Label Text="Застраховани лица" FontSize="22" FontAttributes="Bold" HorizontalOptions="FillAndExpand" TextColor="{StaticResource Primary}" Padding="20,15,0,10" />
+
+                <views:InsuredUsersContentView PropertyChanged="agesList_BindingContextChanged" AgesList="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HealthInsuranceInsuredUsersViewModel}},Path=InsuredUsersAgesList}"  HorizontalOptions="FillAndExpand"/>
+
+                <Grid ColumnDefinitions="Auto,Auto,0.5*" Margin="10,0,0,0">
+                    <CheckBox ScaleX="{OnPlatform Android='1.1'}" ScaleY="{OnPlatform Android='1.1'}" Grid.Column="0" x:Name="CheckBoxSave" 
+              IsChecked="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HealthInsuranceInsuredUsersViewModel}}, Path=InsuredUsers.Count, Converter={StaticResource MoreThanOneUserToCheckedConverter}}" 
+              CheckedChanged="CheckBoxSave_CheckedChanged" />
+                    <Label Grid.Column="1" FontSize="14" Text="Полицата е фамилна" FontAttributes="Bold" VerticalOptions="CenterAndExpand"/>
+                    <!--<ImageButton  Grid.Column="2" Source="btninfo.png" HorizontalOptions="StartAndExpand" Command="{Binding ShowInfoCommand}" MaximumWidthRequest="30" MaximumHeightRequest="20" />-->
+
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer  Tapped="TapGestureRecognizer_Tapped" />
+                    </Grid.GestureRecognizers>
+                </Grid>
+
+                <!--Continue Button -->
+                <Button x:Name="continueBtn"
+          Text="Продължи" Grid.Column="1"
+          Margin="0,50,0,150"
+          Padding="70,5"
+          FontSize="24"
+          BackgroundColor="{StaticResource Tertiary}"
+          TextColor="White"
+          HorizontalOptions="CenterAndExpand"
+          Command="{Binding ContinueCommand}"/>
+            </StackLayout>
+        </ScrollView>
+        <views:NavBar Grid.Row="1" 
+    Margin="0"
+    Padding="0"
+    VerticalOptions="EndAndExpand"
+    BackgroundColor="Transparent"/>
+    </Grid>
+</ContentPage>

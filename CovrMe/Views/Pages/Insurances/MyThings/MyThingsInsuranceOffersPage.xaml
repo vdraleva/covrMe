@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:CovrMe.Views.ContentViews"
+             xmlns:behaviors="clr-namespace:CovrMe.Bahaviors"
+             xmlns:viewmodels="clr-namespace:CovrMe.ViewModels.Pages.Insurances.MyThings"
+             xmlns:offers="clr-namespace:CovrMe.Models.Insurances.Result.MyThings;assembly=CovrMe.Models"
+             x:DataType="viewmodels:MyThingsInsuranceOffersViewModel"
+             x:Class="CovrMe.Views.Pages.Insurances.MyThings.MyThingsInsuranceOffersPage"
+             Title="MyThingsInsuranceOffersPage" BackgroundColor="White">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <behaviors:BorderColorConverter x:Key="BorderColorConverter"/>
+            <behaviors:LabelColorConverter x:Key="LabelColorConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <NavigationPage.TitleView>
+        <Image Source="covrmelogo.png" Margin="0,0,0,0" HeightRequest="50" WidthRequest="250" HorizontalOptions="StartAndExpand" BackgroundColor="White"/>
+    </NavigationPage.TitleView>
+    <Grid RowDefinitions="{OnPlatform Android='9*,*', iOS='670,*'}">
+        <ScrollView Grid.Row="0" Padding="0" MinimumHeightRequest="{OnPlatform Android='400', iOS='750'}" BackgroundColor="White" VerticalOptions="StartAndExpand">
+            <StackLayout>
+                <Label Text="Моите вещи"        FontSize="24" FontAttributes="Bold" HorizontalOptions="FillAndExpand" TextColor="{StaticResource Black}"   Padding="20,5" BackgroundColor="#E8E8E8"/>
+                <Label Text="Оферти"      FontSize="22" FontAttributes="Bold" HorizontalOptions="FillAndExpand" TextColor="{StaticResource Primary}" Padding="20,15,0,0" />
+               
+                <CollectionView
+                ItemsSource="{Binding OffersCollection}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="offers:MyThingsInsuranceSearchModel">
+                            <StackLayout Padding="10">
+                                <Border BackgroundColor="White" StrokeThickness="0" Padding="10" Margin="0,20,0,0" StrokeShape="RoundRectangle 8,8,8,8" WidthRequest="{OnPlatform iOS='370', Android='360'}" HorizontalOptions="Center">
+                                    <Border.Shadow>
+                                        <Shadow Brush="{StaticResource Black}" Opacity="{OnPlatform Android='0.7', iOS='0.4'}" Radius="{OnPlatform iOS='10', Android='20'}"/>
+                                    </Border.Shadow>
+                                    <StackLayout BackgroundColor="White">
+                                        <Grid ColumnDefinitions="5*,3*" VerticalOptions="StartAndExpand" Margin="0" Padding="20,25">
+                                            <Image Grid.Column="0" Source="{Binding LogoSrc}" MaximumWidthRequest="100" MaximumHeightRequest="40" HorizontalOptions="StartAndExpand"/>
+                                            <Label Text="{Binding PremiumFormatted}" Grid.Column="1" FontSize="17" FontAttributes="Bold" TextColor="{StaticResource Black}" Padding="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+                                        </Grid>
+
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MyThingsInsuranceOffersViewModel}},Path=ContinueCommand}" CommandParameter="{Binding .}"/>
+                                        </StackLayout.GestureRecognizers>
+                                    </StackLayout>
+                                </Border>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <StackLayout Margin="20,0,20,0">
+                    <Label Text="Покрити рискове" FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" TextColor="{StaticResource Black}" Padding="0,10"/>
+                    <Grid ColumnDefinitions="*,9*">
+                        <Image Grid.Column="0" Source="tickthree.png" MaximumHeightRequest="10" Margin="0,5,0,0" VerticalOptions="StartAndExpand"/>
+                        <Label Grid.Column="1" Text="Пожар, мълния, експлозия, имплозия,
+удар от летателен апарат или предмет,
+паднал от него."  FontSize="14" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="Black" Padding="0,5,0,0" />
+                    </Grid>
+                    <Grid ColumnDefinitions="*,9*" Margin="0,5,0,0">
+                        <Image Grid.Column="0" Source="tickthree.png" MaximumHeightRequest="10" Margin="0,5,0,0" VerticalOptions="StartAndExpand"/>
+                        <Label Grid.Column="1" Text="Буря, пороен дъжд, градушка, увреждане
+от тежест при естествено натрупване
+ на сняг и лед"  FontSize="14" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="Black" Padding="0,5,0,0" />
+                    </Grid>
+                    <Grid ColumnDefinitions="*,9*" Margin="0,5,0,0">
+                        <Image Grid.Column="0" Source="tickthree.png" MaximumHeightRequest="15" Margin="0,5,0,0"/>
+                        <Label Grid.Column="1" Text="Наводнение"  FontSize="14" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="Black" Padding="0,5,0,0" />
+                    </Grid>
+                    <Grid ColumnDefinitions="*,9*" Margin="0,5,0,0">
+                        <Image Grid.Column="0" Source="tickthree.png" MaximumHeightRequest="10" Margin="0,5,0,0" VerticalOptions="StartAndExpand"/>
+                        <Label Grid.Column="1" Text="Свличане и срутване на земни пластове,
+земетресение"  FontSize="14" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="Black" Padding="0,5,0,0" />
+                    </Grid>
+                    <Grid ColumnDefinitions="*,9*" Margin="0,5,0,0">
+                        <Image Grid.Column="0" Source="tickthree.png" MaximumHeightRequest="15" Margin="0,5,0,0"/>
+                        <Label Grid.Column="1" Text="Удар от пътно превозно средство"  FontSize="14" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="Black" Padding="0,5,0,0" />
+                    </Grid>
+                    <Grid ColumnDefinitions="*,9*" Margin="0,5,0,0">
+                        <Image Grid.Column="0" Source="tickthree.png" MaximumHeightRequest="10" Margin="0,5,0,0" VerticalOptions="StartAndExpand"/>
+                        <Label Grid.Column="1" Text="Злоумишлени действия на трети лица, 
+вандализъм"  FontSize="14" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="Black" Padding="0,5,0,0" />
+                    </Grid>
+                    <Grid ColumnDefinitions="*,9*" Margin="0,5,0,0">
+                        <Image Grid.Column="0" Source="tickthree.png" MaximumHeightRequest="15" Margin="0,5,0,0"/>
+                        <Label Grid.Column="1" Text="Кражба чрез взлом"  FontSize="14" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="Black" Padding="0,5,0,0" />
+                    </Grid>
+                    <Grid ColumnDefinitions="*,9*" Margin="0,5,0,0">
+                        <Image Grid.Column="0" Source="tickthree.png" MaximumHeightRequest="15" Margin="0,5,0,0"/>
+                        <Label Grid.Column="1" Text="Грабеж"  FontSize="14" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="Black" Padding="0,5,0,0" />
+                    </Grid>
+                </StackLayout>
+
+
+                <!--Continue Button -->
+                <Button x:Name="continueBtn"
+              Text="Продължи" Grid.Column="1"
+              Margin="0,50,0,150"
+              Padding="70,5"
+              FontSize="24"
+              BackgroundColor="{StaticResource Tertiary}"
+              TextColor="White"
+              HorizontalOptions="CenterAndExpand"
+              Command="{Binding ContinueCommand}"/>
+            </StackLayout>
+        </ScrollView>
+        <views:NavBar Grid.Row="1" 
+        Margin="0"
+        Padding="0"
+        VerticalOptions="EndAndExpand"
+        BackgroundColor="Transparent"/>
+    </Grid>
+</ContentPage>

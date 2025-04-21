@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:CovrMe.Views.ContentViews"
+             xmlns:model="clr-namespace:CovrMe.ViewModels.Pages.Insurances.CivilInsurance"
+             x:DataType="model:CivilInsuranceCalendarPageViewModel"
+             x:Class="CovrMe.Views.Pages.Insurances.CivilInsurance.CivilInsuranceCalendarPage"
+             Title="CivilInsuranceCalendarPage" BackgroundColor="White">
+    <NavigationPage.TitleView>
+        <Image Source="covrmelogo.png" Margin="0,0,0,0" HeightRequest="50" WidthRequest="250" HorizontalOptions="StartAndExpand" BackgroundColor="White"/>
+    </NavigationPage.TitleView>
+    <Grid RowDefinitions="{OnPlatform Android='9*,*', iOS='670,*'}">
+        <ScrollView Grid.Row="0" Padding="0" MinimumHeightRequest="{OnPlatform Android='400', iOS='750'}"
+              BackgroundColor="White"
+              VerticalOptions="StartAndExpand">
+            <StackLayout>
+                <Label Text="Гражданска отговорност" FontSize="24" FontAttributes="Bold" FontFamily="Montserrat" HorizontalOptions="FillAndExpand" BackgroundColor="#E8E8E8" TextColor="{StaticResource Black}" Padding="25,5"/>
+                <Grid ColumnDefinitions="0.5*,9*" RowDefinitions="*, 2*" Padding="10">
+                    <Image Source="important.png" Grid.Column="0" Grid.Row="0" HeightRequest="20" WidthRequest="20" Margin="0,2,10,0" HorizontalOptions="StartAndExpand" VerticalOptions="Start"/>
+                    <Label Grid.Column="1" Grid.Row="0" Text="{Binding PeriodFormatted,StringFormat='Началната дата на застраховка Гражданска отговорност може да бъде в периода: {0} г.'}" FontSize="Small" TextColor="{StaticResource Black}" />
+                </Grid>
+                <StackLayout Padding="25,10">
+                    <Border x:DataType="{x:Null}" StrokeShape="RoundRectangle 30,30,30,30" StrokeThickness="0">
+                        <views:CalendarView Weeks="{Binding Weeks}" x:Name="calendar" />
+                    </Border>
+                    <Grid ColumnDefinitions="*,8*" RowDefinitions="*,*,*" Padding="20" RowSpacing="10">
+                        <Image Grid.Row="0" Grid.Column="0" Source="calendaricon.png" HeightRequest="20" WidthRequest="20"/>
+                        <Label Grid.Row="0" Grid.Column="1" Text="{Binding Source={x:Reference calendar}, Path=SelectedDateLabel}" FontSize="Medium" TextColor="{StaticResource Black}" />
+                        <Image Grid.Row="1" Grid.Column="0" Source="calendaricon.png" HeightRequest="20" WidthRequest="20"/>
+                        <Label Grid.Row="1" Grid.Column="1" Text="{Binding Source={x:Reference calendar}, Path=SelectedDateLabelYearLater}" FontSize="Medium" TextColor="{StaticResource Black}"/>
+                        <Label Grid.Row="2" Grid.ColumnSpan="2" Text="Валидност: 12 месеца" FontSize="22" FontAttributes="Bold" TextColor="{StaticResource Black}" Padding="10,0,0,0"/>
+                    </Grid>
+                </StackLayout>
+                <!--Continue Button -->
+                <Button
+                    Text="Продължи" Grid.Column="1"
+                    Margin="0,0,0,150"
+                    Padding="50,5"
+                    FontSize="24"
+                    BackgroundColor="{StaticResource Tertiary}"
+                    TextColor="White"
+                    HorizontalOptions="CenterAndExpand"
+                    Command="{Binding ContinueCommand}"/>
+            </StackLayout>
+        </ScrollView>
+        <views:NavBar Grid.Row="1" 
+          Margin="0"
+          Padding="0"
+          VerticalOptions="EndAndExpand"
+          BackgroundColor="Transparent"/>
+    </Grid>
+</ContentPage>

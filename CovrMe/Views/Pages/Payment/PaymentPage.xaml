@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:CovrMe.Views.ContentViews"
+             xmlns:viewmodel="clr-namespace:CovrMe.ViewModels.Pages.Payment"
+             x:DataType="viewmodel:PaymentPageViewModel"
+             x:Class="CovrMe.Views.Pages.Payment.PaymentPage"
+             BackgroundColor="White">
+    <NavigationPage.TitleView>
+        <Image Source="covrmelogo.png" Margin="0,0,0,0" HeightRequest="50" WidthRequest="250" HorizontalOptions="StartAndExpand" BackgroundColor="White"/>
+    </NavigationPage.TitleView>
+
+    <Grid RowDefinitions="{OnPlatform Android='9*,*', iOS='670,*'}">
+        <ScrollView Grid.Row="0" Padding="0" MinimumHeightRequest="{OnPlatform Android='400', iOS='750'}"
+           BackgroundColor="White"
+           VerticalOptions="StartAndExpand">
+            <StackLayout>
+                <Label Text="{Binding Title}" FontSize="24" FontAttributes="Bold" FontFamily="Montserrat" HorizontalOptions="FillAndExpand" BackgroundColor="#E8E8E8" TextColor="{StaticResource Black}" Padding="25,5"/>
+                <StackLayout Padding="20,10,20,0">
+                    <WebView Source="{Binding Source}" MinimumHeightRequest="{OnPlatform Android='400', iOS='750'}"/>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+        <views:NavBar Grid.Row="1" 
+       Margin="0"
+       Padding="0"
+       VerticalOptions="EndAndExpand"
+       BackgroundColor="Transparent"/>
+    </Grid>
+</ContentPage>

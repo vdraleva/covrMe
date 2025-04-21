@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:CovrMe.Views.ContentViews"
+             xmlns:viewmodel="clr-namespace:CovrMe.ViewModels.Pages.Speedy"
+             x:DataType="viewmodel:SpeedyDeliveryOfficeViewModel"
+             x:Class="CovrMe.Views.Pages.Speedy.SpeedyDeliveryOfficePage"
+             BackgroundColor="White">
+    <NavigationPage.TitleView>
+        <Image Source="covrmelogo.png" Margin="0,0,0,0" HeightRequest="50" WidthRequest="250" HorizontalOptions="StartAndExpand" BackgroundColor="White"/>
+    </NavigationPage.TitleView>
+    <Grid RowDefinitions="{OnPlatform Android='9*,*', iOS='670,*'}">
+        <ScrollView Grid.Row="0" Padding="0" MinimumHeightRequest="{OnPlatform Android='400', iOS='750'}"
+       VerticalOptions="StartAndExpand">
+            <StackLayout>
+                <Label Text="Гражданска отговорност" FontSize="24" FontAttributes="Bold" FontFamily="Montserrat" HorizontalOptions="FillAndExpand" BackgroundColor="#E8E8E8" TextColor="{StaticResource Black}" Padding="25,5"/>
+                <StackLayout Padding="20,10,20,0">
+                    <Grid ColumnDefinitions="2*,*">
+                        <Label Grid.Column="0" Text="Данни на доставка" FontSize="22" FontAttributes="Bold" BackgroundColor="White" TextColor="{StaticResource Primary}" Padding="0,5" />
+                        <Image Grid.Column="1" Source="speedyimg.png" MaximumHeightRequest="70" VerticalOptions="StartAndExpand" Margin="0,-5,0,0"/>
+                    </Grid>
+
+                    <StackLayout>
+
+                        <!-- First and Last Name Entry -->
+                        <Grid Margin="0,0,0,5"  HorizontalOptions="FillAndExpand">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start"  Text="Име и фамилия" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0,5"/>
+                            <Frame Grid.Row="1" BorderColor="{StaticResource Black}" CornerRadius="8" Padding="0" MaximumHeightRequest="{OnPlatform Android='38'}" BackgroundColor="Transparent" Margin="0">
+                                <VerticalStackLayout>
+                                    <Entry Placeholder="Алекс Иванов" Text="{Binding FullName, Mode=TwoWay}" Margin="10,0,0,0" TextColor="Black" FontSize="Medium" PlaceholderColor="#C1B5B5" HorizontalOptions="FillAndExpand"/>
+                                </VerticalStackLayout>
+                                <Frame.Triggers>
+                                    <DataTrigger TargetType="Frame" Binding="{Binding FullNameError}" Value="True">
+                                        <Setter Property="BorderColor" Value="Red" />
+                                    </DataTrigger>
+                                </Frame.Triggers>
+                            </Frame>
+                        </Grid>
+
+                        <!-- Phone Entry -->
+                        <Grid Margin="0,0,0,5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start"  Text="Телефон" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0,5"/>
+                            <views:PhonePicker Grid.Row="1" Phone="{Binding Phone, Mode=TwoWay}"/>
+                        </Grid>
+
+                        <!-- City Entry -->
+                        <Grid Margin="0,0,0,5"  HorizontalOptions="FillAndExpand">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start"  Text="Град" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0,5"/>
+                            <Frame Grid.Row="1" BorderColor="{StaticResource Black}" CornerRadius="8" Padding="0" MaximumHeightRequest="{OnPlatform Android='38'}" BackgroundColor="Transparent" Margin="0">
+                                <VerticalStackLayout>
+                                    <Entry Text="{Binding City, Mode=TwoWay}" Margin="10,0,0,0" TextColor="Black" FontSize="Medium" HorizontalOptions="FillAndExpand"/>
+                                </VerticalStackLayout>
+                                <Frame.Triggers>
+                                    <DataTrigger TargetType="Frame" Binding="{Binding CityError}" Value="True">
+                                        <Setter Property="BorderColor" Value="Red" />
+                                    </DataTrigger>
+                                </Frame.Triggers>
+                            </Frame>
+                        </Grid>
+
+                        <!-- Neighbourhood Entry -->
+                        <Grid Margin="0,0,0,5"  HorizontalOptions="FillAndExpand">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start"  Text="Квартал" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0,5"/>
+                            <Frame Grid.Row="1" BorderColor="{StaticResource Black}" CornerRadius="8" Padding="0" MaximumHeightRequest="{OnPlatform Android='38'}" BackgroundColor="Transparent" Margin="0">
+                                <VerticalStackLayout>
+                                    <Entry Text="{Binding Neighbourhood, Mode=TwoWay}" Margin="10,0,0,0" TextColor="Black" FontSize="Medium" HorizontalOptions="FillAndExpand"/>
+                                </VerticalStackLayout>
+                                <Frame.Triggers>
+                                    <DataTrigger TargetType="Frame" Binding="{Binding NeighbourhoodError}" Value="True">
+                                        <Setter Property="BorderColor" Value="Red" />
+                                    </DataTrigger>
+                                </Frame.Triggers>
+                            </Frame>
+                        </Grid>
+
+                    </StackLayout>
+
+                </StackLayout>
+                <!--Continue Button -->
+                <Grid ColumnDefinitions="*,*" Padding="20,0" ColumnSpacing="0" HorizontalOptions="FillAndExpand">
+                    <Button Text="Търси" Grid.Column="0" Margin="0,30,0,50" Padding="0,5" FontSize="Medium" BackgroundColor="{StaticResource Tertiary}"
+                            TextColor="White" HorizontalOptions="CenterAndExpand" Command="{Binding SearchCommand}" MinimumWidthRequest="160"/>
+                    <Button Text="Продължи" Grid.Column="1" Margin="10,30,0,50" Padding="0,5" FontSize="Medium" BackgroundColor="{StaticResource Tertiary}"
+                            TextColor="White" HorizontalOptions="CenterAndExpand" Command="{Binding ContinueCommand}" MinimumWidthRequest="160"/>
+                </Grid>
+
+                <Label Text="Избраният офис е:" IsVisible="{Binding SelectedOffice}" FontSize="15" FontAttributes="Bold" TextColor="{StaticResource Black}" Padding="20,0,20,0"  />
+                <Label Text="{Binding SelectedOfficeName}" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource Black}" Padding="20,0,20,0"  />
+            </StackLayout>
+        </ScrollView>
+        <views:NavBar Grid.Row="1" 
+   Margin="0"
+   Padding="0"
+   VerticalOptions="EndAndExpand"
+   BackgroundColor="Transparent"/>
+    </Grid>
+</ContentPage>

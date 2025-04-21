@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:views="clr-namespace:CovrMe.Views.ContentViews"     
+             xmlns:viewmodels="clr-namespace:CovrMe.ViewModels.Pages.Insurances.HealthInsurance"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:DataType="viewmodels:HealthInsurancePacketsPageViewModel"
+             x:Class="CovrMe.Views.Pages.Insurances.HealthInsurance.HealthInsurancePacketsPage"
+             Title="HealthInsurancePacketsPage" BackgroundColor="White">
+    <NavigationPage.TitleView>
+        <Image Source="covrmelogo.png" Margin="0,0,0,0" HeightRequest="50" WidthRequest="250" HorizontalOptions="StartAndExpand" BackgroundColor="White"/>
+    </NavigationPage.TitleView>
+    <Grid RowDefinitions="{OnPlatform Android='9*,*', iOS='670,*'}">
+        <ScrollView Grid.Row="0" Padding="0" MinimumHeightRequest="{OnPlatform Android='400', iOS='750'}" BackgroundColor="White" VerticalOptions="StartAndExpand">
+            <StackLayout>
+                <Label Text="Здраве и спокойствие" FontSize="24" FontAttributes="Bold" FontFamily="Montserrat" HorizontalOptions="FillAndExpand" BackgroundColor="#E8E8E8" TextColor="{StaticResource Black}" Padding="20,5"/>
+                <Label Text="Пакети" FontSize="22" FontAttributes="Bold" HorizontalOptions="FillAndExpand" TextColor="{StaticResource Primary}" Padding="20,15,0,10" />
+                <Label Text="Покритие за болничен престой, при фрактури и за операции." FontSize="18" FontAttributes="Bold" HorizontalOptions="FillAndExpand" TextColor="{StaticResource Black}" Padding="20,0,0,10" />
+
+                <!--Dropdown-->
+                <StackLayout Padding="10,20,10,0">
+                    <Border BackgroundColor="White" StrokeThickness="0" Padding="5,5,0,5" StrokeShape="RoundRectangle 8,8,8,8" WidthRequest="{OnPlatform iOS='370', Android='350'}" HorizontalOptions="Center">
+                        <Border.Shadow>
+                            <Shadow Brush="{StaticResource Black}" Opacity="{OnPlatform Android='0.7', iOS='0.4'}" Radius="{OnPlatform iOS='10', Android='20'}"/>
+                        </Border.Shadow>
+                        <StackLayout>
+                            <Grid ColumnDefinitions="*,9*">
+                                <RadioButton Grid.Column="0" x:Name="RadioBtnPrestige" Content="" IsChecked="True" CheckedChanged="RadioBtnPrestige_CheckedChanged" Value="8"/>
+                                <Label Grid.Column="1" FontSize="17" x:Name="RadioBtnPrestigeText" Text="Престиж" FontAttributes="Bold" VerticalOptions="CenterAndExpand" Padding="5,0,0,0">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer  Tapped="RadioBtnPrestige_Tapped" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </Grid>
+                            <StackLayout IsVisible="{Binding PrestigeCardOpened}" Padding="10,10,15,0">
+                                <Label  FontSize="15" Text="Покрити рискове:" FontAttributes="Bold" VerticalOptions="CenterAndExpand" Padding="0,0,0,0" Margin="0,0,0,10"/>
+                                <Grid ColumnDefinitions="0.6*,9*" RowDefinitions="*, 2*">
+                                    <Image  Source="tick.png" Grid.Column="0" Grid.Row="0" HeightRequest="20" WidthRequest="20" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand"/>
+                                    <Label Grid.Column="1"     Grid.Row="0" FontSize="14" LineHeight="1.2" Text="Болничен престой вследствие на злополука: по 70 лв./ден"/>
+                                </Grid>
+                                <Grid ColumnDefinitions="0.6*,9*" RowDefinitions="*, 2*" Padding="0,10,0,0">
+                                    <Image Source="tick.png" Grid.Column="0" Grid.Row="0" HeightRequest="20" WidthRequest="20" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand"/>
+                                    <Label Grid.Column="1"     Grid.Row="0" FontSize="14" LineHeight="1.2" Text=" Болничен престой вследствие на заболяване: по 35 лв./ден"/>
+                                </Grid>
+                                <Grid ColumnDefinitions="0.6*,9*" RowDefinitions="*, 2*" Padding="0,10,0,0">
+                                    <Image Source="tick.png" Grid.Column="0" Grid.Row="0" HeightRequest="20" WidthRequest="20" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+                                    <Label Grid.Column="1"     Grid.Row="0" FontSize="14" LineHeight="1.2" Text="При раждане до 6 дни: 210 лв."/>
+                                </Grid>
+                                <Grid ColumnDefinitions="0.6*,9*" RowDefinitions="*, 2*" Padding="0,10,0,0">
+                                    <Image Source="tick.png" Grid.Column="0" Grid.Row="0" HeightRequest="20" WidthRequest="20" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand"/>
+                                    <Label Grid.Column="1"     Grid.Row="0" FontSize="14" LineHeight="1.2" Text="Болничен престой при раждане след 6-я ден: по 35 лв./ден"/>
+                                </Grid>
+                                <Grid ColumnDefinitions="0.6*,9*" RowDefinitions="*, 2*" Padding="0,10,0,0">
+                                    <Image Source="tick.png" Grid.Column="0" Grid.Row="0" HeightRequest="20" WidthRequest="20" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+                                    <Label Grid.Column="1"     Grid.Row="0" FontSize="14" LineHeight="1.2" Text=" При леко счупване на кост: 250 лв."/>
+                                </Grid>
+                                <Grid ColumnDefinitions="0.6*,9*" RowDefinitions="*, 2*" Padding="0,10,0,0">
+                                    <Image Source="tick.png" Grid.Column="0" Grid.Row="0" HeightRequest="20" WidthRequest="20" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand"/>
+                                    <Label Grid.Column="1"     Grid.Row="0" FontSize="14" LineHeight="1.2" Text="При средно и тежко счупване на кост: 500-700 лв."/>
+                                </Grid>
+                                <Grid ColumnDefinitions="0.6*,9*" RowDefinitions="*, 2*" Padding="0,10,0,10">
+                                    <Image Source="tick.png" Grid.Column="0" Grid.Row="0" HeightRequest="20" WidthRequest="20" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand"/>
+                                    <Label Grid.Column="1"     Grid.Row="0" FontSize="14" LineHeight="1.2" Text="За операция: 750-2 000 лв. в зависимост от сложността."/>
+                                </Grid>
+                            </StackLayout>
+                        </StackLayout>
+                    </Border>
+                </StackLayout>
+
+                <!--Dropdown-->
+                <StackLayout Padding="10,20,10,0">
+                    <Border BackgroundColor="White" StrokeThickness="0" Padding="5,5,0,5" StrokeShape="RoundRectangle 8,8,8,8" WidthRequest="{OnPlatform iOS='370', Android='350'}" HorizontalOptions="Center">
+                        <Border.Shadow>
+                            <Shadow Brush="{StaticResource Black}" Opacity="{OnPlatform Android='0.7', iOS='0.4'}" Radius="{OnPlatform iOS='10', Android='20'}"/>
+                        </Border.Shadow>
+                        <StackLayout>
+                            <Grid ColumnDefinitions="*,9*">
+                                <RadioButton Grid.Column="0" x:Name="RadioBtnComfort" Content="" IsChecked="False" CheckedChanged="RadioBtnComfort_CheckedChanged" Value="7"/>
+                                <Label Grid.Column="1" FontSize="17" x:Name="RadioBtnComfortText" Text="Комфорт" FontAttributes="Bold" VerticalOptions="CenterAndExpand" Padding="5,0,0,0">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer  Tapped="RadioBtnComfort_Tapped" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </Grid>
+                            <StackLayout IsVisible="{Binding ComforteCardOpened}" Padding="10,10,15,0">
+                                <Label  FontSize="15" Text="Покрити рискове:" FontAttributes="Bold" VerticalOptions="CenterAndExpand" Padding="0,0,0,0" Margin="0,0,0,10"/>
+                                <Grid ColumnDefinitions="0.6*,9*" RowDefinitions="*, 2*">
+                                    <Image Source="tick.png" Grid.Column="0" Grid.Row="0" HeightRequest="20" WidthRequest="20" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand"/>
+                                    <Label Grid.Column="1"     Grid.Row="0" FontSize="14" LineHeight="1.2" Text="Болничен престой вследствие на злополука: по 70 лв./ден"/>
+                                </Grid>
+                                <Grid ColumnDefinitions="0.6*,9*" RowDefinitions="*, 2*" Padding="0,10,0,0">
+                                    <Image Source="tick.png" Grid.Column="0" Grid.Row="0" HeightRequest="20" WidthRequest="20" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand"/>
+                                    <Label Grid.Column="1"     Grid.Row="0" FontSize="14" LineHeight="1.2" Text=" Болничен престой вследствие на заболяване: по 35 лв./ден"/>
+                                </Grid>
+                                <Grid ColumnDefinitions="0.6*,9*" RowDefinitions="*, 2*" Padding="0,10,0,0">
+                                    <Image Source="tick.png" Grid.Column="0" Grid.Row="0" HeightRequest="20" WidthRequest="20" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+                                    <Label Grid.Column="1"     Grid.Row="0" FontSize="14" LineHeight="1.2" Text="При раждане до 6 дни: 210 лв."/>
+                                </Grid>
+                                <Grid ColumnDefinitions="0.6*,9*" RowDefinitions="*, 2*" Padding="0,10,0,0">
+                                    <Image Source="tick.png" Grid.Column="0" Grid.Row="0" HeightRequest="20" WidthRequest="20" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand"/>
+                                    <Label Grid.Column="1"     Grid.Row="0" FontSize="14" LineHeight="1.2" Text="Болничен престой при раждане след 6-я ден: по 35 лв./ден"/>
+                                </Grid>
+                                <Grid ColumnDefinitions="0.6*,9*" RowDefinitions="*, 2*" Padding="0,10,0,0">
+                                    <Image Source="tick.png" Grid.Column="0" Grid.Row="0" HeightRequest="20" WidthRequest="20" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+                                    <Label Grid.Column="1"     Grid.Row="0" FontSize="14" LineHeight="1.2" Text=" При леко счупване на кост: 250 лв."/>
+                                </Grid>
+                                <Grid ColumnDefinitions="0.6*,9*" RowDefinitions="*, 2*" Padding="0,10,0,0">
+                                    <Image Source="tick.png" Grid.Column="0" Grid.Row="0" HeightRequest="20" WidthRequest="20" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand"/>
+                                    <Label Grid.Column="1"     Grid.Row="0" FontSize="14" LineHeight="1.2" Text="При средно и тежко счупване на кост: 500-700 лв."/>
+                                </Grid>
+                            </StackLayout>
+                        </StackLayout>
+                    </Border>
+                </StackLayout>
+
+                <!--Continue Button -->
+                <Button x:Name="continueBtn"
+        Text="Продължи" Grid.Column="1"
+        Margin="{OnPlatform Android='0,50,0,50', iOS='0,50,0,120'}"
+        Padding="70,5"
+        FontSize="24"
+        BackgroundColor="{StaticResource Tertiary}"
+        TextColor="White"
+        HorizontalOptions="CenterAndExpand"
+        Command="{Binding ContinueCommand}"/>
+            </StackLayout>
+        </ScrollView>
+        <views:NavBar Grid.Row="1" 
+  Margin="0"
+  Padding="0"
+  VerticalOptions="EndAndExpand"
+  BackgroundColor="Transparent"/>
+    </Grid>
+</ContentPage>

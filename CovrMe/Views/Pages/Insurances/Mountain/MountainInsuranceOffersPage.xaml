@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:CovrMe.Views.ContentViews"
+             xmlns:behaviors="clr-namespace:CovrMe.Bahaviors"
+             xmlns:viewmodels="clr-namespace:CovrMe.ViewModels.Pages.Insurances.Mountain"
+             xmlns:offers="clr-namespace:CovrMe.Models.Insurances.Result.MountainInsurance;assembly=CovrMe.Models"
+             x:DataType="viewmodels:MountainInsuranceOffersViewModel"
+             x:Class="CovrMe.Views.Pages.Insurances.Mountain.MountainInsuranceOffersPage"
+             Title="MountainInsuranceOffersPage" BackgroundColor="White">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <behaviors:BorderColorConverter x:Key="BorderColorConverter"/>
+            <behaviors:LabelColorConverter x:Key="LabelColorConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <NavigationPage.TitleView>
+        <Image Source="covrmelogo.png" Margin="0,0,0,0" HeightRequest="50" WidthRequest="250" HorizontalOptions="StartAndExpand" BackgroundColor="White"/>
+    </NavigationPage.TitleView>
+    <Grid RowDefinitions="{OnPlatform Android='9*,*', iOS='670,*'}">
+        <ScrollView Grid.Row="0" Padding="0" MinimumHeightRequest="{OnPlatform Android='400', iOS='750'}" BackgroundColor="White" VerticalOptions="StartAndExpand">
+            <StackLayout>
+                <Label Text="Планинска застраховка"     FontSize="24" FontAttributes="Bold" HorizontalOptions="FillAndExpand" TextColor="{StaticResource Black}"   Padding="20,5" BackgroundColor="#E8E8E8"/>
+                <Label Text="Застрахователна сума"      FontSize="22" FontAttributes="Bold" HorizontalOptions="FillAndExpand" TextColor="{StaticResource Primary}" Padding="20,15,0,10" />
+                <Label Text="Изберете лимит на обезщетение" FontSize="18" FontAttributes="Bold" HorizontalOptions="FillAndExpand" TextColor="{StaticResource Black}"   Padding="20,5,0,20" />
+
+                <Grid RowDefinitions="auto,auto" ColumnDefinitions="*,*" ColumnSpacing="0" RowSpacing="15" Padding="20,0,0,0">
+                    <Border x:Name="Border1" Grid.Row="0" Grid.Column="0" BackgroundColor="{Binding FirstBorderSelected, Converter={StaticResource BorderColorConverter}}" StrokeThickness="0" Padding="0,5" Margin="0,5,0,0" StrokeShape="RoundRectangle 0,8,8,0"
+                        HorizontalOptions="StartAndExpand" WidthRequest="{OnPlatform iOS='170', Android='160'}">
+                        <Border.Shadow>
+                            <Shadow Brush="{StaticResource Black}" Opacity="{OnPlatform Android='0.7', iOS='0.4'}" Radius="{OnPlatform iOS='10', Android='20'}"/>
+                        </Border.Shadow>
+                        <StackLayout Padding="10,0">
+                            <Grid ColumnDefinitions="*,9*" Padding="0" VerticalOptions="CenterAndExpand">
+                                <Image Grid.Column="0" Source="ticktwo.png" IsVisible="{Binding FirstBorderSelected}" HeightRequest="20" WidthRequest="20" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Margin="0"/>
+                                <Label Grid.Column="1" Text="2 000 лв." TextColor="{Binding FirstBorderSelected, Converter={StaticResource LabelColorConverter}}" FontSize="24" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                            </Grid>
+                        </StackLayout>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" CommandParameter="Border1" />
+                        </Border.GestureRecognizers>
+                    </Border>
+                    <Border x:Name="Border2" Grid.Row="0" Grid.Column="1" BackgroundColor="{Binding SecondBorderSelected, Converter={StaticResource BorderColorConverter}}" StrokeThickness="0" Padding="0,5" Margin="0,5,0,0" StrokeShape="RoundRectangle 8,0,0,8"
+                        HorizontalOptions="StartAndExpand" WidthRequest="{OnPlatform iOS='170', Android='160'}">
+                        <Border.Shadow>
+                            <Shadow Brush="{StaticResource Black}" Opacity="{OnPlatform Android='0.7', iOS='0.4'}" Radius="{OnPlatform iOS='10', Android='20'}"/>
+                        </Border.Shadow>
+                        <StackLayout Padding="10,0">
+                            <Grid ColumnDefinitions="*,9*" Padding="0" VerticalOptions="CenterAndExpand">
+                                <Image Grid.Column="0" Source="ticktwo.png" IsVisible="{Binding SecondBorderSelected}" HeightRequest="20" WidthRequest="20" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Margin="0"/>
+                                <Label Grid.Column="1" Text="3 000 лв." TextColor="{Binding SecondBorderSelected, Converter={StaticResource LabelColorConverter}}" FontSize="24" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                            </Grid>
+                        </StackLayout>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" CommandParameter="Border2" />
+                        </Border.GestureRecognizers>
+                    </Border>
+                    <Border x:Name="Border3" Grid.Row="1" Grid.Column="0" BackgroundColor="{Binding ThirdBorderSelected, Converter={StaticResource BorderColorConverter}}" StrokeThickness="0" Padding="0,5" Margin="0,5,0,0" StrokeShape="RoundRectangle 0,8,8,0"
+                        HorizontalOptions="StartAndExpand" WidthRequest="{OnPlatform iOS='170', Android='160'}">
+                        <Border.Shadow>
+                            <Shadow Brush="{StaticResource Black}" Opacity="{OnPlatform Android='0.7', iOS='0.4'}" Radius="{OnPlatform iOS='10', Android='20'}"/>
+                        </Border.Shadow>
+                        <StackLayout Padding="10,0">
+                            <Grid ColumnDefinitions="*,9*" Padding="0" VerticalOptions="CenterAndExpand">
+                                <Image Grid.Column="0" Source="ticktwo.png" IsVisible="{Binding ThirdBorderSelected}" HeightRequest="20" WidthRequest="20" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Margin="0"/>
+                                <Label Grid.Column="1" Text="5 000 лв." TextColor="{Binding ThirdBorderSelected, Converter={StaticResource LabelColorConverter}}" FontSize="24" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                            </Grid>
+                        </StackLayout>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" CommandParameter="Border3" />
+                        </Border.GestureRecognizers>
+                    </Border>
+                    <Border x:Name="Border4" Grid.Row="1" Grid.Column="1" BackgroundColor="{Binding ForthBorderSelected, Converter={StaticResource BorderColorConverter}}" StrokeThickness="0" Padding="0,5" Margin="0,5,0,0" StrokeShape="RoundRectangle 8,0,0,8" 
+                        HorizontalOptions="StartAndExpand" WidthRequest="{OnPlatform iOS='170', Android='160'}">
+                        <Border.Shadow>
+                            <Shadow Brush="{StaticResource Black}" Opacity="{OnPlatform Android='0.7', iOS='0.4'}" Radius="{OnPlatform iOS='10', Android='20'}"/>
+                        </Border.Shadow>
+                        <StackLayout Padding="10,0">
+                            <Grid ColumnDefinitions="*,9*" Padding="0" VerticalOptions="CenterAndExpand">
+                                <Image Grid.Column="0" Source="ticktwo.png" IsVisible="{Binding ForthBorderSelected}" HeightRequest="20" WidthRequest="20" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Margin="0"/>
+                                <Label Grid.Column="1" Text="10 000 лв." TextColor="{Binding ForthBorderSelected, Converter={StaticResource LabelColorConverter}}" FontSize="24" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                            </Grid>
+                        </StackLayout>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" CommandParameter="Border4" />
+                        </Border.GestureRecognizers>
+                    </Border>
+                </Grid>
+                <Label Text="Застрахователна компания" FontSize="18" FontAttributes="Bold" HorizontalOptions="FillAndExpand" TextColor="{StaticResource Black}"   Margin="20,30,0,0" />
+                <CollectionView
+                ItemsSource="{Binding OffersCollection}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="offers:MountainInsuranceSearchModel">
+                            <StackLayout Padding="10">
+                                <Border BackgroundColor="White" StrokeThickness="0" Padding="{OnPlatform iOS='10', Android='15,10,10,10'}" Margin="0,40,0,0" StrokeShape="RoundRectangle 0,8,8,0" WidthRequest="{OnPlatform iOS='370', Android='330'}" HorizontalOptions="Center">
+                                    <Border.Shadow>
+                                        <Shadow Brush="{StaticResource Black}" Opacity="{OnPlatform Android='0.7', iOS='0.4'}" Radius="{OnPlatform iOS='10', Android='20'}"/>
+                                    </Border.Shadow>
+                                    <StackLayout BackgroundColor="White">
+                                        <Grid ColumnDefinitions="5*,3*" VerticalOptions="StartAndExpand" Margin="0" Padding="20,25">
+                                            <Image Grid.Column="0" Source="{Binding LogoSrc}" MaximumWidthRequest="100" MaximumHeightRequest="40" HorizontalOptions="StartAndExpand"/>
+                                            <Label Text="{Binding PremiumFormatted}" Grid.Column="1" FontSize="17" FontAttributes="Bold" TextColor="{StaticResource Black}" Padding="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+                                        </Grid>
+
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MountainInsuranceOffersViewModel}},Path=ContinueCommand}" CommandParameter="{Binding .}"/>
+                                        </StackLayout.GestureRecognizers>
+                                    </StackLayout>
+                                </Border>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+
+                <!--Continue Button -->
+                <Button x:Name="continueBtn"
+              Text="Продължи" Grid.Column="1"
+              Margin="0,50,0,50"
+              Padding="70,5"
+              FontSize="24"
+              BackgroundColor="{StaticResource Tertiary}"
+              TextColor="White"
+              HorizontalOptions="CenterAndExpand"
+              Command="{Binding ContinueCommand}"/>
+            </StackLayout>
+        </ScrollView>
+        <views:NavBar Grid.Row="1" 
+        Margin="0"
+        Padding="0"
+        VerticalOptions="EndAndExpand"
+        BackgroundColor="Transparent"/>
+    </Grid>
+</ContentPage>

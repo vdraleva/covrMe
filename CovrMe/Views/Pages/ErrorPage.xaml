@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:CovrMe.Views.ContentViews"
+             xmlns:model="clr-namespace:CovrMe.ViewModels.Pages"
+             x:DataType="model:ErrorPageViewModel"
+             x:Class="CovrMe.Views.Pages.ErrorPage"
+             Title="ErrorPage" BackgroundColor="White">
+    <NavigationPage.TitleView>
+        <Image Source="covrmelogo.png" Margin="0,0,0,0" HeightRequest="50" WidthRequest="250" HorizontalOptions="StartAndExpand" BackgroundColor="White"/>
+    </NavigationPage.TitleView>
+    <Grid RowDefinitions="{OnPlatform Android='9*,*', iOS='670,*'}">
+        <ScrollView Grid.Row="0" Padding="0" MinimumHeightRequest="{OnPlatform Android='400', iOS='750'}"
+  BackgroundColor="White"
+  VerticalOptions="StartAndExpand">
+            <StackLayout Padding="25,0">
+                <Image Source="warning.png" BackgroundColor="Transparent" Margin="0,60,0,20" MaximumHeightRequest="{OnPlatform Android='200'}"/>
+                <Label Text="Възникна проблем" TextColor="{StaticResource Orange}" FontAttributes="Bold" FontSize="28"  HorizontalOptions="Center" HorizontalTextAlignment="Center" Padding="40,0"/>
+                <Label Text="Скоро ще се свържем с теб!" 
+                   TextColor="{StaticResource Black}" FontSize="16"  FontAttributes="Bold"
+                   HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" 
+                   HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Margin="{OnPlatform Android='0,10,0, 10', iOS='0,10,0,10'}"/>
+                <Label Text="{Binding ErrorId}"
+                       IsVisible="{Binding IsError}"
+                       TextColor="{StaticResource Black}" FontSize="12"  FontAttributes="Bold"
+                       HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" 
+                       HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Margin="{OnPlatform Android='0,10,0, 0', iOS='0,10,0,0'}"/>
+                <Label Text="{Binding ErrorMessage}"
+                       IsVisible="{Binding IsError}"
+                       TextColor="{StaticResource Black}" FontSize="13"  FontAttributes="Bold"
+                       HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" 
+                       HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Margin="{OnPlatform Android='0,10,0, 200', iOS='0,10,0,100'}"/>
+              
+                <!--Continue Button -->
+                <Button Text="Начало" Grid.Column="1"
+                    Margin="0,0,0,150"
+                    Padding="50,5"
+                    FontSize="24"
+                    BackgroundColor="{StaticResource Primary}"
+                    TextColor="White"
+                    HorizontalOptions="CenterAndExpand"
+                    Command="{Binding ContinueCommand}"/>
+            </StackLayout>
+        </ScrollView>
+        <views:NavBar Grid.Row="1" Margin="0" Padding="0" VerticalOptions="EndAndExpand" BackgroundColor="Transparent"/>
+    </Grid>
+</ContentPage>

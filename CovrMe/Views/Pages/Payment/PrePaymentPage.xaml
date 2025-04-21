@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:CovrMe.Views.ContentViews"
+             xmlns:behaviors="clr-namespace:CovrMe.Bahaviors"
+             xmlns:viewmodel="clr-namespace:CovrMe.ViewModels.Pages.Payment"
+             x:DataType="viewmodel:PrePaymentPageViewModel"
+             x:Class="CovrMe.Views.Pages.Payment.PrePaymentPage"
+             BackgroundColor="White">
+    <NavigationPage.TitleView>
+        <Image Source="covrmelogo.png" Margin="0,0,0,0" HeightRequest="50" WidthRequest="250" HorizontalOptions="StartAndExpand" BackgroundColor="White"/>
+    </NavigationPage.TitleView>
+    <Grid RowDefinitions="{OnPlatform Android='9*,*', iOS='670,*'}">
+        <ScrollView Grid.Row="0" Padding="0" MinimumHeightRequest="{OnPlatform Android='400', iOS='750'}"
+         BackgroundColor="White"
+         VerticalOptions="StartAndExpand">
+            <StackLayout>
+                <Label Text="{Binding Title}" FontSize="24" FontAttributes="Bold" FontFamily="Montserrat" HorizontalOptions="FillAndExpand" BackgroundColor="#E8E8E8" TextColor="{StaticResource Black}" Padding="25,5"/>
+                <Label Grid.Column="0" Text="Информация" FontSize="20" FontAttributes="Bold" HorizontalOptions="FillAndExpand" TextColor="{StaticResource Primary}" Padding="20,15,0,10" />
+
+                <Border Grid.Row="1" BackgroundColor="White" StrokeThickness="0" Padding="10" Margin="0,10,0,0" StrokeShape="RoundRectangle 0,8,8,0" WidthRequest="{OnPlatform iOS='370', Android='350'}" HorizontalOptions="Center">
+                    <Border.Shadow>
+                        <Shadow Brush="{StaticResource Black}" Opacity="{OnPlatform Android='0.7', iOS='0.4'}" Radius="{OnPlatform iOS='10', Android='20'}"/>
+                    </Border.Shadow>
+                    <StackLayout Padding="0,10">
+                        <Grid RowDefinitions="*,*,*" ColumnDefinitions="0.85*,*">
+                            <Label Grid.Row="0" Grid.Column="0" Text="Номер на автомобил:" FontSize="14" IsVisible="{Binding ShowVehicleNo}" TextColor="{StaticResource Black}" Padding="0,5,0,0" />
+                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding VehiclePlateNumber}" FontSize="14" IsVisible="{Binding ShowVehicleNo}" FontAttributes="Bold" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start" TextColor="{StaticResource Primary}" Padding="0,5,0,0" />
+
+                            <Label Grid.Row="0" Grid.Column="0" Text="Застраховащ:" FontSize="14" IsVisible="{Binding ShowInsurerName}" TextColor="{StaticResource Black}" Padding="0,5,0,0" />
+                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding InsurerNames}" FontSize="14" IsVisible="{Binding ShowInsurerName}" FontAttributes="Bold" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start" TextColor="{StaticResource Primary}" Padding="0,5,0,0" />
+
+                            <Label Grid.Row="1" Grid.Column="0" Text="Номер на полица:" IsVisible="{Binding ShowPolicyNo}" FontSize="14" TextColor="{StaticResource Black}" Padding="0,5,0,0" />
+                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding PolicyNo}" IsVisible="{Binding ShowPolicyNo}" FontSize="14" FontAttributes="Bold" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start" TextColor="{StaticResource Primary}" Padding="0,5,0,0" />
+
+                            <Label Grid.Row="2" Grid.Column="0" Text="{Binding CompanyName}" FontSize="14" TextColor="{StaticResource Black}" Padding="0,5,0,0" />
+
+                        </Grid>
+                        <Label Text="{Binding PaymentInfo}" FontSize="18" FontAttributes="Bold" TextColor="{StaticResource Primary}" Padding="0,5,0,0" Margin="0,10,0,10" />
+                        <!--<Label Text="Обща стойност с включен 2% данък върху застрахователните премии" FontSize="12" FontAttributes="Bold" TextColor="{StaticResource Black}" Padding="0,5,0,0" />-->
+                        <Label IsVisible="{Binding ShowTaxInfo}" Text="{Binding PremiumWithoutTaxFormatted, StringFormat='Застрахователна премия: {0}'}"  FontSize="14" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" TextColor="{StaticResource Primary}" Padding="0,15,5,0"/>
+                        <Label IsVisible="{Binding ShowTaxInfo}" Text="{Binding TaxFormatted, StringFormat='Данък 2% съгл. ЗДЗП: {0}'}"  FontSize="14" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" TextColor="{StaticResource Primary}" Padding="0,15,5,0"/>
+                        <Label Text="{Binding PremiumFormatted, StringFormat='Общо: {0}'}"  FontSize="18" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" TextColor="{StaticResource Primary}" Padding="0,15,5,0"/>
+                    </StackLayout>
+                </Border>
+
+                <Grid Margin="0,10,0,0" HorizontalOptions="FillAndExpand" Padding="20,10,20,10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start"  Text="Имейл за получаване на полица" FontAttributes="Bold" TextColor="{StaticResource Black}" FontSize="Medium" Margin="0,5"/>
+                    <Frame Grid.Row="1" BorderColor="{StaticResource Black}" CornerRadius="8" Padding="0" MaximumHeightRequest="{OnPlatform Android='38'}" BackgroundColor="Transparent" Margin="0">
+                        <VerticalStackLayout>
+                            <Entry Placeholder="alex.ivanov@gmail.com" Text="{Binding Email, Mode=TwoWay}" Margin="10,0,0,0" TextColor="Black" FontSize="Medium" PlaceholderColor="#C1B5B5" HorizontalOptions="FillAndExpand" MaximumHeightRequest="{OnPlatform Android='42'}"/>
+                        </VerticalStackLayout>
+                        <Frame.Triggers>
+                            <DataTrigger TargetType="Frame" Binding="{Binding EmailError}" Value="True">
+                                <Setter Property="BorderColor" Value="Red" />
+                            </DataTrigger>
+                        </Frame.Triggers>
+                    </Frame>
+                </Grid>
+
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="15" Padding="0,0,0,5">
+                    <Image Grid.Column="0" Source="bdsk.png"    MaximumWidthRequest="100" HorizontalOptions="EndAndExpand"/>
+                    <Image Grid.Column="1" Source="bborika.png" MaximumWidthRequest="100" HorizontalOptions="StartAndExpand"/>
+                </Grid>
+                <Label Text="* Защитено плащане с виртуален POS терминал. Сигурността на онлайн транзакциите е гарантирана от Банка ДСК АД."
+                       FontSize="12" FontAttributes="Bold" TextColor="{StaticResource Black}" Padding="20,5,10,0"  />
+                <Label Text="* Брокер Корпорекс България ЕООД и Диджитъл Полиси Хъб АД  нямат достъп до данните от клиентската карта."
+                        FontSize="12" FontAttributes="Bold" TextColor="{StaticResource Black}" Padding="20,5,10,0"  />
+
+                <!--Continue Button -->
+                <Button
+               Text="Плати" Grid.Column="1"
+               Margin="0,15,0,50"
+               Padding="70,5"
+               FontSize="24"
+               BackgroundColor="{StaticResource Primary}"
+               TextColor="White"
+               HorizontalOptions="CenterAndExpand"
+               Command="{Binding ContinueCommand}"/>
+            </StackLayout>
+        </ScrollView>
+        <views:NavBar Grid.Row="1" 
+     Margin="0"
+     Padding="0"
+     VerticalOptions="EndAndExpand"
+     BackgroundColor="Transparent"/>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:CovrMe.Views.ContentViews"
+             xmlns:model="clr-namespace:CovrMe.ViewModels.Pages.Insurances.MyThings"
+             x:DataType="model:MyThingsInsuranceDocumentsPageViewModel"
+             x:Class="CovrMe.Views.Pages.Insurances.MyThings.MyThingsInsuranceDocumentsPage"
+             Title="MyThingsInsuranceDocumentsPage" BackgroundColor="White">
+    <NavigationPage.TitleView>
+        <Image Source="covrmelogo.png" Margin="0,0,0,0" HeightRequest="50" WidthRequest="250" HorizontalOptions="StartAndExpand" BackgroundColor="White"/>
+    </NavigationPage.TitleView>
+    <Grid RowDefinitions="{OnPlatform Android='9*,*', iOS='670,*'}">
+        <ScrollView Grid.Row="0" Padding="0"
+      BackgroundColor="White"
+      VerticalOptions="StartAndExpand">
+            <StackLayout Padding="0" HorizontalOptions="FillAndExpand">
+                <Label Text="Моите вещи" FontSize="24" FontAttributes="Bold" FontFamily="Montserrat" HorizontalOptions="FillAndExpand" BackgroundColor="#E8E8E8" TextColor="{StaticResource Black}" Padding="25,5"/>
+
+                <StackLayout Padding="20,10,10,0">
+                    <Label Text="Документи" FontSize="22" FontAttributes="Bold" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="{StaticResource Primary}" Padding="0,5" />
+                    <Label Grid.Column="1" Text="Запознай се с документите, преди да продължиш." FontSize="20" FontAttributes="Bold" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="{StaticResource Black}" Padding="0,5,0,0" />
+                    <!--Links-->
+                    <Grid RowDefinitions="*,*,*,*,*,*,*,*" ColumnDefinitions="5*,2*" Padding="0,10,0,0" RowSpacing="10">
+                        <Label Grid.Row="0" Grid.ColumnSpan="2" Text="Общи условия на продукта" FontSize="18" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="{StaticResource MidnightBlue}" Padding="0,5,0,0">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding GoToTermsInsuranceCommand}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <Label Grid.Row="1" Grid.ColumnSpan="2" Text="Информационен документ" FontSize="18" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="{StaticResource MidnightBlue}" Padding="0,5,0,0">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding GoToInfoDocumentCommand}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <Label Grid.Row="2" Grid.ColumnSpan="2" Text="Лични данни" FontSize="18" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="{StaticResource MidnightBlue}" Padding="0,5,0,0">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding GoToPrivacyPolicyCommand}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <Label Grid.Row="3" Grid.ColumnSpan="2" Text="Възлагателен договор" FontSize="18" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="{StaticResource MidnightBlue}" Padding="0,5,0,0">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding GoToContractCommand}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <Label Grid.Row="4" Grid.ColumnSpan="2" Text="Картови плащания" FontSize="18" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="{StaticResource MidnightBlue}" Padding="0,5,0,0">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding GoToBankCardTermsCommand}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <Label Grid.Row="5" Grid.ColumnSpan="2" Text="Преддоговорна информация" FontSize="18" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="{StaticResource MidnightBlue}" Padding="0,5,0,0">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding GoToPredgovorInfoCommand}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <Label Grid.Row="6" Grid.ColumnSpan="2" Text="Уведомление за поверителност – клиенти" FontSize="18" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="{StaticResource MidnightBlue}" Padding="0,5,0,0">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding GoToPrivacyPolicyMyThingsInfoCommand}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <Label Grid.Row="7" Grid.ColumnSpan="2" Text="Специални условия" FontSize="18" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="{StaticResource MidnightBlue}" Padding="0,5,0,0">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding GoToSpecialConditionsCommand}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Grid>
+                </StackLayout>
+
+                <Grid ColumnDefinitions="*,9*" Padding="10,20,0,0">
+                    <CheckBox Grid.Column="0" x:Name="CheckBoxTermsEntry" CheckedChanged="CheckBoxTermsEntry_CheckedChanged" ScaleX="{OnPlatform Android='1.1'}" ScaleY="{OnPlatform Android='1.1'}"/>
+                    <Label Grid.Column="1" FontSize="{OnPlatform Android='15', iOS='13'}" Text="Запознат съм и съм съгласен с условията на Insurance.BG и застрахователната компания" FontAttributes="Bold" VerticalOptions="CenterAndExpand" Padding="5,0,0,0"/>
+
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer  Tapped="TapGestureRecognizer_Tapped" />
+                    </Grid.GestureRecognizers>
+                </Grid>
+
+                <!--Continue Button -->
+                <Button x:Name="continueBtn"
+                     Text="Разпиши" Grid.Column="1"
+                     Margin="0,20,0,50"
+                     Padding="60,5"
+                     FontSize="24"
+                     BackgroundColor="{StaticResource Primary}"
+                     TextColor="White"
+                     HorizontalOptions="CenterAndExpand"
+                     Command="{Binding ContinueCommand}"/>
+            </StackLayout>
+        </ScrollView>
+        <views:NavBar Grid.Row="1" 
+  Margin="0"
+  Padding="0"
+  VerticalOptions="EndAndExpand"
+  BackgroundColor="Transparent"/>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:CovrMe.Views.ContentViews"
+             xmlns:model="clr-namespace:CovrMe.ViewModels.Pages.Insurances.TravelInsurance"
+             xmlns:users="clr-namespace:CovrMe.Models.Users.Result;assembly=CovrMe.Models"
+             x:DataType="model:TravelInsuranceSummaryViewModel"
+             x:Class="CovrMe.Views.Pages.Insurances.TravelInsurance.TravelInsuranceSummaryPage"
+             Title="TravelInsuranceSummaryPage" BackgroundColor="White">
+    <NavigationPage.TitleView>
+        <Image Source="covrmelogo.png" Margin="0,0,0,0" HeightRequest="50" WidthRequest="250" HorizontalOptions="StartAndExpand" BackgroundColor="White"/>
+    </NavigationPage.TitleView>
+    <Grid RowDefinitions="{OnPlatform Android='9*,*', iOS='670,*'}">
+        <ScrollView Grid.Row="0" Padding="0"
+           BackgroundColor="White"
+           VerticalOptions="StartAndExpand">
+            <StackLayout Padding="0" HorizontalOptions="FillAndExpand">
+                <Label Text="Помощ при пътуване" FontSize="24" FontAttributes="Bold" FontFamily="Montserrat" HorizontalOptions="FillAndExpand" BackgroundColor="#E8E8E8" TextColor="{StaticResource Black}" Padding="25,5"/>
+                <Label Text="Преглед"  FontSize="22" FontAttributes="Bold" FontFamily="Montserrat" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="{StaticResource Primary}" Padding="25,15,0,0" />
+
+                <StackLayout Padding="25,10" VerticalOptions="StartAndExpand">
+                    <Border Grid.Row="1" BackgroundColor="White" StrokeThickness="0" Padding="0,5" Margin="0,5,0,0" StrokeShape="RoundRectangle 8,8,8,8" WidthRequest="{OnPlatform iOS='370', Android='350'}" HorizontalOptions="Center">
+                        <Border.Shadow>
+                            <Shadow Brush="{StaticResource Black}" Opacity="{OnPlatform Android='0.7', iOS='0.4'}" Radius="{OnPlatform iOS='10', Android='20'}"/>
+                        </Border.Shadow>
+                        <Grid RowDefinitions="2*,auto,2*,Auto,3*,3*" Padding="10,0" RowSpacing="3">
+                            <Label Grid.Row="0" Text="Застраховани лица"  FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" BackgroundColor="White" TextColor="Black" />
+                            <CollectionView Grid.Row="1" ItemsSource="{Binding InsuredUsers}" HorizontalOptions="FillAndExpand" BackgroundColor="White" Margin="0,10,0,0">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="users:InsuredUserModel">
+                                        <Grid HorizontalOptions="FillAndExpand" Padding="0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Label Text="{Binding FirstName}" FontSize="14" FontAttributes="Bold" HorizontalOptions="StartAndExpand" BackgroundColor="White" TextColor="{StaticResource Black}" Margin="0,0,0,5"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                            <Label Grid.Row="2" Text="{Binding Price, StringFormat='Обща сума: {0}'}"  FontSize="18" FontAttributes="Bold" HorizontalOptions="EndAndExpand"  BackgroundColor="White" TextColor="{StaticResource Primary}" />
+                            <Label Grid.Row="3" Text="Обща стойност с включен 2% данък върху застрахователните премии" FontSize="12" FontAttributes="Bold" TextColor="{StaticResource Black}" Padding="0,5,0,0" />
+
+                            <Grid Grid.Row="4" ColumnDefinitions="0.5*,10*" RowSpacing="10" HorizontalOptions="StartAndExpand" ColumnSpacing="3" Padding="0,10,0,0">
+                                <Image Grid.Column="0" Source="calendaricon.png" HeightRequest="13" WidthRequest="10" Margin="0,5,0,0"/>
+                                <Label Grid.Column="1" Text="{Binding StartDate, StringFormat='Начална дата на покритие: {0} г.'}" FontSize="14" FontAttributes="Bold" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="{StaticResource Black}"   Padding="0,5,0,0" />
+                            </Grid>
+
+                            <Grid Grid.Row="5" ColumnDefinitions="0.5*,10*" Padding="0" RowSpacing="10" HorizontalOptions="StartAndExpand" ColumnSpacing="3">
+                                <Image Grid.Column="0" Source="calendaricon.png" HeightRequest="13" WidthRequest="10" Margin="0,5,0,0"/>
+                                <Label Grid.Column="1" Text="{Binding EndDate, StringFormat='Крайна дата на покритие: {0} г.'}"  FontSize="14" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="{StaticResource Black}"   Padding="0,5,0,0" />
+                            </Grid>
+                        </Grid>
+                    </Border>
+                    
+                    <Label Text="Покрити рискове" FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" TextColor="{StaticResource Black}" Padding="0,10"/>
+                    <Grid ColumnDefinitions="*,9*">
+                        <Image Grid.Column="0" Source="tickthree.png" MaximumHeightRequest="15" Margin="0,5,0,0"/>
+                        <Label Grid.Column="1" Text="Медицински разходи (вкл. COVID 19)"  FontSize="14" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="Black" Padding="0,5,0,0" />
+                    </Grid>
+                    <Grid ColumnDefinitions="*,9*" Margin="0,5,0,0">
+                        <Image Grid.Column="0" Source="tickthree.png" MaximumHeightRequest="15" Margin="0,5,0,0"/>
+                        <Label Grid.Column="1" Text="Медицинско репатриране"  FontSize="14" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="Black" Padding="0,5,0,0" />
+                    </Grid>
+                    <Grid ColumnDefinitions="*,9*" Margin="0,5,0,0">
+                        <Image Grid.Column="0" Source="tickthree.png" MaximumHeightRequest="15" Margin="0,5,0,0"/>
+                        <Label Grid.Column="1" Text="Спешна стоматологична помощ  300 EUR"  FontSize="14" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="Black" Padding="0,5,0,0" />
+                    </Grid>
+                    <Grid ColumnDefinitions="*,9*" Margin="0,5,0,0">
+                        <Image Grid.Column="0" Source="tickthree.png" MaximumHeightRequest="15" Margin="0,5,0,0"/>
+                        <Label Grid.Column="1" Text="Спасителни разноски до 1 000 EUR"  FontSize="14" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="Black" Padding="0,5,0,0" />
+                    </Grid>
+                    <Grid ColumnDefinitions="*,9*" Margin="0,5,0,0">
+                        <Image Grid.Column="0" Source="tickthree.png" MaximumHeightRequest="15" Margin="0,5,0,0"/>
+                        <Label Grid.Column="1" Text="Правна помощ до 1 000 EUR"  FontSize="14" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="Black" Padding="0,5,0,0" />
+                    </Grid>
+                    <Grid ColumnDefinitions="*,9*" RowDefinitions="*,*" Margin="0,5,0,0">
+                        <Image Grid.Column="0" Grid.Row="0" Source="tickthree.png" MaximumHeightRequest="15" Margin="0,5,0,0"/>
+                        <Label Grid.Column="1" Grid.Row="0" Text="Гражданска отговорност към трети лица"  FontSize="14" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="Black" Padding="0,5,0,0" />
+                        <Label Grid.Column="1" Grid.Row="1" Text="до 1 000 EUR"  FontSize="14" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="Black" Padding="0,5,0,0" />
+                    </Grid>
+                    <Grid ColumnDefinitions="*,9*" Margin="0,5,0,0">
+                        <Image Grid.Column="0" Source="tickthree.png" MaximumHeightRequest="15" Margin="0,5,0,0"/>
+                        <Label Grid.Column="1" Text="Смърт от злополука: 1 000 EUR"  FontSize="14" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="Black" Padding="0,5,0,0" />
+                    </Grid>
+                    <Grid ColumnDefinitions="*,9*" Margin="0,5,0,0">
+                        <Image Grid.Column="0" Source="tickthree.png" MaximumHeightRequest="15" Margin="0,5,0,0"/>
+                        <Label Grid.Column="1" Text="Кражба, загуба на багаж: 400 EUR"  FontSize="14" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="Black" Padding="0,5,0,0" />
+                    </Grid>
+                    <Grid ColumnDefinitions="*,9*" Margin="0,5,0,0">
+                        <Image Grid.Column="0" Source="tickthree.png" MaximumHeightRequest="15" Margin="0,5,0,0"/>
+                        <Label Grid.Column="1" Text="Забавяне на багаж: 100 EUR"  FontSize="14" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" TextColor="Black" Padding="0,5,0,0" />
+                    </Grid>
+                    
+                    <!--Continue Button -->
+                    <Button x:Name="RegBtn"
+                       Text="Продължи" Grid.Column="1"
+                       Margin="0,40,0,50"
+                       Padding="50,5"
+                       FontSize="24"
+                       BackgroundColor="{StaticResource Tertiary}"
+                       TextColor="White"
+                       HorizontalOptions="CenterAndExpand"
+                       Command="{Binding ContinueCommand}"/>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+        <views:NavBar Grid.Row="1" 
+       Margin="0"
+       Padding="0"
+       VerticalOptions="EndAndExpand"
+       BackgroundColor="Transparent"/>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:CovrMe.Views.ContentViews"     
+             xmlns:viewmodels="clr-namespace:CovrMe.ViewModels.Pages.Insurances.Mountain"
+             x:DataType="viewmodels:MountainInsuranceInfoPageViewModel"
+             x:Class="CovrMe.Views.Pages.Insurances.Mountain.MountainInsuranceInfoPage"
+             Title="MountainInsuranceInfoPage" BackgroundColor="White">
+    <NavigationPage.TitleView>
+        <Image Source="covrmelogo.png" Margin="0,0,0,0" HeightRequest="50" WidthRequest="250" HorizontalOptions="StartAndExpand" BackgroundColor="White"/>
+    </NavigationPage.TitleView>
+    <Grid RowDefinitions="{OnPlatform Android='9*,*', iOS='670,*'}">
+        <ScrollView Grid.Row="0" Padding="0" MinimumHeightRequest="{OnPlatform Android='400', iOS='750'}" BackgroundColor="White" VerticalOptions="StartAndExpand">
+            <StackLayout>
+                <Label Text="Планинска застраховка" FontSize="24" FontAttributes="Bold" FontFamily="Montserrat" HorizontalOptions="FillAndExpand" BackgroundColor="#E8E8E8" TextColor="{StaticResource Black}" Padding="20,5"/>
+                <Label Text="Покритие при инцидент в планината" FontSize="22" FontAttributes="Bold" HorizontalOptions="FillAndExpand" TextColor="{StaticResource Primary}" Padding="20,15,0,10" />
+                <Grid ColumnDefinitions="6*,2*" HorizontalOptions="StartAndExpand" Padding="20,0,0,0">
+                    <Label Grid.Column="0"  Text="Застрахователна сума:" FontSize="18" FontAttributes="Bold" HorizontalOptions="StartAndExpand" TextColor="{StaticResource Black}"    Padding="0,5,0,10" />
+                    <Label Grid.Column="1"  Text="{Binding LimitFormatted}" FontSize="18" FontAttributes="Bold" HorizontalOptions="StartAndExpand" TextColor="{StaticResource Tertiary}" Padding="5,5,0,5" />
+                </Grid>
+
+                <!--Dropdown-->
+                <StackLayout Padding="20,20,10,0">
+                    <Grid ColumnDefinitions="*,9*">
+                        <Image Grid.Column="0" Source="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MountainInsuranceInfoPageViewModel}},Path=FirstCardArrow}" HeightRequest="15" WidthRequest="10" HorizontalOptions="StartAndExpand" Margin="10,0,0,0"/>
+                        <Label Grid.Column="1" Text="Покрити рискове" TextColor="{StaticResource Black}" FontSize="18" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+                    </Grid>
+                    <StackLayout IsVisible="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MountainInsuranceInfoPageViewModel}},Path=FirstCardOpened}" Padding="35,10,20,0">
+                        <Grid ColumnDefinitions="0.5*,9*" RowDefinitions="*, 2*">
+                            <Image Source="tick.png" Grid.Column="0" Grid.Row="0" HeightRequest="15" WidthRequest="10" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+                            <Label Grid.Column="1"     Grid.Row="0" FontSize="14" LineHeight="1.2" Text="Спасителни разноски"/>
+                        </Grid>
+                        <Grid ColumnDefinitions="0.5*,9*" RowDefinitions="*, 2*" Padding="0,20,0,0">
+                            <Image Source="tick.png" Grid.Column="0" Grid.Row="0" HeightRequest="15" WidthRequest="10" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+                            <Label Grid.Column="1"     Grid.Row="0" FontSize="14" LineHeight="1.2" Text="Медицински разноски"/>
+                        </Grid>
+                        <Grid ColumnDefinitions="0.5*,9*" RowDefinitions="*, 2*" Padding="0,20,0,0">
+                            <Image Source="tick.png" Grid.Column="0" Grid.Row="0" HeightRequest="15" WidthRequest="10" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+                            <Label Grid.Column="1"     Grid.Row="0" FontSize="14" LineHeight="1.2" Text="Разходи за евакуация"/>
+                        </Grid>
+                        <Grid ColumnDefinitions="0.5*,9*" RowDefinitions="*, 2*" Padding="0,20,0,0">
+                            <Image Source="tick.png" Grid.Column="0" Grid.Row="0" HeightRequest="15" WidthRequest="10" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+                            <Label Grid.Column="1"     Grid.Row="0" FontSize="14" LineHeight="1.2" Text="Разходи за репатриране"/>
+                        </Grid>
+                        <Grid ColumnDefinitions="0.5*,9*" RowDefinitions="*, 2*" Padding="0,20,0,0">
+                            <Image Source="tick.png" Grid.Column="0" Grid.Row="0" HeightRequest="15" WidthRequest="10" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+                            <Label Grid.Column="1"     Grid.Row="0" FontSize="14" LineHeight="1.2" Text="Смърт от злополука"/>
+                        </Grid>
+                        <Grid ColumnDefinitions="0.5*,9*" RowDefinitions="*, 2*" Padding="0,20,0,0">
+                            <Image Source="tick.png" Grid.Column="0" Grid.Row="0" HeightRequest="15" WidthRequest="10" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+                            <Label Grid.Column="1"     Grid.Row="0" FontSize="14" LineHeight="1.2" Text="Трайна загуба на работоспособност"/>
+                        </Grid>
+                    </StackLayout>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding CardToggleCommand}" CommandParameter="first" />
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+                <!--Dropdown-->
+                <StackLayout Padding="20,10,0,0">
+                    <Grid ColumnDefinitions="*,9*">
+                        <Image Grid.Column="0" Source="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MountainInsuranceInfoPageViewModel}},Path=SecondCardArrow}" HeightRequest="15" WidthRequest="10" HorizontalOptions="StartAndExpand" Margin="10,0,0,0"/>
+                        <Label Grid.Column="1" Text="Застраховката не покрива" TextColor="{StaticResource Black}" FontSize="18" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+                    </Grid>
+                    <StackLayout IsVisible="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MountainInsuranceInfoPageViewModel}},Path=SecondCardOpened}" Padding="35,10,20,0">
+                        <Grid ColumnDefinitions="0.5*,9*" RowDefinitions="*, 2*">
+                            <Image Source="closered.png" Grid.Column="0" Grid.Row="0" HeightRequest="15" WidthRequest="10"/>
+                            <Label Grid.Column="1"     Grid.Row="0" FontSize="14" LineHeight="1.2" Text="Събития, случили се извън"/>
+                            <Label Grid.ColumnSpan="2" Grid.Row="1" Text="територията на Р. България."/>
+                        </Grid>
+                        <Grid ColumnDefinitions="0.5*,9*" RowDefinitions="*, 2*" Padding="0,20,0,0">
+                            <Image Source="closered.png" Grid.Column="0" Grid.Row="0" HeightRequest="15" WidthRequest="10"/>
+                            <Label Grid.Column="1"     Grid.Row="0" Text="Събития, настъпили след употреба"/>
+                            <Label Grid.ColumnSpan="2" Grid.Row="1" Text=" на алкохол или наркотични вещества."/>
+                        </Grid>
+                        <Grid ColumnDefinitions="0.5*,9*" RowDefinitions="*, 2*" Padding="0,20,0,0">
+                            <Image Source="closered.png" Grid.Column="0" Grid.Row="0" HeightRequest="15" WidthRequest="10"/>
+                            <Label Grid.Column="1"     Grid.Row="0" Text="Самоубийство или опит за такова."/>
+                            <Label Grid.ColumnSpan="2" Grid.Row="1" Text="Физическа саморазправа."/>
+                        </Grid>
+                        <Grid ColumnDefinitions="0.5*,9*" RowDefinitions="*, 2*" Padding="0,20,0,0">
+                            <Image Source="closered.png" Grid.Column="0" Grid.Row="0" HeightRequest="15" WidthRequest="10"/>
+                            <Label Grid.Column="1"     Grid.Row="0" Text="Събития, възникнали по време"/>
+                            <Label Grid.ColumnSpan="2" Grid.Row="1" Text=" на професионални състезания."/>
+                        </Grid>
+                    </StackLayout>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding CardToggleCommand}" CommandParameter="second" />
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+                <!--Dropdown-->
+                <StackLayout Padding="20,10,0,0">
+                    <Grid ColumnDefinitions="*,9*">
+                        <Image Grid.Column="0" Source="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MountainInsuranceInfoPageViewModel}},Path=ThirdCardArrow}" HeightRequest="15" WidthRequest="10" HorizontalOptions="StartAndExpand" Margin="10,0,0,0"/>
+                        <Label Grid.Column="1" Text="Документи" TextColor="{StaticResource Black}" FontSize="18" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+                    </Grid>
+                    <StackLayout IsVisible="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MountainInsuranceInfoPageViewModel}},Path=ThirdCardOpened}" Padding="35,10,20,0">
+                        <Grid ColumnDefinitions="0.5*,9*" RowDefinitions="*,*,*,*,*,*" RowSpacing="3">
+                            <Image Source="inspdf.png" Grid.Column="0" Grid.Row="1" HeightRequest="15" WidthRequest="50" VerticalOptions="StartAndExpand" Margin="0,3,0,0"/>
+                            <Label Grid.Column="1"  Grid.Row="1" Text="Общи условия на „Планинска застраховка“">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding GoToTermsTouristInsuranceCommand}" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Grid>
+                        <Grid ColumnDefinitions="0.5*,9*" RowDefinitions="*,*,*,*,*,*" RowSpacing="3">
+                            <Image Source="inspdf.png" Grid.Column="0" Grid.Row="1" HeightRequest="15" WidthRequest="50" VerticalOptions="StartAndExpand" Margin="0,3,0,0"/>
+                            <Label Grid.Column="1"  Grid.Row="1" Text="Информационен документ за застрахователен продукт">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding GoToInfoDocumentCommand}" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Grid>
+                        <Grid ColumnDefinitions="0.5*,9*" RowDefinitions="*,*,*,*,*,*" RowSpacing="3">
+                            <Image Source="inspdf.png" Grid.Column="0" Grid.Row="1" HeightRequest="15" WidthRequest="50" VerticalOptions="StartAndExpand" Margin="0,3,0,0"/>
+                            <Label Grid.Column="1"  Grid.Row="1" Text="Преддоговорна информация">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding GoToPreDocumentInfoCommand}" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Grid>
+                        <Grid ColumnDefinitions="0.5*,9*" RowDefinitions="*,*,*,*,*,*" RowSpacing="3">
+                            <Image Source="inspdf.png" Grid.Column="0" Grid.Row="1" HeightRequest="15" WidthRequest="50" VerticalOptions="StartAndExpand" Margin="0,3,0,0"/>
+                            <Label Grid.Column="1"  Grid.Row="1" Text="Уведомление за поверителност – клиенти">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding GoToPrivacyPolicyInfoCommand}" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Grid>
+                        <Grid ColumnDefinitions="0.5*,9*" RowDefinitions="*,*,*,*,*,*" RowSpacing="3">
+                            <Image Source="inspdf.png" Grid.Column="0" Grid.Row="1" HeightRequest="15" WidthRequest="50" VerticalOptions="StartAndExpand" Margin="0,3,0,0"/>
+                            <Label Grid.Column="1"  Grid.Row="1" Text="Лични данни">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding GoToPrivacyPolicyCommand}" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Grid>
+                        <Grid ColumnDefinitions="0.5*,9*" RowDefinitions="*,*,*,*,*,*" RowSpacing="3">
+                            <Image Source="inspdf.png" Grid.Column="0" Grid.Row="1" HeightRequest="15" WidthRequest="50" VerticalOptions="StartAndExpand" Margin="0,3,0,0"/>
+                            <Label Grid.Column="1"  Grid.Row="1" Text="Възлагателен договор">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding GoToContractCommand}" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Grid>
+                        <Grid ColumnDefinitions="0.5*,9*" RowDefinitions="*,*,*,*,*,*" RowSpacing="3">
+                            <Image Source="inspdf.png" Grid.Column="0" Grid.Row="1" HeightRequest="15" WidthRequest="50" VerticalOptions="StartAndExpand" Margin="0,3,0,0"/>
+                            <Label Grid.Column="1"  Grid.Row="1" Text="Картови плащания">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding GoToBankCardTermsCommand}" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Grid>
+                    </StackLayout>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding CardToggleCommand}" CommandParameter="third" />
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+
+                <!--CheckBox-->
+                <Grid ColumnDefinitions="*,9*" Padding="20,40,0,0">
+                    <CheckBox Grid.Column="0" x:Name="CheckBoxTermsEntry" CheckedChanged="CheckBoxTermsEntry_CheckedChanged" ScaleX="{OnPlatform Android='1.1'}" ScaleY="{OnPlatform Android='1.1'}" />
+                    <Label Grid.Column="1" FontSize="14" Text="Прочетох и съм съгласен" FontAttributes="Bold" VerticalOptions="CenterAndExpand" Padding="0,0,0,0"/>
+
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer  Tapped="TapGestureRecognizer_Tapped" />
+                    </Grid.GestureRecognizers>
+                </Grid>
+
+                <!--Continue Button -->
+                <Button x:Name="continueBtn"
+            Text="Продължи" Grid.Column="1"
+            Margin="0,50,0,50"
+            Padding="70,5"
+            FontSize="24"
+            BackgroundColor="{StaticResource Tertiary}"
+            TextColor="White"
+            HorizontalOptions="CenterAndExpand"
+            Command="{Binding ContinueCommand}"/>
+            </StackLayout>
+        </ScrollView>
+        <views:NavBar Grid.Row="1" 
+      Margin="0"
+      Padding="0"
+      VerticalOptions="EndAndExpand"
+      BackgroundColor="Transparent"/>
+    </Grid>
+</ContentPage>

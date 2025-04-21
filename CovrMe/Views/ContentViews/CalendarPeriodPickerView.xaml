@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<StackLayout x:Name="this"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:CovrMe.Handlers"
+             x:Class="CovrMe.Views.ContentViews.CalendarPeriodPickerView">
+    <StackLayout.Resources>
+        <ResourceDictionary>
+            <local:BulgarianDateFormatConverter x:Key="BulgarianDateFormatConverter"/>
+        </ResourceDictionary>
+    </StackLayout.Resources>
+    <Grid Margin="0,0,0,10"  HorizontalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Frame Grid.Row="1" BorderColor="{StaticResource Black}" CornerRadius="8" Padding="0" MaximumHeightRequest="{OnPlatform Android='38'}" BackgroundColor="Transparent" Margin="0">
+            <VerticalStackLayout>
+                <Picker x:Name="PeriodPicker" ItemsSource="{Binding PeriodCollection}" SelectedItem="{Binding SelectedPeriod, Mode=TwoWay}" SelectedIndexChanged="PeriodPicker_SelectedIndexChanged" Title="Период" TitleColor="Silver" Margin="10,0,0,0" FontSize="Medium" HorizontalTextAlignment="Start" IsEnabled="True">
+                    <Picker.ItemDisplayBinding>
+                        <Binding Path="Text" />
+                    </Picker.ItemDisplayBinding>
+                </Picker>
+            </VerticalStackLayout>
+        </Frame>
+        <ImageButton Grid.Row="1" Source="arrowmore.png" Margin="10,0" MaximumWidthRequest="10" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand" Scale="{OnPlatform iOS='0.4'}"/>
+    </Grid>
+
+    <Border StrokeShape="RoundRectangle 30,30,30,30" StrokeThickness="0">
+        <StackLayout BackgroundColor="#ECE6F0" MinimumHeightRequest="{OnPlatform Android='300', iOS='330'}" Padding="0,0">
+            <Label Text="Избери период" FontSize="20" FontAttributes="Bold" TextColor="{StaticResource Black}" Padding="15,15,0,0"/>
+            <Grid Padding="{OnPlatform Android='20,20,0,0', iOS='15,20,10,0'}" RowSpacing="15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <!--<Label FontSize="26" Grid.Column="0" Grid.Row="0" Text="{Binding SelectedStartDate, StringFormat='{0:ddd, MMM dd}', Mode=TwoWay}" HorizontalOptions="StartAndExpand"/>-->
+                <BoxView HeightRequest="1" BackgroundColor="LightGray" Grid.ColumnSpan="2" Opacity="0.2" Grid.Row="1" VerticalOptions="StartAndExpand"/>
+                <Label FontSize="16" Grid.Column="0" Grid.Row="1"
+                       Text="{Binding CurrentDate, Converter={StaticResource BulgarianDateFormatConverter}}"
+                       HorizontalOptions="StartAndExpand" Padding="0,10,0,0"/> 
+                <StackLayout Grid.Column="1" Grid.Row="1" HorizontalOptions="End" Orientation="Horizontal" Spacing="10"  Padding="{OnPlatform iOS='0,10,0,0', Android='0,10,5,0'}">
+                    <Image HeightRequest="13" Source="aleft.png" WidthRequest="22" IsVisible="{Binding IsNextMonth, Mode=TwoWay}">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding PreviousMonthCommand}" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Image HeightRequest="13" Source="aright.png" WidthRequest="22">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NextMonthCommand}" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </StackLayout>
+            </Grid>
+            <Grid ColumnDefinitions="*,*,*,*,*,*,*" ColumnSpacing="{OnPlatform Android='10',iOS='15'}" Padding="{OnPlatform Android='25,20,20,10', iOS='19,20,10,10'}">
+                <Label FontSize="14" Grid.Column="0" Text="Н" TextColor="{StaticResource Black}"/>
+                <Label FontSize="14" Grid.Column="1" Text="П" TextColor="{StaticResource Black}"/>
+                <Label FontSize="14" Grid.Column="2" Text="В" TextColor="{StaticResource Black}"/>
+                <Label FontSize="14" Grid.Column="3" Text="С" TextColor="{StaticResource Black}"/>
+                <Label FontSize="14" Grid.Column="4" Text="Ч" TextColor="{StaticResource Black}"/>
+                <Label FontSize="14" Grid.Column="5" Text="П" TextColor="{StaticResource Black}"/>
+                <Label FontSize="14" Grid.Column="6" Text="С" TextColor="{StaticResource Black}"/>
+            </Grid>
+            <CollectionView ItemsSource="{Binding Weeks}" HorizontalOptions="FillAndExpand" BackgroundColor="#ECE6F0">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid HorizontalOptions="{OnPlatform Android='CenterAndExpand', iOS='FillAndExpand'}" Padding="{OnPlatform iOS='7,0,0,0', Android='0'}" MaximumHeightRequest="{OnPlatform iOS='50'}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <CollectionView MinimumHeightRequest="{OnPlatform Android='40'}" Grid.Column="1" ItemsSource="{Binding Value}" HorizontalOptions="FillAndExpand">
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout ItemSpacing="{OnPlatform Android='6', iOS='12'}" Orientation="Horizontal"/>
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackLayout Margin="0" Padding="0">
+                                            <Border Background="#ECE6F0"
+                                                    StrokeShape="RoundRectangle 40,40,40,40"
+                                                    StrokeThickness="2"
+                                                    WidthRequest="35"
+                                                    HeightRequest="35"
+                                                    VerticalOptions="CenterAndExpand"
+                                                    Stroke="#ECE6F0">
+                                                <VerticalStackLayout Padding="0,0,0,0" VerticalOptions="CenterAndExpand">
+                                                    <Label FontAttributes="Bold" FontSize="12" HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand" Text="{Binding Date, StringFormat='{0:d }'}" TextColor="{StaticResource Black}">
+                                                        <Label.Triggers>
+                                                            <DataTrigger Binding="{Binding IsSelected}" TargetType="Label" Value="true">
+                                                                <Setter Property="TextColor" Value="White" />
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding IsEnabled}" TargetType="Label" Value="false">
+                                                                <Setter Property="TextColor" Value="Gray" />
+                                                            </DataTrigger>
+                                                        </Label.Triggers>
+                                                    </Label>
+                                                </VerticalStackLayout>
+                                                <Border.Triggers>
+                                                    <DataTrigger Binding="{Binding IsSelected}" TargetType="Border" Value="True">
+                                                        <Setter Property="Background" Value="#6750A4" />
+                                                    </DataTrigger>
+                                                </Border.Triggers>
+                                                <Border.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding Source={x:Reference this}, Path=TapCommand}" CommandParameter="{Binding .}" />
+                                                </Border.GestureRecognizers>
+                                            </Border>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </Border>
+
+
+
+</StackLayout>

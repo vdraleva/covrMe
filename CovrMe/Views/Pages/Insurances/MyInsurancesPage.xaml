@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:CovrMe.Views.ContentViews"
+             xmlns:viewmodels="clr-namespace:CovrMe.ViewModels.Pages.Insurances"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:model="clr-namespace:CovrMe.ViewModels.Pages.Insurances"
+             xmlns:insurancesModel="clr-namespace:CovrMe.Models.Insurances;assembly=CovrMe.Models"
+             x:DataType="model:MyInsurancesPageViewModel"
+             x:Class="CovrMe.Views.Pages.Insurances.MyInsurancesPage"
+             Title="MyInsurancesPage"
+             BackgroundColor="White">
+
+    <NavigationPage.TitleView>
+        <Image Source="covrmelogo.png" Margin="0,0,0,0" HeightRequest="50" WidthRequest="250" HorizontalOptions="StartAndExpand" BackgroundColor="White"/>
+    </NavigationPage.TitleView>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:InvertedBoolConverter x:Key="invertBoolConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid RowDefinitions="{OnPlatform Android='9*,*', iOS='670,*'}">
+        <ScrollView Grid.Row="0" MinimumHeightRequest="{OnPlatform Android='400', iOS='750'}" Padding="0" BackgroundColor="White" VerticalOptions="StartAndExpand">
+            <StackLayout VerticalOptions="StartAndExpand">
+                <Label Text="Моите застраховки" FontSize="24" FontAttributes="Bold" FontFamily="Montserrat" HorizontalOptions="FillAndExpand" BackgroundColor="#E8E8E8" TextColor="{StaticResource Black}" Padding="25,5"/>
+                <Grid Padding="25,15,0,0">
+                    <Label Text="Преглед" TextColor="{StaticResource Primary}" FontSize="18" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="EndAndExpand"></Label>
+                </Grid>
+                <StackLayout Padding="25,10,25,20" Margin="{OnPlatform iOS='0,0,0,200'}">
+                    <Grid RowDefinitions="auto,auto" HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand">
+                        <Border Grid.Row="0" BackgroundColor="{Binding ActiveInsuranceColor}" StrokeThickness="0" Padding="0,5" Margin="0,5,0,10" StrokeShape="RoundRectangle 8,8,8,8" WidthRequest="{OnPlatform iOS='370', Android='350'}" HorizontalOptions="Center">
+                            <Border.Shadow>
+                                <Shadow Brush="{StaticResource Black}" Opacity="{OnPlatform Android='0.7', iOS='0.4'}" Radius="{OnPlatform iOS='10', Android='20'}"/>
+                            </Border.Shadow>
+                            <StackLayout Padding="10,0,10,0">
+                                <Grid ColumnDefinitions="1.5*,9*,*">
+                                    <Image Grid.Column="0" Source="{Binding FirstCardArrow}" HeightRequest="15" WidthRequest="12" HorizontalOptions="StartAndExpand" Margin="10,0,0,0"/>
+                                    <Label Grid.Column="1" Text="Активни" TextColor="{StaticResource Black}" FontSize="18" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+                                    <Image Grid.Column="2" Source="dotgreen.png" HeightRequest="30" WidthRequest="30" HorizontalOptions="StartAndExpand"/>
+                                </Grid>
+                                <CollectionView ItemsSource="{Binding ActiveInsurances}" BackgroundColor="Transparent" IsVisible="{Binding FirstCardOpened}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="insurancesModel:MyInsurancesModel">
+                                            <Grid RowDefinitions="1.5*,1.5*,1.5*,1.5*,*,2*,*, *" ColumnDefinitions="*,2.6*" RowSpacing="4" Padding="30,0,0,0" Margin="0,10">
+                                                <Grid Grid.Row="0" Grid.ColumnSpan="2" ColumnDefinitions="Auto,Auto" >
+                                                    <Image  Grid.Column="0" Source="{Binding StatusImgSource}" WidthRequest="20" />
+                                                    <Label  Grid.Column="1" FontSize="16"    HorizontalOptions="StartAndExpand" Text="{Binding InsuranceType}" FontAttributes="Bold"/>
+                                                </Grid>
+                                                <Label Grid.Row="1" Grid.Column="0"     FontSize="Small" HorizontalOptions="StartAndExpand" Text="Валидност: "/>
+                                                <Label Grid.Row="1" Grid.Column="1"     FontSize="Small" HorizontalOptions="StartAndExpand" Text="{Binding ExpireDate}" FontAttributes="Bold"/>
+                                                <Label Grid.Row="2" Grid.ColumnSpan="3" FontSize="Small" HorizontalOptions="FillAndExpand" Text="{Binding Name}"/>
+                                                <Label Grid.Row="3" Grid.ColumnSpan="2" FontSize="Small" HorizontalOptions="StartAndExpand" Text="{Binding InsuranceCompany}"   />
+                                                <Grid ColumnDefinitions="*, *" RowDefinitions="*,*,*" Grid.RowSpan="4" Grid.Row="4" Grid.ColumnSpan="3" Margin="0,5,0,0">
+                                                    <Grid ColumnDefinitions="0.5*, 3*"  Grid.Column="0" Grid.Row="0">
+                                                        <Image Grid.Column="0"  Source="inspdf.png" HeightRequest="25"></Image>
+                                                        <Label Grid.Column="1"  FontSize="15" FontAttributes="Bold" VerticalTextAlignment="Center" TextDecorations="Underline" Text="Полица"></Label>
+
+                                                        <Grid.GestureRecognizers>
+                                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MyInsurancesPageViewModel}},Path=DownloadPolicyCommand}" CommandParameter="{Binding .}"/>
+                                                        </Grid.GestureRecognizers>
+                                                    </Grid>
+                                                    <Grid ColumnDefinitions="0.5*, 3*"  Grid.Column="0" Grid.Row="1">
+                                                        <Image Grid.Column="0"  Source="inspdf.png" HeightRequest="25"></Image>
+                                                        <Label Grid.Column="1"  FontSize="15" FontAttributes="Bold" VerticalTextAlignment="Center" TextDecorations="Underline" Text="Разписка"></Label>
+
+                                                        <Grid.GestureRecognizers>
+                                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MyInsurancesPageViewModel}},Path=DownloadReceiptCommand}" CommandParameter="{Binding .}"/>
+                                                        </Grid.GestureRecognizers>
+                                                    </Grid>
+                                                    <Grid ColumnDefinitions="0.5*, 3*"  Grid.Column="0" Grid.Row="2" IsVisible="{Binding IsCivil}">
+                                                        <Image Grid.Column="0"  Source="inspdf.png" HeightRequest="25"></Image>
+                                                        <Label Grid.Column="1"  FontSize="15" FontAttributes="Bold" VerticalTextAlignment="Center" TextDecorations="Underline" Text="Зелена карта"></Label>
+
+
+                                                        <Grid.GestureRecognizers>
+                                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MyInsurancesPageViewModel}},Path=DownloadGreenCardCommand}" CommandParameter="{Binding .}"/>
+                                                        </Grid.GestureRecognizers>
+                                                    </Grid>
+                                                    <ImageButton IsVisible="{Binding ShowBtn}" Source="{Binding BtnSource}" Grid.RowSpan="2" Grid.Column="1" MaximumHeightRequest="50" MaximumWidthRequest="130" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand" Margin="0,10,0,0" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MyInsurancesPageViewModel}},Path=InsurancePayCommand}" CommandParameter="{Binding .}" />
+                                                </Grid>
+                                                <Image  Grid.Row="8"   Grid.ColumnSpan="3"  Margin="0,10,30,0"  Source="hr.png" MaximumWidthRequest="250"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding CardToggleCommand}" CommandParameter="first" />
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+                        </Border>
+                        <Border Grid.Row="1" BackgroundColor="{Binding ExpiredInsuranceColor}" StrokeThickness="0" Padding="0,5" Margin="0,5,0,0" StrokeShape="RoundRectangle 8,8,8,8" WidthRequest="{OnPlatform iOS='370', Android='350'}" HorizontalOptions="Center">
+                            <Border.Shadow>
+                                <Shadow Brush="{StaticResource Black}" Opacity="{OnPlatform Android='0.7', iOS='0.4'}" Radius="{OnPlatform iOS='10', Android='20'}"/>
+                            </Border.Shadow>
+                            <StackLayout Padding="10,0,10,0">
+                                <Grid ColumnDefinitions="1.5*,9*,*">
+                                    <Image Grid.Column="0" Source="{Binding SecondCardArrow}" HeightRequest="20" WidthRequest="12" HorizontalOptions="StartAndExpand" Margin="10,0,0,0"/>
+                                    <Label Grid.Column="1" Text="Изтекли" TextColor="{StaticResource Black}" FontSize="18" FontAttributes="Bold" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+                                    <Image Grid.Column="2" Source="dotred.png" HeightRequest="30" WidthRequest="30" HorizontalOptions="StartAndExpand"/>
+                                </Grid>
+                                <CollectionView ItemsSource="{Binding ExpiredInsurances}" BackgroundColor="Transparent" IsVisible="{Binding SecondCardOpened}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="insurancesModel:MyInsurancesModel">
+                                            <Grid RowDefinitions="1.5*,1.5*,1.5*,1.5*,*,2*,*, *" ColumnDefinitions="*,2.6*" RowSpacing="4" Padding="30,0,0,0" Margin="0,10">
+                                                <Label Grid.Row="0"  Grid.ColumnSpan="2" FontSize="16"    HorizontalOptions="StartAndExpand" Text="{Binding InsuranceType}" FontAttributes="Bold"/>
+                                                <Label Grid.Row="1" Grid.Column="0"     FontSize="Small" HorizontalOptions="StartAndExpand" Text="Валидност: "/>
+                                                <Label Grid.Row="1" Grid.Column="1"     FontSize="Small" HorizontalOptions="StartAndExpand" Text="{Binding ExpireDate}" FontAttributes="Bold"/>
+                                                <Label Grid.Row="2" Grid.ColumnSpan="3" FontSize="Small" HorizontalOptions="FillAndExpand" Text="{Binding Name}"/>
+                                                <Label Grid.Row="3" Grid.ColumnSpan="2" FontSize="Small" HorizontalOptions="StartAndExpand" Text="{Binding InsuranceCompany}"   />
+                                                <Grid ColumnDefinitions="*, *" RowDefinitions="*,*,*" Grid.RowSpan="4" Grid.Row="4" Grid.ColumnSpan="3" Margin="0,0,0,0">
+                                                    <Grid ColumnDefinitions="0.5*, 3*"  Grid.Column="0" Grid.Row="0">
+                                                        <Image Grid.Column="0"  Source="inspdf.png" HeightRequest="25"></Image>
+                                                        <Label Grid.Column="1"  FontSize="15" FontAttributes="Bold" VerticalTextAlignment="Center" TextDecorations="Underline" Text="Полица"></Label>
+
+                                                        <Grid.GestureRecognizers>
+                                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MyInsurancesPageViewModel}},Path=DownloadPolicyCommand}" CommandParameter="{Binding .}"/>
+                                                        </Grid.GestureRecognizers>
+                                                    </Grid>
+                                                    <Grid ColumnDefinitions="0.5*, 3*"  Grid.Column="0" Grid.Row="1">
+                                                        <Image Grid.Column="0"  Source="inspdf.png" HeightRequest="25"></Image>
+                                                        <Label Grid.Column="1"  FontSize="15" FontAttributes="Bold" VerticalTextAlignment="Center" TextDecorations="Underline" Text="Разписка"></Label>
+
+                                                        <Grid.GestureRecognizers>
+                                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MyInsurancesPageViewModel}},Path=DownloadReceiptCommand}" CommandParameter="{Binding .}"/>
+                                                        </Grid.GestureRecognizers>
+                                                    </Grid>
+                                                    <Grid ColumnDefinitions="0.5*, 3*"  Grid.Column="0" Grid.Row="2" IsVisible="{Binding IsCivil}">
+                                                        <Image Grid.Column="0"  Source="inspdf.png" HeightRequest="25"></Image>
+                                                        <Label Grid.Column="1"  FontSize="15" FontAttributes="Bold" VerticalTextAlignment="Center" TextDecorations="Underline" Text="Зелена карта"></Label>
+
+                                                        <Grid.GestureRecognizers>
+                                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MyInsurancesPageViewModel}},Path=DownloadGreenCardCommand}" CommandParameter="{Binding .}"/>
+                                                        </Grid.GestureRecognizers>
+                                                    </Grid>
+                                                    <ImageButton IsVisible="{Binding ShowBtn}" Source="{Binding BtnSource}" Grid.RowSpan="2" Grid.Column="1" MaximumHeightRequest="50" MaximumWidthRequest="130" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand" Margin="0,10,0,0" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MyInsurancesPageViewModel}},Path=InsurancePayCommand}" CommandParameter="{Binding .}" />
+                                                </Grid>
+                                                <Image  Grid.Row="8"   Grid.ColumnSpan="3"  Margin="0,10,30,0"  Source="hr.png" MaximumWidthRequest="250"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding CardToggleCommand}" CommandParameter="second" />
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+                        </Border>
+                        
+                    </Grid>
+                </StackLayout>
+
+            </StackLayout>
+        </ScrollView>
+    <views:NavBar Grid.Row="1" 
+               Margin="0"
+               Padding="0"
+               VerticalOptions="EndAndExpand"
+               BackgroundColor="Transparent"/>
+    </Grid>
+
+</ContentPage>
