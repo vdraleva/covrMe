@@ -176,6 +176,7 @@
 
         //vehicles
         public const string VehicleBrands = "vehicles\\vehicleMarks.json";
+        public const string VehicleModels = "vehicles\\vehicleModels.json";
         public const string VehicleTypes = "vehicles\\vehicleTypes.json";
         public const string VehicleUsages = "vehicles\\vehicleUsages.json";
         public const string VehicleBodyTypes = "vehicles\\bodyType.json";

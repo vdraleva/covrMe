@@ -25,7 +25,7 @@
                 <StackLayout Padding="25,0" VerticalOptions="StartAndExpand" Margin="0,20">
                     <Border BackgroundColor="White" StrokeThickness="0" Padding="0,5" Margin="0,10" StrokeShape="RoundRectangle 8,8,8,8" HorizontalOptions="FillAndExpand" WidthRequest="{OnPlatform iOS='370'}">
                         <Border.Shadow>
-                            <Shadow Brush="{StaticResource Black}" Opacity="{OnPlatform Android='0.7', iOS='0.4'}" Radius="{OnPlatform iOS='10', Android='20'}"/>
+                            <Shadow Brush="{StaticResource Black}" Opacity="{OnPlatform Android='0.1', iOS='0.4'}" Radius="{OnPlatform iOS='10', Android='20'}"/>
                         </Border.Shadow>
                         <StackLayout Padding="0">
                             <Grid ColumnDefinitions="*,2*,10*" Padding="0,8">
@@ -39,7 +39,7 @@
                     </Border>
                     <Border BackgroundColor="White" StrokeThickness="0" Padding="0,5" Margin="0,10" StrokeShape="RoundRectangle 8,8,8,8" HorizontalOptions="FillAndExpand" WidthRequest="{OnPlatform iOS='370'}">
                         <Border.Shadow>
-                            <Shadow Brush="{StaticResource Black}" Opacity="{OnPlatform Android='0.7', iOS='0.4'}" Radius="{OnPlatform iOS='10', Android='20'}"/>
+                            <Shadow Brush="{StaticResource Black}" Opacity="{OnPlatform Android='0.1', iOS='0.4'}" Radius="{OnPlatform iOS='10', Android='20'}"/>
                         </Border.Shadow>
                         <StackLayout Padding="0">
                             <Grid ColumnDefinitions="*,2*,10*" Padding="0,8">
@@ -53,7 +53,7 @@
                     </Border>
                     <Border BackgroundColor="White" StrokeThickness="0" Padding="0,5" Margin="0,10" StrokeShape="RoundRectangle 8,8,8,8" HorizontalOptions="FillAndExpand" WidthRequest="{OnPlatform iOS='370'}">
                         <Border.Shadow>
-                            <Shadow Brush="{StaticResource Black}" Opacity="{OnPlatform Android='0.7', iOS='0.4'}" Radius="{OnPlatform iOS='10', Android='20'}"/>
+                            <Shadow Brush="{StaticResource Black}" Opacity="{OnPlatform Android='0.1', iOS='0.4'}" Radius="{OnPlatform iOS='10', Android='20'}"/>
                         </Border.Shadow>
                         <StackLayout Padding="0">
                             <Grid ColumnDefinitions="*,2*,10*" Padding="0,8">
@@ -67,7 +67,7 @@
                     </Border>
                     <Border BackgroundColor="White" StrokeThickness="0" Padding="0,5" Margin="0,10" StrokeShape="RoundRectangle 8,8,8,8" HorizontalOptions="FillAndExpand" WidthRequest="{OnPlatform iOS='370'}">
                         <Border.Shadow>
-                            <Shadow Brush="{StaticResource Black}" Opacity="{OnPlatform Android='0.7', iOS='0.4'}" Radius="{OnPlatform iOS='10', Android='20'}"/>
+                            <Shadow Brush="{StaticResource Black}" Opacity="{OnPlatform Android='0.1', iOS='0.4'}" Radius="{OnPlatform iOS='10', Android='20'}"/>
                         </Border.Shadow>
                         <StackLayout Padding="0">
                             <Grid ColumnDefinitions="*,2*,10*" Padding="0,8">
@@ -81,7 +81,7 @@
                     </Border>
                     <Border BackgroundColor="White" StrokeThickness="0" Padding="0,5" Margin="0,10" StrokeShape="RoundRectangle 8,8,8,8" HorizontalOptions="FillAndExpand" WidthRequest="{OnPlatform iOS='370'}">
                         <Border.Shadow>
-                            <Shadow Brush="{StaticResource Black}" Opacity="{OnPlatform Android='0.7', iOS='0.4'}" Radius="{OnPlatform iOS='10', Android='20'}"/>
+                            <Shadow Brush="{StaticResource Black}" Opacity="{OnPlatform Android='0.1', iOS='0.4'}" Radius="{OnPlatform iOS='10', Android='20'}"/>
                         </Border.Shadow>
                         <StackLayout Padding="0">
                             <Grid ColumnDefinitions="*,2*,10*" Padding="0,8">
@@ -95,7 +95,7 @@
                     </Border>
                     <Border BackgroundColor="White" StrokeThickness="0" Padding="0,5" Margin="0,10" StrokeShape="RoundRectangle 8,8,8,8" HorizontalOptions="FillAndExpand" WidthRequest="{OnPlatform iOS='370'}">
                         <Border.Shadow>
-                            <Shadow Brush="{StaticResource Black}" Opacity="{OnPlatform Android='0.7', iOS='0.4'}" Radius="{OnPlatform iOS='10', Android='20'}"/>
+                            <Shadow Brush="{StaticResource Black}" Opacity="{OnPlatform Android='0.1', iOS='0.4'}" Radius="{OnPlatform iOS='10', Android='20'}"/>
                         </Border.Shadow>
                         <StackLayout Padding="0">
                             <Grid ColumnDefinitions="*,2*,10*" Padding="0,8">

@@ -57,7 +57,7 @@
                     </Grid.ColumnDefinitions>
                     <CollectionView MinimumHeightRequest="{OnPlatform Android='40'}" Grid.Column="1" ItemsSource="{Binding Value}" HorizontalOptions="FillAndExpand">
                         <CollectionView.ItemsLayout>
-                            <LinearItemsLayout ItemSpacing="{OnPlatform Android='0', iOS='4'}" Orientation="Horizontal" />
+                            <LinearItemsLayout ItemSpacing="{OnPlatform Android='0.1', iOS='4'}" Orientation="Horizontal" />
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate>

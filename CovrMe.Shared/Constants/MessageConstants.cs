@@ -104,7 +104,7 @@
         public const string InappropriatedAgeError = "Ако желаете да застраховате лице над {0} г., моля свържете се с нас на hello@insurance.bg";
         public const string BadPhoto = "Снимката не се получи добре. \nМоля, опитайте пак!";
         public const string OcrRequestTimeExpired = "Сканирането има временно забавяне. \nМоля, опитайте отново след малко!";
-        public const string SameSide = "Снимана е едина и съща страна два пъти. \nМоля, снимайте талона от двете страни!";
+        public const string SameSide = "Снимана е една и съща страна два пъти. \nМоля, снимайте талона от двете страни!";
         #endregion
 
         #region Other

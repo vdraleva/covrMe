@@ -13,8 +13,8 @@ namespace CovrMe.Services.Implementation
         }
         public async Task<string> RecognizeImage(byte[] image)
         {
-            var apiUrl1 = "https://apipro1.ocr.space/parse/image";
-            var apiUrl2 = "https://apipro2.ocr.space/parse/image";
+            var apiUrl1 = "https://api.ocr.space/parse/image";
+            var apiUrl2 = "https://api.ocr.space/parse/image";
 
             using var client = new HttpClient();
             var apikey = _config.GetSection("Ocr:ApiKey").Value;

@@ -21,7 +21,7 @@
                 <StackLayout Padding="25,10" VerticalOptions="StartAndExpand">
                     <Border Grid.Row="1" BackgroundColor="White" StrokeThickness="0" Padding="0,5" Margin="0,5,0,0" StrokeShape="RoundRectangle 8,8,8,8" WidthRequest="{OnPlatform iOS='370', Android='350'}" HorizontalOptions="Center">
                         <Border.Shadow>
-                            <Shadow Brush="{StaticResource Black}" Opacity="{OnPlatform Android='0.7', iOS='0.4'}" Radius="{OnPlatform iOS='10', Android='20'}"/>
+                            <Shadow Brush="{StaticResource Black}" Opacity="{OnPlatform Android='0.1', iOS='0.4'}" Radius="{OnPlatform iOS='10', Android='20'}"/>
                         </Border.Shadow>
                         <Grid RowDefinitions="2*,auto,2*,Auto,3*,3*" Padding="10,0" RowSpacing="3">
                             <Label Grid.Row="0" Text="Застраховани лица"  FontSize="20" FontAttributes="Bold" HorizontalOptions="StartAndExpand" BackgroundColor="White" TextColor="Black" />

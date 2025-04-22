@@ -23,6 +23,11 @@ public partial class CarDataPage : ContentPage
 
         viewModel.IsUpdatingOnLoading = false;
     }
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        await viewModel.InitializeAsync();
+    }
     private async void UserVehiclesPicker_SelectedIndexChanged(object sender, EventArgs e)
     {
         var selectedOption = UserVehiclesPicker.SelectedItem as UserVehiclesPickerModel;

@@ -68,7 +68,7 @@
             <CollectionView ItemsSource="{Binding Weeks}" HorizontalOptions="FillAndExpand" BackgroundColor="#ECE6F0">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Grid HorizontalOptions="{OnPlatform Android='CenterAndExpand', iOS='FillAndExpand'}" Padding="{OnPlatform iOS='7,0,0,0', Android='0'}" MaximumHeightRequest="{OnPlatform iOS='50'}">
+                        <Grid HorizontalOptions="{OnPlatform Android='CenterAndExpand', iOS='FillAndExpand'}" Padding="{OnPlatform iOS='7,0,0,0', Android='0.1'}" MaximumHeightRequest="{OnPlatform iOS='50'}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />

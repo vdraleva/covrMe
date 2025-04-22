@@ -20,7 +20,7 @@
                 <StackLayout Padding="10,20,10,0">
                     <Border BackgroundColor="White" StrokeThickness="0" Padding="5,5,0,5" StrokeShape="RoundRectangle 8,8,8,8" WidthRequest="{OnPlatform iOS='370', Android='350'}" HorizontalOptions="Center">
                         <Border.Shadow>
-                            <Shadow Brush="{StaticResource Black}" Opacity="{OnPlatform Android='0.7', iOS='0.4'}" Radius="{OnPlatform iOS='10', Android='20'}"/>
+                            <Shadow Brush="{StaticResource Black}" Opacity="{OnPlatform Android='0.1', iOS='0.4'}" Radius="{OnPlatform iOS='10', Android='20'}"/>
                         </Border.Shadow>
                         <StackLayout>
                             <Grid ColumnDefinitions="*,9*">
@@ -70,7 +70,7 @@
                 <StackLayout Padding="10,20,10,0">
                     <Border BackgroundColor="White" StrokeThickness="0" Padding="5,5,0,5" StrokeShape="RoundRectangle 8,8,8,8" WidthRequest="{OnPlatform iOS='370', Android='350'}" HorizontalOptions="Center">
                         <Border.Shadow>
-                            <Shadow Brush="{StaticResource Black}" Opacity="{OnPlatform Android='0.7', iOS='0.4'}" Radius="{OnPlatform iOS='10', Android='20'}"/>
+                            <Shadow Brush="{StaticResource Black}" Opacity="{OnPlatform Android='0.1', iOS='0.4'}" Radius="{OnPlatform iOS='10', Android='20'}"/>
                         </Border.Shadow>
                         <StackLayout>
                             <Grid ColumnDefinitions="*,9*">

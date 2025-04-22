@@ -6,14 +6,14 @@
     <StackLayout>
         <Border BackgroundColor="White" StrokeThickness="0" Padding="10" Margin="0,10,0,0" StrokeShape="RoundRectangle 0,8,8,0" WidthRequest="{OnPlatform iOS='370', Android='360'}" HorizontalOptions="Center">
             <Border.Shadow>
-                <Shadow Brush="{StaticResource Black}" Opacity="{OnPlatform Android='0.7', iOS='0.4'}" Radius="{OnPlatform iOS='10', Android='20'}"/>
+                <Shadow Brush="{StaticResource Black}" Opacity="{OnPlatform Android='0.1', iOS='0.4'}" Radius="{OnPlatform iOS='10', Android='20'}"/>
             </Border.Shadow>
             <StackLayout BackgroundColor="Transparent">
-                <Label Text="Брой лица" FontSize="Medium" FontAttributes="Bold" TextColor="{StaticResource Black}" Padding="10,0" HorizontalOptions="CenterAndExpand"  />
+                <Label Text="Брой лица" FontSize="Medium" FontAttributes="Bold" TextColor="{StaticResource Black}" Padding="10,0" HorizontalOptions="Center"  />
                 <Grid ColumnDefinitions="2*,*,2*" VerticalOptions="StartAndExpand" Margin="0" Padding="10">
-                    <ImageButton Grid.Column="0" Source="minusbtn.png" MaximumWidthRequest="30" MaximumHeightRequest="25" HorizontalOptions="EndAndExpand" Command="{Binding MinusCommand}"/>
-                    <Label x:Name="InsuredUsersAgesCount" Text="{Binding AgesList.Count}" Grid.Column="1" FontSize="Large" FontAttributes="Bold" TextColor="{StaticResource Black}" Padding="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
-                    <ImageButton Grid.Column="2" Source="plusbtn.png" MaximumWidthRequest="30" MaximumHeightRequest="25" HorizontalOptions="StartAndExpand" Command="{Binding PlusCommand}"/>
+                    <ImageButton Grid.Column="0" Source="minusbtn.png" MaximumWidthRequest="30" MaximumHeightRequest="25" HorizontalOptions="End" Command="{Binding MinusCommand}"/>
+                    <Label x:Name="InsuredUsersAgesCount" Text="{Binding AgesList.Count}" Grid.Column="1" FontSize="Large" FontAttributes="Bold" TextColor="{StaticResource Black}" Padding="0" HorizontalOptions="Center" VerticalOptions="Center" />
+                    <ImageButton Grid.Column="2" Source="plusbtn.png" MaximumWidthRequest="30" MaximumHeightRequest="25" HorizontalOptions="Start" Command="{Binding PlusCommand}"/>
                 </Grid>
             </StackLayout>
         </Border>

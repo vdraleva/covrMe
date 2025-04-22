@@ -57,24 +57,29 @@ namespace CovrMe.ViewModels.Pages.Insurances.CivilInsurance
         #endregion
         public CivilInsuranceVehicleViewModel(IVehicleService vehicleService, IInsuranceService insuranceService)
         {
-            this._vehicleService = vehicleService;
-            this._insuranceService = insuranceService;
+            _vehicleService = vehicleService;
+            _insuranceService = insuranceService;
 
-            this.FirstRegistrationDate = DateTime.Now;
-            this.MaxPickerDate = DateTime.Now;
-            this.MinPickerDate = DateTime.Parse("01/01/1960");
+            FirstRegistrationDate = DateTime.Now;
+            MaxPickerDate = DateTime.Now;
+            MinPickerDate = DateTime.Parse("01/01/1960");
 
-            this.UserVehiclesCollection = new ObservableCollection<UserVehiclesPickerModel>();
-            this.VehicleBrandsCollection = new ObservableCollection<BaseDataModel>();
-            this.VehiclesModelsCollection = new ObservableCollection<BaseDataModel>();
-            this.VehiclesTypesCollection = new ObservableCollection<BaseOcrDataModel>();
-            this.VehicleUsagesCollection = new ObservableCollection<BaseDataModel>();
+            UserVehiclesCollection = new ObservableCollection<UserVehiclesPickerModel>();
+            VehicleBrandsCollection = new ObservableCollection<BaseDataModel>();
+            VehiclesModelsCollection = new ObservableCollection<BaseDataModel>();
+            VehiclesTypesCollection = new ObservableCollection<BaseOcrDataModel>();
+            VehicleUsagesCollection = new ObservableCollection<BaseDataModel>();
 
-            Task.Run(async () => { await GetVehicleBrands(); }).Wait();
-            Task.Run(async () => { await GetVehicleTypes(); }).Wait();
-            Task.Run(async () => { await GetVehicleUsages(); }).Wait();
-            Task.Run(async () => { await GetUserVehicles(); }).Wait();
         }
+
+        public async Task InitializeAsync()
+        {
+            await GetVehicleBrands();
+            await GetVehicleTypes();
+            await GetVehicleUsages();
+            await GetUserVehicles();
+        }
+
 
         #region Collections
 
@@ -483,6 +488,43 @@ namespace CovrMe.ViewModels.Pages.Insurances.CivilInsurance
 
         }
         public async Task GetVehicleModels(BaseDataModel selectedVehicleBrand)
+        {
+            if (selectedVehicleBrand == null)
+                return; 
+
+            var vehiclesModels = new ObservableCollection<BaseDataModel>();
+            var modelsColl = new List<BaseDataModel>();
+
+            var vehicleModelsJson = await AssetsHelper.LoadAssets(GlobalConstants.VehicleModels);
+            var allBrandsWithModels = JsonConvert.DeserializeObject<List<VehicleBrandWithModels>>(vehicleModelsJson);
+
+            var selectedBrand = allBrandsWithModels
+                .FirstOrDefault(b => b.Brand.Equals(selectedVehicleBrand.Name, StringComparison.OrdinalIgnoreCase));
+
+            if (selectedBrand != null)
+            {
+                modelsColl = selectedBrand.Models
+                    .Select(m => new BaseDataModel
+                    {
+                        Id = 0, 
+                        Name = m
+                    })
+                    .OrderBy(x => x.Name)
+                    .ToList();
+            }
+
+            var str = "";
+            foreach (var model in modelsColl)
+            {
+                str += model.Name + ", ";
+                vehiclesModels.Add(model);
+            }
+
+            this.VehiclesModelsCollection = vehiclesModels;
+        }
+
+
+        public async Task GetVehicleModelsAPI(BaseDataModel selectedVehicleBrand)
         {
             try
             {

@@ -96,15 +96,18 @@ namespace CovrMe.ViewModels.Pages.Profile
             this.ColorsCollection = new ObservableCollection<BaseDataModel>();
             this.EngineTypesCollection = new ObservableCollection<BaseDataModel>();
             this.SteeringWheelCollection = new ObservableCollection<BaseDataModel>();
+        }
 
-            Task.Run(async () => { await GetColors(); }).Wait();
-            Task.Run(async () => { await GetBodyTypes(); }).Wait();
-            Task.Run(async () => { await GetEngineTypes(); }).Wait();
-            Task.Run(async () => { await PopulateSteeringWheelCollection(); }).Wait();
-            Task.Run(async () => { await GetVehicleBrands(); }).Wait();
-            Task.Run(async () => { await GetVehicleTypes(); }).Wait();
-            Task.Run(async () => { await GetVehicleUsages(); }).Wait();
-            Task.Run(async () => { await GetUserVehicles(); }).Wait();
+        public async Task InitializeAsync()
+        {
+            await GetColors();
+            await GetBodyTypes();
+            await GetEngineTypes();
+            await PopulateSteeringWheelCollection();
+            await GetVehicleBrands();
+            await GetVehicleTypes();
+            await GetVehicleUsages();
+            await GetUserVehicles();
         }
 
         #region Collections

@@ -44,7 +44,7 @@
                             <StackLayout Padding="5" HeightRequest="{OnPlatform iOS={Binding IsOpen, Converter={StaticResource insuredUsersIosHeightConverter}}}">
                                 <Border VerticalOptions="Start" BackgroundColor="White" StrokeThickness="0" Padding="0,10" Margin="0,5,0,0" StrokeShape="RoundRectangle 8,8,8,8"  WidthRequest="{OnPlatform iOS='370', Android='350'}" HorizontalOptions="CenterAndExpand">
                                     <Border.Shadow>
-                                        <Shadow Brush="{StaticResource Black}" Opacity="{OnPlatform Android='0.7', iOS='0.4'}" Radius="{OnPlatform iOS='10', Android='20'}" />
+                                        <Shadow Brush="{StaticResource Black}" Opacity="{OnPlatform Android='0.1', iOS='0.4'}" Radius="{OnPlatform iOS='10', Android='20'}" />
                                     </Border.Shadow>
                                     <StackLayout Padding="10,0,10,0">
                                         <Label Text="{Binding Number, StringFormat='Лице {0}', Mode=TwoWay}" TextColor="{Binding TextColor}" FontSize="18" FontAttributes="None" HorizontalOptions="StartAndExpand" VerticalOptions="Center" WidthRequest="{OnPlatform iOS='370', Android='350'}" >

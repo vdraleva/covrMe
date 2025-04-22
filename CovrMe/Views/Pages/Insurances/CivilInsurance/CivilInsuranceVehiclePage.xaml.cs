@@ -1,4 +1,4 @@
- using CovrMe.Models;
+using CovrMe.Models;
 using CovrMe.Models.Vehicles.Pickers;
 using CovrMe.Models.Vehicles.Result;
 using CovrMe.Shared.Constants;
@@ -15,7 +15,7 @@ public partial class CivilInsuranceVehiclePage : ContentPage
     private bool _updatedPlateNumber;
     private bool _updatedCertificateNumber;
     public CivilInsuranceVehiclePage(CivilInsuranceVehicleViewModel vm, Dictionary<string, object> parameters)
-	{
+    {
         InitializeComponent();
         vm.Navigation = Navigation;
 
@@ -25,6 +25,11 @@ public partial class CivilInsuranceVehiclePage : ContentPage
 
         CheckBoxSave.IsChecked = true;
         viewModel.IsUpdatingOnLoading = false;
+    }
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        await viewModel.InitializeAsync();
     }
 
     private async void UserVehiclesPicker_SelectedIndexChanged(object sender, EventArgs e)
@@ -48,7 +53,7 @@ public partial class CivilInsuranceVehiclePage : ContentPage
                 if (!viewModel.IsUpdatingCollection && !viewModel.IsUpdatingOnLoading)
                 {
                     await viewModel.ChangeUserVehicle(selectedOption);
-                }                   
+                }
             }
         }
     }
